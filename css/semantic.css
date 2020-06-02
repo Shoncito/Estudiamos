@@ -33423,7 +33423,7 @@ select.ui.dropdown {
 .ui.simple.dropdown .menu:after {
   display: none;
 }
-
+/* Borrar para color negro que quede colo blanco*/
 .ui.simple.dropdown .menu {
   position: absolute;
   display: block;
