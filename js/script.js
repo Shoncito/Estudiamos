@@ -6,6 +6,10 @@ function myFunction(x) {
   $("#divMenuVertical").toggle();
 }
 
+$('.special.cards .image').dimmer({
+  on: 'hover'
+});
+
 $(document).ready(function(){
  	$("#Login").click(function() {
 		$("#g2").hide("slow");
