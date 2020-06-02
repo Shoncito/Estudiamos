@@ -2,6 +2,11 @@
 	margin:0;
 	padding: 0;
 }
+
+.hero{
+	display: none;
+}
+
 .form-box{
 	width: 380px;
 	height: 480px;
@@ -66,6 +71,72 @@
 .chech-box{
 	margin: 30px 10px 30px 0;
 }
+
 #g2{
 	display: none;
+}
+
+#divHeader{
+	background-color: #ff7043;
+	width: 100%;
+	height: 100px !important;
+	text-align: center;
+	position: absolute;
+	border-bottom: 3px solid brown;
+}
+
+#divHeader h1{
+	position: relative;
+	margin-top: -15px;
+	font-size: 600%;
+	background: -webkit-linear-gradient(#fff 50%, #ff7043);
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+#divHeader a{
+	font-size: 25px;
+}
+
+#divHeader a:hover{
+	background-color: #ff7043;
+	color: white;
+}
+
+#divMenuVertical{
+	display: none;
+	margin-top: 86px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 18px;
+  cursor: pointer;
+  transition: 0.4s ease-out;
+}
+
+.linea-1,
+.linea-2,
+.linea-3 {
+  width: 50px;
+  height: 10px;
+  background: -webkit-linear-gradient(right, #fff 50%, #ff7043);
+  margin: 3px 0px;
+  transition: 0.4s ease-out;
+}
+
+.change .linea-1 {
+  transform: rotate(-45deg) translate(3px, 8px);
+  position: absolute;
+}
+
+.change .linea-2 {
+  opacity: 0;
+}
+
+.change .linea-3 {
+  transform: rotate(45deg) translate(3px, -6px);
 }

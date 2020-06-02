@@ -1,3 +1,11 @@
+let menu = document.getElementById("menu");
+
+function myFunction(x) {
+  menu.classList.toggle("change-menu");
+  x.classList.toggle("change");
+  $("#divMenuVertical").toggle();
+}
+
 $(document).ready(function(){
  	$("#Login").click(function() {
 		$("#g2").hide("slow");
