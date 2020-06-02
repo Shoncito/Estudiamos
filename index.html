@@ -3,14 +3,31 @@
 <head>
 	<meta charset="utf-8">
 	<title>Estudiamos</title>
+	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/semantic.min.js"></script>
 <body>
-	<div id="divLogin">
-		
-	</div>
-	<div id="divRegister">
-		
+	<div class="hero">
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<button type="button" class="toggle-btn" id="Login">Iniciar</button>
+				<button type="button" class="toggle-btn" id="Register">Registrar</button>
+			</div>
+			<div class="input-group" id="g1">
+				<input type="text" class="input-field" placeholder="Usuario"required>
+				<input type="text" class="input-field" placeholder="Contraseña"required>
+				<button type="submit" class="submit-btn">Iniciar</button>
+			</div>
+			<div class="input-group" id="g2">
+				<input type="text" class="input-field" placeholder="Usuario"required>
+				<input type="text" class="input-field" placeholder="Correo"required>
+				<input type="text" class="input-field" placeholder="Contraseña"required>
+				<button type="submit" class="submit-btn">Registrar</button>
+			</div>
+		</div>
 	</div>
 </body>
 <script type="text/javascript" src="js/script.js"></script>
