@@ -192,3 +192,84 @@
 	height: 30%;
 	width: 50%;
 }
+
+#divInicio{
+	display: none;
+}
+
+#divSnacks{
+	background-color: #ce9f74;
+	width: 800px;
+	height: 450px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 300px;
+	color: white;
+	text-align: center;
+}
+
+#divSnacks h1{
+	font-size: 55px;
+	margin-bottom: 0px !important;
+}
+
+#menuSnacks{
+	background-color: #ba7a3e;
+	height: 340px;
+	width: 100px;
+	border-radius: 20px;
+	margin: 20px;
+	flex-direction: column;
+}
+
+#productosSnacks{
+	background-color: #;
+	height: 340px;
+	width: 640px;
+	margin-left: 140px;
+	margin-top: -360px;
+	overflow : auto;
+}
+
+.CategoriaSnack{
+	align-content: center;
+	opacity: 50%;
+}
+
+.CategoriaSnack:hover{
+	opacity: 100%;
+	cursor: pointer;
+}
+
+.brillo{
+	opacity: 100%;
+}
+
+.CategoriaSnack img{
+	width: 50px;
+	height: 50px;
+	margin-top: 5px;
+}
+
+.CategoriaSnack p{
+	font-size: 18px;
+}
+
+#productosSnacks .card{
+	height: 145px;
+}
+
+#productosSnacks img{
+	width: 90px;
+	height: 90px;
+	margin-left: 25px;
+	margin-top: -20px;
+}
+
+#productosSnacks .meta{
+	font-size: 20px;
+}
+
+#productosSnacks .header{
+	margin-top: -10px !important;
+}
