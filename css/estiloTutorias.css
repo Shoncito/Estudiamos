@@ -1,0 +1,13 @@
+#formulario{
+    width: 700px;
+    height: 450px;
+}
+input{
+    width: 25% !important;
+}
+div{
+    text-align: center;
+}
+body{
+    background: brown;
+}
