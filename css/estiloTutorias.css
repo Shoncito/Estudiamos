@@ -2,12 +2,16 @@
     width: 700px;
     height: 450px;
 }
-input{
+select{
     width: 25% !important;
+    margin-left: 37.5%;
 }
-div{
+#contenido{
     text-align: center;
+    align-items: center;
 }
 body{
+    color: white;
     background: brown;
 }
+
