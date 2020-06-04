@@ -12,3 +12,25 @@ $(document).ready(function(){
 		$("#btn").css("left","40.99%");
 	});
 });
+
+let menu = document.getElementById("menu");
+
+function myFunction(x) {
+  menu.classList.toggle("change-menu");
+  x.classList.toggle("change");
+  $("#divMenuVertical").toggle();
+}
+
+$('.special.cards .image').dimmer({
+  	on: 'hover'
+});
+
+$(".CategoriaSnack").click(function(){
+	$(".CategoriaSnack").each(function(){
+		if($(this).hasClass("brillo")){
+			$(this).removeClass("brillo");
+		}
+	});
+	$(this).addClass("brillo");
+});
+
