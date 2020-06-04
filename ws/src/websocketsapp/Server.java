@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -20,19 +21,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.omg.Messaging.SyncScopeHelper;
 
+import funciones.Comparador;
+import modelo.Usuario;
+
 
 public class Server extends WebSocketServer{
 //	private static Map<Integer,Set<WebSocket>> Rooms = new HashMap<>();
-	public static List<WebSocket> clients=new ArrayList<WebSocket>();
+	public LinkedList<Usuario> usuarios;
 
 	public Server() {
         super(new InetSocketAddress(8080));
+        this.usuarios=new LinkedList<Usuario>();
     }
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         System.out.println("New client connected: " + conn.getRemoteSocketAddress() + " hash " + conn.getRemoteSocketAddress().hashCode());
-        clients.add(conn);
+        Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
+        if(usuario!=null) {
+        	usuario.setWebSocket(conn);
+        }else {
+        	usuario = new Usuario();
+        	usuario.setWebSocket(conn);
+        	usuario.setDireccion(conn.getRemoteSocketAddress());
+        }
+        
        // System.out.println(clients.size());
     }
 
@@ -56,8 +69,8 @@ public class Server extends WebSocketServer{
 
     public void sendToAll(WebSocket conn, String message) {
  
-    	for(int i =0;i<clients.size();i++) {
-    		WebSocket c = (WebSocket)clients.get(i);
+    	for(int i =0;i<usuarios.size();i++) {
+    		WebSocket c = (WebSocket)usuarios.get(i).getWebSocket();
             if (c != conn) c.send(message);
     	}
     }
