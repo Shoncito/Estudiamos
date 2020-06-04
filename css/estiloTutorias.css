@@ -1,0 +1,16 @@
+select{
+    width: 25% !important;
+    margin-left: 37.5%;
+}
+#contenido{
+    text-align: center;
+    align-items: center;
+}
+body{
+    color: white;
+    background: peru;
+}
+label{
+    color: white !important;
+}
+
