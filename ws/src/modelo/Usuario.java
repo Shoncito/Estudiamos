@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import org.java_websocket.WebSocket;
 
 public class Usuario {
+	
 	private WebSocket webSocket;
 	private String token;
 	private LinkedList<Tutoria>tutorias ;
