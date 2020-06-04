@@ -34,3 +34,22 @@ $(".CategoriaSnack").click(function(){
 	$(this).addClass("brillo");
 });
 
+$('.special.cards .image').dimmer({
+  on: 'hover'
+});
+
+var valor=0;
+function carrito(boton){
+    var contador = document.getElementById("contador").value;
+    if (boton.value=='aumentar') {
+    	if (valor<30) {
+    		valor++
+    	}
+    }else{
+    	if (valor>0) {
+    		valor--
+    	}
+    }
+    document.getElementById("contador").textContent = valor;
+}
+

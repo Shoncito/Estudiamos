@@ -106,8 +106,21 @@ a:hover{
   	-webkit-text-fill-color: transparent;
 }
 
+#divHeader p{
+	font-size: 22px;
+	color: white;
+	margin-top: 25px;
+	margin-right: 50px;
+	line-height: 4px;
+}
+
 #divHeader a{
-	font-size: 25px;
+	font-size: 20px;
+	width: 100%;
+}
+
+#divHeader .header{
+	font-size: 20px;
 }
 
 #divHeader a:hover{
@@ -203,13 +216,30 @@ a:hover{
 
 #divSnacks{
 	background-color: #ce9f74;
-	width: 800px;
+	width: 920px;
 	height: 450px;
 	border-radius: 20px;
 	margin-top: 50px;
-	margin-left: 300px;
+	margin-left: 228px;
 	color: white;
 	text-align: center;
+}
+
+#botonComprar{
+	width: 100px;
+	margin: 0px !important;
+	margin-top: 150% !important;
+}
+
+#botonSnacks{
+	height: 340px;
+	width: 100px;
+	margin-left: 800px;
+	margin-top: -340px;
+}
+
+#botonSnacks a{
+	color: #3f4041;
 }
 
 #divSnacks h1{
@@ -255,19 +285,43 @@ a:hover{
 	margin-top: 5px;
 }
 
+#divImgProducto{
+	background-color: transparent !important;
+}
+
 .CategoriaSnack p{
 	font-size: 18px;
 }
 
 #productosSnacks .card{
-	height: 145px;
+	height: 56%;
+}
+
+#productosSnacks .extra{
+	padding: 0px !important;
+}
+
+#productosSnacks button{
+	width: 10px;
+}
+
+#productosSnacks #p{
+	margin-top: 14px;
+	margin-left: 55px;
+	border-radius: 50%;
+	background-color: white;
+	font-size: auto;
+	position: absolute;
+	height: 25px;
+	width: 25px;
+	align-content: center;
 }
 
 #productosSnacks img{
 	width: 90px;
 	height: 90px;
 	margin-left: 25px;
-	margin-top: -20px;
+	margin-top: -10px;
 }
 
 #productosSnacks .meta{
@@ -276,4 +330,13 @@ a:hover{
 
 #productosSnacks .header{
 	margin-top: -10px !important;
+}
+
+#divPedido{
+	background-color: #ba7a3e;
+	height: 340px;
+	width: 770px;
+	margin: 15px;
+	border-radius: 20px;
+	overflow : auto;
 }

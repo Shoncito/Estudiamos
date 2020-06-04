@@ -5,26 +5,63 @@
     <title>Crear grupo</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">  
     <link rel="stylesheet" href="css/estilos2.css">
-    <link rel="stylesheet" href="css/semantic.css">  
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/semantic.min.js"></script>
 <body>
+    <!-- Header -->
+        <div id="divHeader" class="ui grid">
+            <div class="two wide column">
+                <div class="menu" id="menu" onclick="myFunction(this)">
+                  <div class="linea-1"></div>
+                  <div class="linea-2"></div>
+                  <div class="linea-3"></div>
+                </div>
+                <div class="menu-container" id="menu">
+                    <div class="ui left fixed vertical menu" id="divMenuVertical">
+                        <a href="index.html" class="item">Inicio</a>
+                        <div class="item">
+                            <div class="header">Grupos de estudio</div>
+                            <div class="menu">
+                                <a href="creargrup.html" class="item">Crear</a>
+                                <a href="nindex.html" class="item">Unirse</a>
+                                <a class="item">Mis grupos</a>
+                            </div>
+                        </div>
+                        <a href="foro.html" class="item">Foros</a>
+                        <div class="item">
+                            <div class="header">Snacks</div>
+                            <div class="menu">
+                                <a href="snacks.html" class="item">Menú</a>
+                                <a href="pedidoSnacks.html" class="item">Mis pedidos</a>
+                            </div>
+                        </div>
+                        <a class="item">Sobre nosotros</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="twelve wide column">
+                <h1>
+                    Estudiamos
+                </h1>
+            </div>
+            <div class="two wide column" id="saludoUsuario">
+                <p>Hola</p>
+                <p>Fulanito :3</p>
+            </div>
+        </div>
 <div id="categorys">
     <div class="contenedor-form" id="menucategory">     
         <div class="formulario">
             <h2>Crear grupo.</h2>
-<<<<<<< HEAD
-            <form action="#">
-                <input  type="namec" placeholder="Nombre" required>
-                <select name="" id="amen">
-                    <option>Fisica</option> 
-                    </select>
-=======
             <form action="#">              
                 <input  type="namec" placeholder="Nombre" required>             
                 <select name="" id="amen">
                 <option>Fisica</option> 
                 </select>
->>>>>>> grupos2
                 <input  type="logoc" placeholder="Tema" required>
                 <input  type="logoc" placeholder="Fecha" required>
                 <input  type="logoc" placeholder="Hora" required>
@@ -35,7 +72,8 @@
 </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/semantic.min.js"></script>
+    
+    
 </body>
+<script type="text/javascript" src="js/script.js"></script>
 </html>
