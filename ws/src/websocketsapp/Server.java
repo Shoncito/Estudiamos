@@ -20,8 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.omg.Messaging.SyncScopeHelper;
 
-import com.google.gson.Gson;
-
 
 public class Server extends WebSocketServer{
 //	private static Map<Integer,Set<WebSocket>> Rooms = new HashMap<>();
@@ -41,9 +39,6 @@ public class Server extends WebSocketServer{
     public void onMessage(WebSocket conn, String message) {
   
     }
-   
-    	
-    
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
