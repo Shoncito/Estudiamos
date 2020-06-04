@@ -78,20 +78,15 @@ public class Server extends WebSocketServer{
    		grup1.setHora(gruestu.getJSONObject(i).getInt("hora"));
    		grup1.setIdGrupo(gruestu.getJSONObject(i).getInt("idGrupo"));
    		grup1.setNombreGrupo(gruestu.getJSONObject(i).getString("nombreGrupo"));
-   		grup1.setTema(gruestu.getJSONObject(i).getString("tema"));
-        
-   		
-   		
-   		
-   	}
-   	
-   	
-   	
-   
-   	
-    
-   	
+   		grup1.setTema(gruestu.getJSONObject(i).getString("tema"));   	
+   		grupoestudio.add(grup1);	
+   	}	
+      usuario.setGruposEstudio(grupoestudio);
    }
+   
+   
+   
+   
    }
 
     @Override

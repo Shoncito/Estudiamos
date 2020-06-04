@@ -6,7 +6,62 @@ public class Tutoria {
 	private Profesor profesor;
 	private String lugar;
 	private Usuario usuario;
+	private String fecha;
 	
+	
+	
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idTutoria;
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Recuerda que tienes una tutoria en la hora:" + hora + ",junto con el profesor:" + profesor + ",en el lugar:" + lugar + ", en el dia:" + fecha;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tutoria other = (Tutoria) obj;
+		if (idTutoria != other.idTutoria)
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+	/**
+	 * @return the fecha
+	 */
+	public String getFecha() {
+		return fecha;
+	}
+	/**
+	 * @param fecha the fecha to set
+	 */
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 	public Profesor getProfesor() {
 		return profesor;
 	}

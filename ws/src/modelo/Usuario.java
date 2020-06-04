@@ -13,6 +13,10 @@ public class Usuario {
 	private LinkedList<GrupoEstudio>gruposEstudio;
 	private InetSocketAddress direccion;
 	
+	
+	
+	
+	
 	public WebSocket getWebSocket() {
 		return webSocket;
 	}
