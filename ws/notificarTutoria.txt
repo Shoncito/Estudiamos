@@ -1,0 +1,12 @@
+1. Recibir
+{
+tipo: recibir,
+tutoria: [],
+grupoEstudio: []
+}
+2. notificarTutoria
+{
+tipo: notificar,
+subtipo: tutoria,
+mensaje: 
+}
