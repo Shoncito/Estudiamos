@@ -1,0 +1,28 @@
+.tutoria{
+	font-weight: bold;
+	font-family: 'Source Sans Pro',sans-serif ;
+	color: rgba(0,0,0,.68)!important;
+}
+
+span{
+	font-weight: bold;
+	font-family:'Source Sans Pro',sans-serif;
+	font-size: 15px;
+}
+
+#listadoTutorias{
+	text-align: center;
+	font-family:sans-serif;
+	padding: 25px;
+}
+.tutoria2{
+	color: rgba(0,0,0,.68)!important;
+}
+.yo{
+	text-decoration-style: solid!important;
+	font-size: 25px!important;
+
+}
+
+
+
