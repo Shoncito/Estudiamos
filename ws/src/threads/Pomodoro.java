@@ -23,6 +23,7 @@ public class Pomodoro implements Runnable {
 				for(int i=0;i<this.grupoEstudio.getUsuarios().size();i++) {
 					String mensaje = "{" + 
 							"	tipo: notificacion," + 
+							"	subtipo: grupo," + 
 							"	mensaje: ¡A estudiar!. Estudia 20 minutos" + 
 							"}";
 					enviarATodosEnElGrupo(mensaje);
@@ -35,14 +36,16 @@ public class Pomodoro implements Runnable {
 				for(int i=0;i<this.grupoEstudio.getUsuarios().size();i++) {
 					String mensaje = "{" + 
 							"	tipo: notificacion," + 
-							"	mensaje: Descansa "+descanso+" minutos" + 
+							"	subtipo: grupo," + 
+							"	mensaje: descansa "+descanso+" minutos " + 
 							"}";
 					enviarATodosEnElGrupo(mensaje);
 				}
 				Thread.sleep(descanso*60*1000);
 				String mensaje = "{" + 
 						"	tipo: notificacion," + 
-						"	mensaje: grupo de estudio finalizado" + 
+						"	subtipo: grupo," + 
+						"	mensaje: Grupo estudio finalizado" + 
 						"}";
 			}
 			

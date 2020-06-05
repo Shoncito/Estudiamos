@@ -29,19 +29,16 @@ websocket.onmessage=function(event){
 	
 	if (event.data === "pong") {
 		ping();
+		console.log(event.data);
 	} else {
 		var obj = JSON.parse(event.data);
-		if(obj.tipo==="hash"){
+		if(obj.tipo==="notificacion"){
 			//Se recibe el hash y se guarda en una cookie. 
-			setCookie("hash",obj.hash,1);
-		}
-		else if (obj.tipo==="codigo sala"){
-			//Se recibe el código de la sala y un mensaje 
-			cambiarASalaDeEsperaCreador(obj.codigo,obj.mensaje,1);
+			enviarNotificacion(obj.subtipo,obj.mensaje);
 		}
 	}
 }
-
+;
 /**
 * Cuando el websocket se cierra
 */
@@ -75,4 +72,13 @@ function enviarMensaje(object){
 	var stringObject = JSON.stringify(object);
 	websocket.send(stringObject);
 	console.log("Enviando: "+stringObject);
+}
+
+/**
+ * 
+ * @param {String} subtipo 
+ * @param {String} mensaje 
+ */
+function enviarNotificacion(subtipo, mensaje){
+
 }

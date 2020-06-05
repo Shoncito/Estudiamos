@@ -6,7 +6,30 @@ grupoEstudio: []
 }
 2. notificarTutoria
 {
-tipo: notificar,
+tipo: notificacion,
 subtipo: tutoria,
 mensaje: 
+}
+
+Enviar  mensaje pomodoro
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: ¡A estudiar!. Estudia 20 minutos
+}
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: descansa tantos minutos 
+}
+
+Fin pomodoro
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: Grupo estudio finalizado
+}
+ping - pong
+{
+	tipo: ping
 }

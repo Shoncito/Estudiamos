@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.omg.Messaging.SyncScopeHelper;
 
+import funciones.Buscador;
 import funciones.Comparador;
 import modelo.GrupoEstudio;
 import modelo.Tutoria;
@@ -54,11 +55,14 @@ public class Server extends WebSocketServer{
     
     @Override
     public void onMessage(WebSocket conn, String message) {
+    System.out.println(message);
     JSONObject js =new JSONObject(message);
-    if(js.get("tipo").equals("ping")) {
+    System.out.println(js.getString("tipo"));
+    if(js.getString("tipo").equals("ping")) {
+    	
     	conn.send("pong");
     }
-    else if(js.get("tipo").equals("recibir")){
+    else if(js.getString("tipo").equals("recibir")){
    LinkedList<Tutoria> tutorias=new LinkedList();
    LinkedList<GrupoEstudio> grupoestudio=new LinkedList();
    	JSONArray tuto=js.getJSONArray("tutorias");
@@ -94,16 +98,15 @@ public class Server extends WebSocketServer{
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+    	if(!reason.equals("cambio")) {
+    		this.usuarios.remove(Buscador.buscarUsuario(conn, usuarios));
+    	}
         System.out.println("Client disconnected: " + reason);
     }
 
     @Override
     public void onError(WebSocket conn, Exception exc) {
         System.out.println("Error happened: " + exc);
-    }
-
-    private int generateRoomNumber() {
-        return new Random(System.currentTimeMillis()).nextInt();
     }
 
     public void sendToAll(WebSocket conn, String message) {
