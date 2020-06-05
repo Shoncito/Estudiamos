@@ -55,7 +55,10 @@ public class Server extends WebSocketServer{
     @Override
     public void onMessage(WebSocket conn, String message) {
     JSONObject js =new JSONObject(message);
-   if(js.get("tipo").equals("recibir")){
+    if(js.get("tipo").equals("ping")) {
+    	conn.send("pong");
+    }
+    else if(js.get("tipo").equals("recibir")){
    LinkedList<Tutoria> tutorias=new LinkedList();
    LinkedList<GrupoEstudio> grupoestudio=new LinkedList();
    	JSONArray tuto=js.getJSONArray("tutorias");
