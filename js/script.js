@@ -53,3 +53,13 @@ function carrito(boton){
     document.getElementById("contador").textContent = valor;
 }
 
+
+var nombreProducto=["CocaCola", "Pepsi", "H2O", "Té", "Café"];
+var precioProducto=["12.000", "5.000", "6.000", "3.000", "1.000"];
+var imagenProducto=["img/estudio.jpg", "img/estudio.jpg", "img/estudio.jpg", "img/estudio.jpg", "img/estudio.jpg"];
+
+ var PRODUCTO = document.getElementsByName("PRODUCTO");
+ for (i in nombreProducto){
+ PRODUCTO[i].innerHTML = '<div class="content"><div name="NOMBREPRODUCTO" class="header">'+nombreProducto[i]+' </div></div><img src="' +imagenProducto[i]+ '"><div name="PRECIOPRODUCTO" class="meta">' +precioProducto[i]+ '</div><div class="extra content ui large buttons"><button class="ui brown button" id="disminuir"'+i+' onclick="carrito(this)" value="disminuir">-</button><div id="p'+i+'"><p id="contador" value=""></p></div><button class="ui orange button" id="aumentar'+i+'" onclick="carrito(this)" value="aumentar">+</button></div>';
+ }
+
