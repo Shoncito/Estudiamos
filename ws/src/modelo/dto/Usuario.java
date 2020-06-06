@@ -1,4 +1,4 @@
-package modelo;
+package modelo.dto;
 
 import java.net.InetSocketAddress;
 import java.util.LinkedList;
@@ -9,9 +9,10 @@ public class Usuario {
 	
 	private WebSocket webSocket;
 	private String token;
-	private LinkedList<Tutoria>tutorias ;
-	private LinkedList<GrupoEstudio>gruposEstudio;
 	private InetSocketAddress direccion;
+	private String correo;
+	private String usuario;
+	private String contraseña;
 	
 	
 	
@@ -29,18 +30,6 @@ public class Usuario {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public LinkedList<Tutoria> getTutorias() {
-		return tutorias;
-	}
-	public void setTutorias(LinkedList<Tutoria> tutorias) {
-		this.tutorias = tutorias;
-	}
-	public LinkedList<GrupoEstudio> getGruposEstudio() {
-		return gruposEstudio;
-	}
-	public void setGruposEstudio(LinkedList<GrupoEstudio> gruposEstudio) {
-		this.gruposEstudio = gruposEstudio;
-	}
 	/**
 	 * @return the direccion
 	 */
@@ -52,6 +41,42 @@ public class Usuario {
 	 */
 	public void setDireccion(InetSocketAddress direccion) {
 		this.direccion = direccion;
+	}
+	/**
+	 * @return the correo
+	 */
+	public String getCorreo() {
+		return correo;
+	}
+	/**
+	 * @param correo the correo to set
+	 */
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	/**
+	 * @return the usuario
+	 */
+	public String getUsuario() {
+		return usuario;
+	}
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	/**
+	 * @return the contraseña
+	 */
+	public String getContraseña() {
+		return contraseña;
+	}
+	/**
+	 * @param contraseña the contraseña to set
+	 */
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
 	}
 
 	

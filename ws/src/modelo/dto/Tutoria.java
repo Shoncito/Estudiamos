@@ -1,4 +1,4 @@
-package modelo;
+package modelo.dto;
 
 public class Tutoria {
 	private int idTutoria;

@@ -4,9 +4,9 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import modelo.GrupoEstudio;
-import modelo.Tutoria;
-import modelo.Usuario;
+import modelo.dto.GrupoEstudio;
+import modelo.dto.Tutoria;
+import modelo.dto.Usuario;
 import websocketsapp.Server;
 
 public class Observador implements Runnable {

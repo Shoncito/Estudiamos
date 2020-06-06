@@ -2,8 +2,8 @@ package threads;
 
 import java.util.LinkedList;
 
-import modelo.GrupoEstudio;
-import modelo.Usuario;
+import modelo.dto.GrupoEstudio;
+import modelo.dto.Usuario;
 
 public class Pomodoro implements Runnable {
 

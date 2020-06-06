@@ -3,7 +3,7 @@ package funciones;
 import java.net.InetSocketAddress;
 import java.util.LinkedList;
 
-import modelo.Usuario;
+import modelo.dto.Usuario;
 
 public class Comparador {
 	public static Usuario comparar(LinkedList <Usuario> usuarios, InetSocketAddress dir2) {

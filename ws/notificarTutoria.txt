@@ -1,9 +1,3 @@
-1. Recibir
-{
-tipo: recibir,
-tutoria: [],
-grupoEstudio: []
-}
 2. notificarTutoria
 {
 tipo: notificacion,
@@ -15,7 +9,7 @@ Enviar  mensaje pomodoro
 {
 	tipo: notificacion,
 	subtipo: grupo,
-	mensaje: �A estudiar!. Estudia 20 minutos
+	mensaje: �A estudiar!. Estudia 20 minutos
 }
 {
 	tipo: notificacion,
@@ -33,3 +27,151 @@ ping - pong
 {
 	tipo: ping
 }
+//Cliente
+ingresa
+{
+	usuario: usuario,
+	contraseña: contraseña
+}
+Retorna: id (Hash)
+registro
+{
+	tipo: registro,
+	usuario: usuario,
+	contraseña: contraseña,
+	correo: correo
+}
+Retorna: ok
+Crear Materia:
+{
+	tipo: crear materia,
+	idEscuela: id escuela,
+	nombreMateria: nombre materia
+}
+
+Crear Grupo:
+{
+	nombreGrupo: nombreGrupo,
+	idMateria: id materia,
+	tema: tema,
+	fecha: fecha,
+	hora: hora,
+	lugar: lugar,
+	idUsuario: id usuario
+}
+
+Crear Profesor:
+{
+	tipo: crear profesor,
+	nombreProfesor: nombreProfesor
+}
+Retorna ok
+
+Asociar materia a profesor:
+
+{
+	tipo: asociar materia a profesor,
+	idProfesor: id profesor,
+	idMateria: id materia
+}
+
+Retorna: ok
+
+Pedir Tutoría:
+{
+	tipo: pedir tutoria,
+	idUsuario: id usuario,
+	idMateria: id materia,
+	idProfesor: id profesor,
+	fecha: fecha,
+	hora: hora,
+	lugar: lugar
+}
+
+Retorna: id tutoria
+
+Crear categoría Snack:
+{
+	tipo: crear categoria snack,
+	nombreCategoria: nombre categoria
+}
+
+Retorna: id categoría
+
+Crear Snack:
+
+{
+	tipo: crear snack,
+	idCategoria: idCategoria,
+	nombreSnack: nombre snack,
+	precio: precio
+}
+
+retorna: id snack
+
+Crear escuela:
+
+{
+	tipo: crear escuela,
+	nombreEscuela: nombre escuela
+}
+Retorna: id escuela
+
+Ingresar a grupo:
+{
+	tipo: ingresar a grupo,
+	idUsuario: idUsuario,
+	idGrupo: idGrupo
+}
+
+Retorna: ok
+
+Crear publicación:
+{
+	tipo: crear publicación,
+	idUsuario: idUsuario,
+	titulo: titulo,
+	contenido: contenido,
+	idMateria: idMateria
+}
+
+Retorna: ok
+
+Agregar horario disponible:
+{
+	tipo: agregar horario disponible,
+	fecha: fecha,
+	hora: hora
+}
+
+Retorna: ok
+
+- Consultar tutorías programadas:
+{
+	tipo: consultar tutorias
+}
+Retorna: un arreglo con todos los datos de las tutorías que están programadas
+
+Consultar tutorías programadas:
+Retorna: un arreglo con todos los datos de las tutorías que están programadas
+
+- Consultar todas las publicaciones:
+retorna: un arreglo con todos los datos de las publicaciones realizadas
+
+- Consultar todos los profesores:
+Retorna un arreglo con nombre y id del profesor
+
+- Consultar profesor:
+Parámetros: id profesor
+{
+	tipo: consultar profesor
+}
+Retorna: dos arreglos: uno con sus horarios disponibles y otro con las materias que dicta
+
+- Consultar todos los grupos de estudio:
+Retorna: un arreglo con todos los datos de todos los grupos de estudio
+
+- Consultar todos los snacks:
+Retorna: un arreglo con todos los datos de todos los snacks
+
+

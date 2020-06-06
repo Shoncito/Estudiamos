@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import org.java_websocket.WebSocket;
 
-import modelo.Usuario;
+import modelo.dto.Usuario;
 
 public class Buscador {
 	public static Usuario buscarUsuario(WebSocket conn, LinkedList<Usuario> usuarios) {

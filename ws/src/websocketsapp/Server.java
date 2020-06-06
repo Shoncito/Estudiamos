@@ -24,10 +24,10 @@ import org.omg.Messaging.SyncScopeHelper;
 
 import funciones.Buscador;
 import funciones.Comparador;
-import modelo.GrupoEstudio;
-import modelo.Tutoria;
-import modelo.Usuario;
-import modelo.Profesor;
+import modelo.dto.GrupoEstudio;
+import modelo.dto.Profesor;
+import modelo.dto.Tutoria;
+import modelo.dto.Usuario;
 
 public class Server extends WebSocketServer{
 //	private static Map<Integer,Set<WebSocket>> Rooms = new HashMap<>();

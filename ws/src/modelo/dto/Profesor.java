@@ -1,4 +1,4 @@
-package modelo;
+package modelo.dto;
 
 public class Profesor {
 private int id;
