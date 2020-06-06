@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Crear snack</title>  
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">  
+	<link rel="stylesheet" type="text/css" href="css/unetegrupo.css" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="contenedor-form" id="ingresarSnack">
+		<div class="ui center aligned container">
+			<div class="UneteGrupo">
+				<h2>Snack</h2>
+				<input type="text" placeholder="Id " id="idSnack" readonly="readonly">
+				<form action="#">
+					<select id="amen"> 
+						<option value="1" >
+							Bebidas
+						</option>
+						<option value="2">
+							Paquetes
+						</option>
+						<option value="3">
+							Dulces
+						</option>
+					</select>
+				<input type="text" placeholder="Nombre"  id="nombreSnack" required >
+				<input type="text" placeholder="Precio"  id="precioSnack" required >
+				<input type="submit" value="Crear" id="crearSnack" required>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
