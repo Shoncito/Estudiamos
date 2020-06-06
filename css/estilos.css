@@ -333,10 +333,53 @@ a:hover{
 }
 
 #divPedido{
-	background-color: #ba7a3e;
-	height: 340px;
-	width: 770px;
-	margin: 15px;
+	background-color: #ce9f74;
+	width: 700px;
+	height: 450px;
 	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 338px;
+	color: white;
+	text-align: center;
+	align-content: center;
+}
+
+#divPedido h1{
+	font-size: 55px;
+	margin-bottom: 0px !important;
+}
+
+#divPedido .card{
+	position: relative;
+	text-align: left;
+	width: auto;
+	margin: 15px;
+}
+
+#divPedido .header{
+	font-size: 22px;
+}
+
+#divPedido .meta{
+	font-size: 20px;
+}
+
+#divPedido .grid{
+	color: black;
+	padding: 14px;
+}
+
+#divPedido .grid{
+	color: black;
+	padding: 14px;
+	font-size: 18px;
+}
+
+#totalPedido{
+	text-align: right;
+	margin-right: 47px;
+}
+
+#Pedido{
 	overflow : auto;
 }
