@@ -5,7 +5,12 @@ import java.util.LinkedList;
 
 import modelo.dto.Tutoria;
 
-public class TutoriasDao implements ITutoriasDao {
+public class TutoriasDao extends Dao implements ITutoriasDao {
+
+	public TutoriasDao(String FILENAME) {
+		super(FILENAME);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean crear(Tutoria dto) {
