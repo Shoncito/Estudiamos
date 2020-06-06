@@ -8,41 +8,38 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
-import modelo.dto.Tutoria;
-/**
- * Clase de objeto de acceso a datos de las tutorías
- * @author Santiago Pérez
- *
- */
-public class TutoriasDao extends Dao implements ITutoriasDao {
+import modelo.dto.CategoriaSnack;
+import modelo.dto.GrupoEstudio;
 
-	public TutoriasDao(String FILENAME) {
+public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
+
+	public GruposEstudioDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean crear(Tutoria dto) {
-		
+	public boolean crear(GrupoEstudio dto) {
+		// TODO Auto-generated method stub
 		return this.data.add(dto);
 	}
 
 	@Override
-	public Tutoria consultar(String id) {
-		Tutoria tutoria = null;
+	public GrupoEstudio consultar(String id) {
+		GrupoEstudio grupo = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==Integer.parseInt(id)){
-                tutoria = (Tutoria)this.data.get(i);
+            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==Integer.parseInt(id)){
+                grupo = (GrupoEstudio)this.data.get(i);
                 break;
             }
         }
-        return tutoria;
+        return grupo;
 	}
 
 	@Override
-	public boolean actualizar(Tutoria dto) {
+	public boolean actualizar(GrupoEstudio dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdTutoria() == (((Tutoria)this.data.get(i)).getIdTutoria())){
+            if(dto.getIdGrupo() == (((GrupoEstudio)this.data.get(i)).getIdGrupo())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -51,9 +48,9 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	}
 
 	@Override
-	public boolean eliminar(Tutoria dto) {
+	public boolean eliminar(GrupoEstudio dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==(dto.getIdTutoria())){
+            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==(dto.getIdGrupo())){
                 this.data.remove(i);
                 return true;
             }
@@ -62,11 +59,10 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	}
 
 	@Override
-	public LinkedList<Tutoria> listarTodos() {
+	public LinkedList<GrupoEstudio> listarTodos() {
 		// TODO Auto-generated method stub
 		return this.data;
 	}
-
 	 /**-
      * Método que permite leer el archivo de datos
      * @throws IOException
@@ -91,5 +87,6 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
         ObjectOutputStream fileO = new ObjectOutputStream(new FileOutputStream(this.getFILENAME()));
         fileO.writeObject(this.data);
     }
+
 
 }

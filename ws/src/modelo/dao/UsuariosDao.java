@@ -10,6 +10,12 @@ import java.util.LinkedList;
 
 import modelo.dto.Usuario;
 
+/**
+ * Clase de objeto de acceso a datos del usuario
+ * @author Santiago Pérez
+ *
+ */
+
 public class UsuariosDao extends Dao implements IUsuariosDao {
 
 	

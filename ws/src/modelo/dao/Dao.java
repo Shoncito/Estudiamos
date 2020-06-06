@@ -1,7 +1,11 @@
 package modelo.dao;
 
 import java.util.LinkedList;
-
+/**
+ * Clase de objeto de acceso a datos
+ * @author Santiago Pérez
+ *
+ */
 public class Dao {
     protected LinkedList data;
     private final String FILENAME;

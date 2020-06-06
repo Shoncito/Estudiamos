@@ -8,41 +8,41 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
-import modelo.dto.Tutoria;
+import modelo.dto.Escuela;
 /**
- * Clase de objeto de acceso a datos de las tutorías
+ * Clase de objeto de acceso a datos de las escuelas
  * @author Santiago Pérez
  *
  */
-public class TutoriasDao extends Dao implements ITutoriasDao {
+public class EscuelasDao extends Dao implements IEscuelasDao {
 
-	public TutoriasDao(String FILENAME) {
+	public EscuelasDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean crear(Tutoria dto) {
-		
+	public boolean crear(Escuela dto) {
+		// TODO Auto-generated method stub
 		return this.data.add(dto);
 	}
 
 	@Override
-	public Tutoria consultar(String id) {
-		Tutoria tutoria = null;
+	public Escuela consultar(String id) {
+		Escuela escuela = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==Integer.parseInt(id)){
-                tutoria = (Tutoria)this.data.get(i);
+            if(((Escuela)this.data.get(i)).getIdEscuela()==Integer.parseInt(id)){
+                escuela = (Escuela)this.data.get(i);
                 break;
             }
         }
-        return tutoria;
+        return escuela;
 	}
 
 	@Override
-	public boolean actualizar(Tutoria dto) {
+	public boolean actualizar(Escuela dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdTutoria() == (((Tutoria)this.data.get(i)).getIdTutoria())){
+            if(dto.getIdEscuela() == (((Escuela)this.data.get(i)).getIdEscuela())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -51,9 +51,9 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	}
 
 	@Override
-	public boolean eliminar(Tutoria dto) {
+	public boolean eliminar(Escuela dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==(dto.getIdTutoria())){
+            if(((Escuela)this.data.get(i)).getIdEscuela()==(dto.getIdEscuela())){
                 this.data.remove(i);
                 return true;
             }
@@ -62,7 +62,7 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	}
 
 	@Override
-	public LinkedList<Tutoria> listarTodos() {
+	public LinkedList<Escuela> listarTodos() {
 		// TODO Auto-generated method stub
 		return this.data;
 	}
