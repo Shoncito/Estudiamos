@@ -59,6 +59,7 @@ body {
 .contenedor-form input[type="email"],
 .contenedor-form input[type="namec"],
 .contenedor-form input[type="descriptionc"],
+.contenedor-form input[type="date"],
 .contenedor-form input[type="logoc"] {
     outline: none;
     display: block;
