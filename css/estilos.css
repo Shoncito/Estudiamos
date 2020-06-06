@@ -3,6 +3,14 @@
 	padding: 0;
 }
 
+a{
+	color: white;
+}
+
+a:hover{
+	color: white;
+}
+
 .hero{
 	display: none;
 }
@@ -98,8 +106,21 @@
   	-webkit-text-fill-color: transparent;
 }
 
+#divHeader p{
+	font-size: 22px;
+	color: white;
+	margin-top: 25px;
+	margin-right: 50px;
+	line-height: 4px;
+}
+
 #divHeader a{
-	font-size: 25px;
+	font-size: 20px;
+	width: 100%;
+}
+
+#divHeader .header{
+	font-size: 20px;
 }
 
 #divHeader a:hover{
@@ -193,19 +214,32 @@
 	width: 50%;
 }
 
-#divInicio{
-	display: none;
-}
-
 #divSnacks{
 	background-color: #ce9f74;
-	width: 800px;
+	width: 920px;
 	height: 450px;
 	border-radius: 20px;
 	margin-top: 50px;
-	margin-left: 300px;
+	margin-left: 228px;
 	color: white;
 	text-align: center;
+}
+
+#botonComprar{
+	width: 100px;
+	margin: 0px !important;
+	margin-top: 150% !important;
+}
+
+#botonSnacks{
+	height: 340px;
+	width: 100px;
+	margin-left: 800px;
+	margin-top: -340px;
+}
+
+#botonSnacks a{
+	color: #3f4041;
 }
 
 #divSnacks h1{
@@ -251,19 +285,43 @@
 	margin-top: 5px;
 }
 
+#divImgProducto{
+	background-color: transparent !important;
+}
+
 .CategoriaSnack p{
 	font-size: 18px;
 }
 
 #productosSnacks .card{
-	height: 145px;
+	height: 58%;
+}
+
+#productosSnacks .extra{
+	padding: 0px !important;
+}
+
+#productosSnacks button{
+	width: 10px;
+}
+
+#productosSnacks #p{
+	margin-top: 14px;
+	margin-left: 55px;
+	border-radius: 50%;
+	background-color: white;
+	font-size: auto;
+	position: absolute;
+	height: 25px;
+	width: 25px;
+	align-content: center;
 }
 
 #productosSnacks img{
 	width: 90px;
 	height: 90px;
 	margin-left: 25px;
-	margin-top: -20px;
+	margin-top: -10px;
 }
 
 #productosSnacks .meta{
@@ -272,4 +330,61 @@
 
 #productosSnacks .header{
 	margin-top: -10px !important;
+}
+
+#divPedido{
+	background-color: #ce9f74;
+	width: 700px;
+	height: 450px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 338px;
+	color: white;
+	text-align: center;
+	align-content: center;
+}
+
+#divPedido h1{
+	font-size: 55px;
+	margin-bottom: 0px !important;
+}
+
+#divPedido .card{
+	position: relative;
+	text-align: left;
+	width: auto;
+	margin: 15px;
+}
+
+#divPedido .header{
+	font-size: 22px;
+}
+
+#divPedido .meta{
+	font-size: 20px;
+}
+
+#divPedido .grid{
+	color: black;
+	padding: 14px;
+}
+
+#divPedido .grid{
+	color: black;
+	padding: 14px;
+	font-size: 18px;
+}
+
+#totalPedido{
+	text-align: right;
+	margin-right: 47px;
+}
+
+#Pedido{
+	background-color: ;
+	height: 365px;
+	width: 686px;
+	margin-left: 0px;
+	margin-top: 0px;
+	overflow : auto;
 }
