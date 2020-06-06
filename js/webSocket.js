@@ -34,7 +34,7 @@ websocket.onmessage=function(event){
 		var obj = JSON.parse(event.data);
 		if(obj.tipo==="notificacion"){
 			//Se recibe el hash y se guarda en una cookie. 
-			enviarNotificacion(obj.subtipo,obj.mensaje);
+			notificar(obj.subtipo,obj.mensaje);
 		}
 	}
 }
