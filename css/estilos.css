@@ -381,5 +381,10 @@ a:hover{
 }
 
 #Pedido{
+	background-color: ;
+	height: 365px;
+	width: 686px;
+	margin-left: 0px;
+	margin-top: 0px;
 	overflow : auto;
 }

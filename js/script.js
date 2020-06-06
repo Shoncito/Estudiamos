@@ -37,6 +37,30 @@ $("#menuPedido").click(function(){
 	window.location.assign("pedidoSnacks.html");
 });
 
+$("#btnCrear").click(function(){
+	window.location.assign("creargrup.html");
+});
+
+$("#btnUnirse").click(function(){
+	window.location.assign("nindex.html");
+});
+
+$("#btnForo").click(function(){
+	window.location.assign("foro.html");
+});
+
+$("#btnMenu").click(function(){
+	window.location.assign("snacks.html");
+});
+
+$("#btnPedido").click(function(){
+	window.location.assign("pedidoSnacks.html");
+});
+
+$("#botonComprar").click(function(){
+	window.location.assign("pedidoSnacks.html");
+});
+
 let menu = document.getElementById("menu");
 
 function myFunction(x) {
