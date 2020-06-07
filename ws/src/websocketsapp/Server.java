@@ -1,6 +1,6 @@
 package websocketsapp;
 
-
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,103 +24,289 @@ import org.omg.Messaging.SyncScopeHelper;
 
 import funciones.Buscador;
 import funciones.Comparador;
+import modelo.dao.UsuariosDao;
 import modelo.dto.GrupoEstudio;
 import modelo.dto.Profesor;
 import modelo.dto.Tutoria;
 import modelo.dto.Usuario;
 
-public class Server extends WebSocketServer{
+public class Server extends WebSocketServer {
 //	private static Map<Integer,Set<WebSocket>> Rooms = new HashMap<>();
 	public LinkedList<Usuario> usuarios;
 
 	public Server() {
-        super(new InetSocketAddress(8080));
-        this.usuarios=new LinkedList<Usuario>();
-    }
+		super(new InetSocketAddress(8080));
+		this.usuarios = new LinkedList<Usuario>();
+	}
 
-    @Override
-    public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        System.out.println("New client connected: " + conn.getRemoteSocketAddress() + " hash " + conn.getRemoteSocketAddress().hashCode());
-        Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
-        if(usuario!=null) {
-        	usuario.setWebSocket(conn);
-        }else {
-        	usuario = new Usuario();
-        	usuario.setWebSocket(conn);
-        	usuario.setDireccion(conn.getRemoteSocketAddress());
-        }
-        
-       // System.out.println(clients.size());
-    }
-    
-    @Override
-    public void onMessage(WebSocket conn, String message) {
-    System.out.println(message);
-    JSONObject js =new JSONObject(message);
-    System.out.println(js.getString("tipo"));
-    if(js.getString("tipo").equals("ping")) {
-    	
-    	conn.send("pong");
-    }
-    else if(js.getString("tipo").equals("recibir")){
-   LinkedList<Tutoria> tutorias=new LinkedList();
-   LinkedList<GrupoEstudio> grupoestudio=new LinkedList();
-   	JSONArray tuto=js.getJSONArray("tutorias");
-   	JSONArray gruestu=js.getJSONArray("gruposEstudio");
-   	Usuario usuario=Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
-   	for(int i=0;i<tuto.length();i++){
-   		Tutoria tuto2=new Tutoria();
-   		Profesor profe=new Profesor();
-   		profe.setNombre(tuto.getJSONObject(i).getString("nombreProfesor"));
-   	    tuto2.setIdTutoria(tuto.getJSONObject(i).getInt("id"));
-        tuto2.setHora(tuto.getJSONObject(i).getInt("hora"));
-        tuto2.setLugar(tuto.getJSONObject(i).getString("lugar"));
-        tuto2.setProfesor(profe);
-        tuto2.setUsuario(usuario); 
-   	}
-    usuario.setTutorias(tutorias);
-   	for(int i=0;i<gruestu.length();i++){
-   		GrupoEstudio grup1=new GrupoEstudio();
-   		grup1.setFecha(gruestu.getJSONObject(i).getString("fecha"));
-   		grup1.setHora(gruestu.getJSONObject(i).getInt("hora"));
-   		grup1.setIdGrupo(gruestu.getJSONObject(i).getInt("idGrupo"));
-   		grup1.setNombreGrupo(gruestu.getJSONObject(i).getString("nombreGrupo"));
-   		grup1.setTema(gruestu.getJSONObject(i).getString("tema"));   	
-   		grupoestudio.add(grup1);	
-   	}	
-      usuario.setGruposEstudio(grupoestudio);
-   }
-   
-   
-   
-   
-   }
+	@Override
+	public void onOpen(WebSocket conn, ClientHandshake handshake) {
+		System.out.println("New client connected: " + conn.getRemoteSocketAddress() + " hash "
+				+ conn.getRemoteSocketAddress().hashCode());
+		Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
+		if (usuario != null) {
+			usuario.setWebSocket(conn);
+		}
 
-    @Override
-    public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-    	if(!reason.equals("cambio")) {
-    		this.usuarios.remove(Buscador.buscarUsuario(conn, usuarios));
-    	}
-        System.out.println("Client disconnected: " + reason);
-    }
+		// System.out.println(clients.size());
+	}
 
-    @Override
-    public void onError(WebSocket conn, Exception exc) {
-        System.out.println("Error happened: " + exc);
-    }
+	@Override
+	public void onMessage(WebSocket conn, String message) {
+		System.out.println(message);
+		JSONObject js = new JSONObject(message);
+		System.out.println(js.getString("tipo"));
+		if (js.getString("tipo").equals("ping")) {
+			conn.send("pong");
+		} else if (js.getString("tipo").equals("login")) {
+			loginUsuario(conn, js);
+		} else if (js.getString("tipo").equals("registro")) {
+			registroUsuario(conn, js);
+		} else if (js.getString("tipo").equals("crear materia")) {
+			crearMateria(conn, js);
+		} else if (js.getString("tipo").equals("crear grupo")) {
+			crearGrupo(conn, js);
+		} else if (js.getString("tipo").equals("crear profesor")) {
+			crearProfesor(conn, js);
+		} else if (js.getString("tipo").equals("asociar materia a profesor")) {
+			asociarMateria(conn, js);
+		} else if (js.getString("tipo").equals("pedir tutoria")) {
+			pedirTutoria(conn, js);
+		} else if (js.getString("tipo").equals("crear categoria snack")) {
+			crearCategoriaSnack(conn, js);
+		} else if (js.getString("tipo").equals("crear snack")) {
+			crearSnack(conn, js);
+		} else if (js.getString("tipo").equals("crear escuela")) {
+			crearEscuela(conn, js);
+		} else if (js.getString("tipo").equals("ingresar a grupo")) {
+			ingresarAGrupo(conn, js);
+		} else if (js.getString("tipo").equals("crear publicación")) {
+			crearPublicacion(conn, js);
+		} else if (js.getString("tipo").equals("agregar horario disponible")) {
+			agregarHorarioProfesor(conn, js);
+		} else if (js.getString("tipo").equals("consultar tutorias")) {
+			consultarTutorias(conn, js);
+		} else if (js.getString("tipo").equals("consultar publicaciones")) {
+			consultarPublicaciones(conn, js);
+		} else if (js.getString("tipo").equals("consultar profesores")) {
+			consultarProfesores(conn, js);
+		} else if (js.getString("tipo").equals("consultar profesor")) {
+			consultarProfesor(conn, js);
+		} else if (js.getString("tipo").equals("consultar grupos")) {
+			consultarGrupos(conn, js);
+		} else if (js.getString("tipo").equals("consultar snacks")) {
+			consultarSnacks(conn, js);
+		} else if (js.getString("tipo").equals("editar grupo")) {
+			crearGrupo(conn, js);
+		} else if (js.getString("tipo").equals("editar publicación")) {
+			editarPublicacion(conn, js);
+		} else if (js.getString("tipo").equals("eliminar materia")) {
+			eliminarMateria(conn, js);
+		} else if (js.getString("tipo").equals("eliminar grupo")) {
+			eliminarGrupo(conn, js);
+		} else if (js.getString("tipo").equals("eliminar profesor")) {
+			eliminarProfesor(conn, js);
+		} else if (js.getString("tipo").equals("eliminar publicación")) {
+			eliminarPublicacion(conn, js);
+		} else if (js.getString("tipo").equals("cancelar tutoria")) {
+			cancelarTutoria(conn, js);
+		} else if (js.getString("tipo").equals("eliminar tutoria")) {
+			eliminarTutoria(conn, js);
+		} else if (js.getString("tipo").equals("eliminar categoria")) {
+			eliminarCategoria(conn, js);
+		} else if (js.getString("tipo").equals("eliminar snack")) {
+			eliminarSnack(conn, js);
+		}
 
-    public void sendToAll(WebSocket conn, String message) {
- 
-    	for(int i =0;i<usuarios.size();i++) {
-    		WebSocket c = (WebSocket)usuarios.get(i).getWebSocket();
-            if (c != conn) c.send(message);
-    	}
-    }
-    
+	}
 
-    
+	private void eliminarSnack(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
 
+	}
 
-	
+	private void eliminarCategoria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void eliminarTutoria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void cancelarTutoria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void eliminarPublicacion(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void eliminarProfesor(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void eliminarGrupo(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void eliminarMateria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void editarPublicacion(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarSnacks(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarGrupos(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarProfesor(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarProfesores(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarPublicaciones(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void consultarTutorias(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void agregarHorarioProfesor(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearPublicacion(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void ingresarAGrupo(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearEscuela(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearSnack(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearCategoriaSnack(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void pedirTutoria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void asociarMateria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearProfesor(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearGrupo(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void crearMateria(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void registroUsuario(WebSocket conn, JSONObject js) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loginUsuario(WebSocket conn, JSONObject js) {
+		UsuariosDao usuarioDao =UsuariosDao.getInstancia();
+		try {
+			usuarioDao.leerArchivo();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Usuario usuario = usuarioDao.consultar(js.getString("usuario"));
+		String mensaje = "";
+		if (usuario == null) {
+			mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
+		} else {
+			if (usuario.getContraseña().equals(js.getString("contraseña"))) {
+				mensaje = "{" + "	tipo: token," + "	mensaje: " + usuario.getToken() + "}";
+				usuario.setWebSocket(conn);
+			} else {
+				mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
+			}
+		}
+		conn.send(mensaje);
+		try {
+			usuarioDao.escribirArchivo();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+		if (!reason.equals("cambio")) {
+			Usuario usuario = Buscador.buscarUsuario(conn, usuarios);
+			this.usuarios.remove(usuario);
+			usuario.setWebSocket(null);
+		}
+		System.out.println("Client disconnected: " + reason);
+	}
+
+	@Override
+	public void onError(WebSocket conn, Exception exc) {
+		System.out.println("Error happened: " + exc);
+	}
+
+	public void sendToAll(WebSocket conn, String message) {
+
+		for (int i = 0; i < usuarios.size(); i++) {
+			WebSocket c = (WebSocket) usuarios.get(i).getWebSocket();
+			if (c != conn)
+				c.send(message);
+		}
+	}
 
 }

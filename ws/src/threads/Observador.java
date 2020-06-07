@@ -46,7 +46,9 @@ public class Observador implements Runnable {
 				int año = calendario.get(Calendar.YEAR);
 				String fecha = año + "-" + meses + "-" + dias;
 				while (true) {
-					for (int i = 0; i < usuarios.size(); i++) {
+					
+					
+					/*for (int i = 0; i < usuarios.size(); i++) {
 						LinkedList<Tutoria> tutorias = usuarios.get(i).getTutorias();
 						for (int j = 0; j < tutorias.size(); j++) {
 							String fecha2 = tutorias.get(j).getFecha();
@@ -75,7 +77,7 @@ public class Observador implements Runnable {
 							}
 						}
 
-					}
+					}*/
 					Thread.sleep(3600000);
 				}
 				

@@ -8,12 +8,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
-import modelo.dto.CategoriaSnack;
 import modelo.dto.GrupoEstudio;
-
+/**
+ * Clase objeto 
+ * @author Santiago Pérez
+ *
+ */
 public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
 
-	public GruposEstudioDao(String FILENAME) {
+	private static GruposEstudioDao instancia;
+	private GruposEstudioDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -87,6 +91,11 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
         ObjectOutputStream fileO = new ObjectOutputStream(new FileOutputStream(this.getFILENAME()));
         fileO.writeObject(this.data);
     }
-
+    public static GruposEstudioDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new GruposEstudioDao("grupo");
+    	}
+    	return instancia;
+    }
 
 }

@@ -17,7 +17,8 @@ import modelo.dto.CategoriaSnack;
  */
 public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
 
-	public CategoriaSnackDao(String FILENAME) {
+	private static CategoriaSnackDao instancia;
+	private CategoriaSnackDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -93,4 +94,10 @@ public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
         fileO.writeObject(this.data);
     }
 
+    public static CategoriaSnackDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new CategoriaSnackDao("categoria");
+    	}
+    	return instancia;
+    }
 }

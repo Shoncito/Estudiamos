@@ -16,7 +16,8 @@ import modelo.dto.Tutoria;
  */
 public class TutoriasDao extends Dao implements ITutoriasDao {
 
-	public TutoriasDao(String FILENAME) {
+	private static TutoriasDao instancia;
+	private TutoriasDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -91,5 +92,11 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
         ObjectOutputStream fileO = new ObjectOutputStream(new FileOutputStream(this.getFILENAME()));
         fileO.writeObject(this.data);
     }
-
+    
+    public static TutoriasDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new TutoriasDao("tutorias");
+    	}
+    	return instancia;
+    }
 }

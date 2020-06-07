@@ -17,6 +17,7 @@ import modelo.dto.Snack;
 
 public class SnackDao extends Dao implements ISnackDao {
 
+	private static SnackDao instancia;
 	public SnackDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
@@ -87,4 +88,10 @@ public class SnackDao extends Dao implements ISnackDao {
 	      fileO.writeObject(this.data);
 	}
 
+	public static SnackDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new SnackDao("snack");
+    	}
+    	return instancia;
+    }
 }

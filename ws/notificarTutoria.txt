@@ -30,6 +30,7 @@ ping - pong
 //Cliente
 ingresa
 {
+	tipo: login,
 	usuario: usuario,
 	contraseña: contraseña
 }
@@ -51,6 +52,7 @@ Crear Materia:
 
 Crear Grupo:
 {
+	tipo: crear grupo,
 	nombreGrupo: nombreGrupo,
 	idMateria: id materia,
 	tema: tema,
@@ -152,26 +154,134 @@ Retorna: ok
 }
 Retorna: un arreglo con todos los datos de las tutorías que están programadas
 
-Consultar tutorías programadas:
-Retorna: un arreglo con todos los datos de las tutorías que están programadas
 
 - Consultar todas las publicaciones:
+{
+	tipo: consultar publicaciones
+}
 retorna: un arreglo con todos los datos de las publicaciones realizadas
 
 - Consultar todos los profesores:
+{
+	tipo: consultar profesores
+}
 Retorna un arreglo con nombre y id del profesor
 
 - Consultar profesor:
 Parámetros: id profesor
 {
-	tipo: consultar profesor
+	tipo: consultar profesor,
+	id: idProfesor
 }
 Retorna: dos arreglos: uno con sus horarios disponibles y otro con las materias que dicta
 
 - Consultar todos los grupos de estudio:
+{
+	tipo: consultar grupos
+}
 Retorna: un arreglo con todos los datos de todos los grupos de estudio
 
 - Consultar todos los snacks:
+{
+	tipo: consultar snacks
+}
 Retorna: un arreglo con todos los datos de todos los snacks
 
 
+Put:
+- Editar grupo de estudio:
+{
+	tipo: editar grupo,
+	idMateria: idMateria,
+	tema: tema,
+	fecha: fecha,
+	hora: hora,
+	idGrupo: idGrupo
+}
+Parámetros: Materia, tema, fecha, hora, id grupo
+Retorna: ok
+
+
+- Editar publicación:
+{
+	tipo: editar publicación,
+	titulo: titulo,
+	contenido: contenido,
+	idPublicacion: id publicación
+}
+Retorna: ok
+
+- Eliminar Materia:
+{
+	tipo: eliminar materia,
+	idMateria: id
+}
+Parámetros: id materia
+Retorna: ok
+
+- Eliminar Grupo:
+{
+	tipo: eliminar grupo,
+	idGrupo: id
+}
+Parámetros: id grupo
+Retorna: ok
+
+- Borrar profesor:
+{
+	tipo: eliminar profesor,
+	idProfesor: id
+}
+Parámetros: id profesor
+Retorna: ok
+
+- Borrar publicación:
+{
+	tipo: eliminar publicación,
+	idPublicacion: id
+}
+Parámetros: id publicacion
+Retorna: ok
+
+- Cancelar Tutoría:
+{
+	tipo: cancelar tutoria,
+	idTutoria: idTutoria,
+	idUsuario: idUsuario 
+}
+Parámetros: id tutoria
+Retorna: ok
+
+- Eliminar tutoria:
+{
+	tipo: eliminar tutoria,
+	idTutoria: idTutoria
+}
+
+- Eliminar categoría Snack:
+{
+	tipo: eliminar categoria,
+	idCategoria: id
+}
+Parámetros: id categoria
+Retorna: ok
+
+- Eliminar Snack:
+{
+	tipo: eliminar snack,
+	idSnack: id
+}
+Parámetros: id snack
+retorna: ok
+
+
+válido
+{
+	tipo: ok
+}
+
+error
+{
+	tipo: error,
+	mensaje: mensaje
+}

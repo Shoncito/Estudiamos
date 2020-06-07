@@ -17,7 +17,8 @@ import modelo.dto.Materia;
 
 public class MateriaDao extends Dao implements IMateriaDao {
 
-	public MateriaDao(String FILENAME) {
+	private static MateriaDao instancia;
+	private MateriaDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -85,4 +86,10 @@ public class MateriaDao extends Dao implements IMateriaDao {
         fileO.writeObject(this.data);
 	}
 
+	public static MateriaDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new MateriaDao("materia");
+    	}
+    	return instancia;
+    }
 }

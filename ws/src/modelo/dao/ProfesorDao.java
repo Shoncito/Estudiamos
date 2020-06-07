@@ -17,6 +17,7 @@ import modelo.dto.Profesor;
 
 public class ProfesorDao extends Dao implements IProfesorDao {
 
+	private static ProfesorDao instancia;
 	public ProfesorDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
@@ -83,5 +84,10 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 	    ObjectOutputStream fileO = new ObjectOutputStream(new FileOutputStream(this.getFILENAME()));
         fileO.writeObject(this.data);
 	}
-
+	public static ProfesorDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new ProfesorDao("profesor");
+    	}
+    	return instancia;
+    }
 }

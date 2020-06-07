@@ -17,7 +17,8 @@ import modelo.dto.Publicacion;
 
 public class PublicacionDao extends Dao implements IPublicacionDao {
 
-	public PublicacionDao(String FILENAME) {
+	private static PublicacionDao instancia;
+	private PublicacionDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -83,5 +84,10 @@ public class PublicacionDao extends Dao implements IPublicacionDao {
 		  ObjectOutputStream fileO = new ObjectOutputStream(new FileOutputStream(this.getFILENAME()));
 	      fileO.writeObject(this.data);
 	}
-
+	public static PublicacionDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new PublicacionDao("publicacion");
+    	}
+    	return instancia;
+    }
 }

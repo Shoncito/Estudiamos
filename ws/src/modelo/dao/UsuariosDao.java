@@ -18,8 +18,9 @@ import modelo.dto.Usuario;
 
 public class UsuariosDao extends Dao implements IUsuariosDao {
 
+	private static UsuariosDao instancia;
 	
-	public UsuariosDao(String FILENAME) {
+	private UsuariosDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -94,4 +95,10 @@ public class UsuariosDao extends Dao implements IUsuariosDao {
         fileO.writeObject(this.data);
     }
 
+    public static UsuariosDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new UsuariosDao("usuarios");
+    	}
+    	return instancia;
+    }
 }

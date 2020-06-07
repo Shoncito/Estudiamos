@@ -16,7 +16,8 @@ import modelo.dto.Escuela;
  */
 public class EscuelasDao extends Dao implements IEscuelasDao {
 
-	public EscuelasDao(String FILENAME) {
+	private static EscuelasDao instancia;
+	private EscuelasDao(String FILENAME) {
 		super(FILENAME);
 		// TODO Auto-generated constructor stub
 	}
@@ -92,4 +93,10 @@ public class EscuelasDao extends Dao implements IEscuelasDao {
         fileO.writeObject(this.data);
     }
 
+    public static EscuelasDao getInstancia() {
+    	if(instancia ==null) {
+    		instancia = new EscuelasDao("escuela");
+    	}
+    	return instancia;
+    }
 }
