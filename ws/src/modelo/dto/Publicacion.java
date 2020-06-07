@@ -11,18 +11,19 @@ package modelo.dto;
  * @author Val
  */
 public class Publicacion {
-    private int idPublicacion;
+    private String idPublicacion;
+    private String idMateria;
     private int titulo;
     private int contenido;
 
     public Publicacion() {
     }
 
-    public int getIdPublicacion() {
+    public String getIdPublicacion() {
         return idPublicacion;
     }
 
-    public void setIdPublicacion(int idPublicacion) {
+    public void setIdPublicacion(String idPublicacion) {
         this.idPublicacion = idPublicacion;
     }
 
@@ -41,6 +42,20 @@ public class Publicacion {
     public void setContenido(int contenido) {
         this.contenido = contenido;
     }
+
+	/**
+	 * @return the idMateria
+	 */
+	public String getIdMateria() {
+		return idMateria;
+	}
+
+	/**
+	 * @param idMateria the idMateria to set
+	 */
+	public void setIdMateria(String idMateria) {
+		this.idMateria = idMateria;
+	}
     
     
     

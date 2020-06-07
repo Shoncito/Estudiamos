@@ -33,8 +33,7 @@ public class MateriaDao extends Dao implements IMateriaDao {
 	public Materia consultar(String id) {
 		Materia materia = null;
         for (int i = 0; i < this.data.size(); i++) {
-        	int idMateria=Integer.parseInt(id);
-            if(((Materia)this.data.get(i)).getIdMateria()==idMateria){
+            if(((Materia)this.data.get(i)).getIdMateria().equals(id)){
             	materia = (Materia)this.data.get(i);
                 break;
             }

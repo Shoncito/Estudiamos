@@ -10,18 +10,18 @@ package modelo.dto;
  * @author Val
  */
 public class CategoriaSnack {
-    private int idCategoria;
+    private String idCategoria;
     private String nombreCategoria;
 
     public CategoriaSnack() {
     }
     
 
-    public int getIdCategoria() {
+    public String getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(String idCategoria) {
         this.idCategoria = idCategoria;
     }
 

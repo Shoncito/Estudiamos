@@ -10,18 +10,20 @@ package modelo.dto;
  * @author Val
  */
 public class Snack {
-    private int idSnack;
+    private String idSnack;
     private String nombreSnack;
+    private String imagen;
+    private String idCategoria;
     private float precio;
 
     public Snack() {
     }
 
-    public int getIdSnack() {
+    public String getIdSnack() {
         return idSnack;
     }
 
-    public void setIdSnack(int idSnack) {
+    public void setIdSnack(String idSnack) {
         this.idSnack = idSnack;
     }
 
@@ -40,6 +42,34 @@ public class Snack {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
+
+	/**
+	 * @return the imagen
+	 */
+	public String getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	/**
+	 * @return the idCategoria
+	 */
+	public String getIdCategoria() {
+		return idCategoria;
+	}
+
+	/**
+	 * @param idCategoria the idCategoria to set
+	 */
+	public void setIdCategoria(String idCategoria) {
+		this.idCategoria = idCategoria;
+	}
     
     
 }

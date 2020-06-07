@@ -33,8 +33,7 @@ public class SnackDao extends Dao implements ISnackDao {
 	public Snack consultar(String id) {
 		Snack snack = null;
         for (int i = 0; i < this.data.size(); i++) {
-        	int idSnack=Integer.parseInt(id);
-            if(((Snack)this.data.get(i)).getIdSnack()==idSnack){
+            if(((Snack)this.data.get(i)).getIdSnack().equals(id)){
                 snack = (Snack)this.data.get(i);
                 break;
             }
@@ -57,7 +56,7 @@ public class SnackDao extends Dao implements ISnackDao {
 	@Override
 	public boolean eliminar(Snack dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Snack)this.data.get(i)).getIdSnack()==dto.getIdSnack()){
+            if(((Snack)this.data.get(i)).getIdSnack().equals(dto.getIdSnack())){
                 this.data.remove(i);
                 return true;
             }

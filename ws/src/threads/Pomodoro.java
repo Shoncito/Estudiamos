@@ -2,6 +2,9 @@ package threads;
 
 import java.util.LinkedList;
 
+import org.java_websocket.WebSocket;
+
+import modelo.dao.UsuariosDao;
 import modelo.dto.GrupoEstudio;
 import modelo.dto.Usuario;
 
@@ -57,9 +60,16 @@ public class Pomodoro implements Runnable {
 	}
 
 	private void enviarATodosEnElGrupo(String mensaje) {
-		LinkedList<Usuario> usuarios = grupoEstudio.getUsuarios();
-		for(Usuario usuario : usuarios) {
-			usuario.getWebSocket().send(mensaje);
+		LinkedList<String> usuarios = grupoEstudio.getUsuarios();
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
+		for(String nombreUsuario : usuarios) {
+			Usuario usuario =usuariosDao.consultar(nombreUsuario);
+			WebSocket w = usuario.getWebSocket();
+			if(w!=null) {
+				w.send(mensaje);
+			}else {
+				System.out.println(usuario.getUsuario()+" no está conectado");
+			}
 		}
 	}
 

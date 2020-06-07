@@ -10,20 +10,12 @@ package modelo.dto;
  * @author Val
  */
 public class Materia {
-    private int idMateria;
+    private String idMateria;
     private String nombreMateria;
+    private String idEscuela;
 
     public Materia() {
     }
-
-    public int getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
-    }
-
 
     public String getNombreMateria() {
         return nombreMateria;
@@ -32,6 +24,36 @@ public class Materia {
     public void setNombreMateria(String nombreMateria) {
         this.nombreMateria = nombreMateria;
     }
+
+    
+
+	/**
+	 * @return the idEscuela
+	 */
+	public String getIdEscuela() {
+		return idEscuela;
+	}
+
+	/**
+	 * @param idEscuela the idEscuela to set
+	 */
+	public void setIdEscuela(String idEscuela) {
+		this.idEscuela = idEscuela;
+	}
+
+	/**
+	 * @return the idMateria
+	 */
+	public String getIdMateria() {
+		return idMateria;
+	}
+
+	/**
+	 * @param idMateria the idMateria to set
+	 */
+	public void setIdMateria(String idMateria) {
+		this.idMateria = idMateria;
+	}
     
     
 }

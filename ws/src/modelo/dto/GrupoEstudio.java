@@ -3,23 +3,15 @@ package modelo.dto;
 import java.util.LinkedList;
 
 public class GrupoEstudio {
-	private int idGrupo;
-	private LinkedList<Usuario> usuarios;
+	private String idGrupo;
+	private LinkedList<String> usuarios;
 	private String nombreGrupo;
 	private String tema;
 	private String fecha;
 	private int hora;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idGrupo;
-		return result;
-	}
+	private String lugar;
+	private String idMateria;
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -39,25 +31,25 @@ public class GrupoEstudio {
 	/**
 	 * @return the idGrupo
 	 */
-	public int getIdGrupo() {
+	public String getIdGrupo() {
 		return idGrupo;
 	}
 	/**
 	 * @param idGrupo the idGrupo to set
 	 */
-	public void setIdGrupo(int idGrupo) {
+	public void setIdGrupo(String idGrupo) {
 		this.idGrupo = idGrupo;
 	}
 	/**
 	 * @return the usuarios
 	 */
-	public LinkedList<Usuario> getUsuarios() {
+	public LinkedList<String> getUsuarios() {
 		return usuarios;
 	}
 	/**
 	 * @param usuarios the usuarios to set
 	 */
-	public void setUsuarios(LinkedList<Usuario> usuarios) {
+	public void setUsuarios(LinkedList<String> usuarios) {
 		this.usuarios = usuarios;
 	}
 	/**
@@ -107,6 +99,30 @@ public class GrupoEstudio {
 	 */
 	public void setHora(int hora) {
 		this.hora = hora;
+	}
+	/**
+	 * @return the lugar
+	 */
+	public String getLugar() {
+		return lugar;
+	}
+	/**
+	 * @param lugar the lugar to set
+	 */
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+	/**
+	 * @return the idMateria
+	 */
+	public String getIdMateria() {
+		return idMateria;
+	}
+	/**
+	 * @param idMateria the idMateria to set
+	 */
+	public void setIdMateria(String idMateria) {
+		this.idMateria = idMateria;
 	}
 	
 }

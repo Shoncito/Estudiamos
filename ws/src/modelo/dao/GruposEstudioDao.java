@@ -32,7 +32,7 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
 	public GrupoEstudio consultar(String id) {
 		GrupoEstudio grupo = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==Integer.parseInt(id)){
+            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==id){
                 grupo = (GrupoEstudio)this.data.get(i);
                 break;
             }
@@ -97,5 +97,17 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
     	}
     	return instancia;
     }
+
+	@Override
+	public GrupoEstudio consultarPorNombre(String nombre) {
+		GrupoEstudio grupo = null;
+        for (int i = 0; i < this.data.size(); i++) {
+            if(((GrupoEstudio)this.data.get(i)).getNombreGrupo().equals(nombre)){
+                grupo = (GrupoEstudio)this.data.get(i);
+                break;
+            }
+        }
+        return grupo;
+	}
 
 }

@@ -1,11 +1,13 @@
 package modelo.dto;
 
+import java.util.LinkedList;
+
 public class Tutoria {
-	private int idTutoria;
+	private String idTutoria;
 	private int hora;
 	private Profesor profesor;
 	private String lugar;
-	private Usuario usuario;
+	private LinkedList<String> usuarios;
 	private String fecha;
 	
 	
@@ -13,16 +15,7 @@ public class Tutoria {
 	
 	
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idTutoria;
-		return result;
-	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -69,18 +62,6 @@ public class Tutoria {
 		this.profesor = profesor;
 	}
 	/**
-	 * @return the idTutoria
-	 */
-	public int getIdTutoria() {
-		return idTutoria;
-	}
-	/**
-	 * @param idTutoria the idTutoria to set
-	 */
-	public void setIdTutoria(int idTutoria) {
-		this.idTutoria = idTutoria;
-	}
-	/**
 	 * @return the hora
 	 */
 	public int getHora() {
@@ -105,16 +86,28 @@ public class Tutoria {
 		this.lugar = lugar;
 	}
 	/**
-	 * @return the usuario
+	 * @return the idTutoria
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public String getIdTutoria() {
+		return idTutoria;
 	}
 	/**
-	 * @param usuario the usuario to set
+	 * @param idTutoria the idTutoria to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdTutoria(String idTutoria) {
+		this.idTutoria = idTutoria;
+	}
+	/**
+	 * @return the usuarios
+	 */
+	public LinkedList<String> getUsuarios() {
+		return usuarios;
+	}
+	/**
+	 * @param usuarios the usuarios to set
+	 */
+	public void setUsuarios(LinkedList<String> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	

@@ -7,5 +7,5 @@ import modelo.dto.Escuela;
  *
  */
 public interface IEscuelasDao extends IDao<Escuela>{
-
+	Escuela consultarPorNombre(String nombre);
 }

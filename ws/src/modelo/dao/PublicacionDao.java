@@ -32,8 +32,7 @@ public class PublicacionDao extends Dao implements IPublicacionDao {
 	public Publicacion consultar(String id) {
 		Publicacion publicacion = null;
         for (int i = 0; i < this.data.size(); i++) {
-        	int idPublicacion=Integer.parseInt(id);		
-            if(((Publicacion)this.data.get(i)).getIdPublicacion()==idPublicacion){
+            if(((Publicacion)this.data.get(i)).getIdPublicacion()==id){
             	publicacion = (Publicacion)this.data.get(i);
                 break;
             }

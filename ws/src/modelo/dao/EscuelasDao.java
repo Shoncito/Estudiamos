@@ -32,7 +32,7 @@ public class EscuelasDao extends Dao implements IEscuelasDao {
 	public Escuela consultar(String id) {
 		Escuela escuela = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Escuela)this.data.get(i)).getIdEscuela()==Integer.parseInt(id)){
+            if(((Escuela)this.data.get(i)).getIdEscuela()==id){
                 escuela = (Escuela)this.data.get(i);
                 break;
             }
@@ -99,4 +99,16 @@ public class EscuelasDao extends Dao implements IEscuelasDao {
     	}
     	return instancia;
     }
+
+	@Override
+	public Escuela consultarPorNombre(String nombre) {
+		Escuela escuela = null;
+        for (int i = 0; i < this.data.size(); i++) {
+            if(((Escuela)this.data.get(i)).getNombreEscuela().equals(nombre)){
+                escuela = (Escuela)this.data.get(i);
+                break;
+            }
+        }
+        return escuela;
+	}
 }

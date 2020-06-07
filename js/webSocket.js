@@ -32,8 +32,15 @@ websocket.onmessage=function(event){
 		console.log(event.data);
 	} else {
 		var obj = JSON.parse(event.data);
-		if(obj.tipo==="notificacion"){
-			//Se recibe el hash y se guarda en una cookie. 
+		if(obj.tipo==="error"){
+			alert("Error: "+obj.mensaje);
+		}
+		else if(obj.tipo ==="token"){
+			setCookie("token",obj.token,6);
+			//Se supone que aquí se accede a la página
+
+		}
+		else if(obj.tipo==="notificacion"){ 
 			notificar(obj.subtipo,obj.mensaje);
 		}
 	}
@@ -64,10 +71,11 @@ function ping(){
 }
 
 
-/**
-* Función que envía un mensaje al servidor
-*/
 
+/**
+ * Función que envía un mensaje al servidor
+ * @param {*} object 
+ */
 function enviarMensaje(object){
 	var stringObject = JSON.stringify(object);
 	websocket.send(stringObject);
@@ -75,10 +83,10 @@ function enviarMensaje(object){
 }
 
 /**
- * 
- * @param {String} subtipo 
- * @param {String} mensaje 
+ * Función que envía una notificación
+ * @param {String} subtipo que es el título de la notificación Pomodoro o tutoría
+ * @param {String} mensaje que es el mensaje
  */
 function enviarNotificacion(subtipo, mensaje){
-
+	notificar(subtipo,mensaje);
 }

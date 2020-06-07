@@ -9,7 +9,7 @@ Enviar  mensaje pomodoro
 {
 	tipo: notificacion,
 	subtipo: grupo,
-	mensaje: �A estudiar!. Estudia 20 minutos
+	mensaje: ¡A estudiar!. Estudia 20 minutos
 }
 {
 	tipo: notificacion,
@@ -65,14 +65,14 @@ Crear Grupo:
 Crear Profesor:
 {
 	tipo: crear profesor,
-	nombreProfesor: nombreProfesor
+	idProfesor: idProfesor
 }
 Retorna ok
 
 Asociar materia a profesor:
 
 {
-	tipo: asociar materia a profesor,
+	tipo: asociar materia,
 	idProfesor: id profesor,
 	idMateria: id materia
 }
@@ -83,6 +83,11 @@ Pedir Tutoría:
 {
 	tipo: pedir tutoria,
 	idUsuario: id usuario,
+	idTutoria: id tutoria
+}
+
+crearTutoria{
+	tipo: crear tutoria,
 	idMateria: id materia,
 	idProfesor: id profesor,
 	fecha: fecha,
@@ -187,6 +192,11 @@ Retorna: un arreglo con todos los datos de todos los grupos de estudio
 }
 Retorna: un arreglo con todos los datos de todos los snacks
 
+- Consultar escuela:
+{
+	tipo: consultar escuela,
+	idEscuela: id
+}
 
 Put:
 - Editar grupo de estudio:
@@ -278,6 +288,7 @@ retorna: ok
 válido
 {
 	tipo: ok
+	mensaje: mensaje
 }
 
 error

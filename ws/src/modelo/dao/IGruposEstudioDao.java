@@ -11,5 +11,5 @@ import modelo.dto.GrupoEstudio;
  *
  */
 public interface IGruposEstudioDao extends IDao<GrupoEstudio> {
-
+	GrupoEstudio consultarPorNombre (String nombre);
 }

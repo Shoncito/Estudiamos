@@ -10,17 +10,17 @@ package modelo.dto;
  * @author Val
  */
 public class Escuela {
-    private int idEscuela;
+    private String idEscuela;
     private String nombreEscuela;
 
     public Escuela() {
     }
 
-    public int getIdEscuela() {
+    public String getIdEscuela() {
         return idEscuela;
     }
 
-    public void setIdEscuela(int idEscuela) {
+    public void setIdEscuela(String idEscuela) {
         this.idEscuela = idEscuela;
     }
 

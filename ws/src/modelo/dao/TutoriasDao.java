@@ -32,7 +32,7 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	public Tutoria consultar(String id) {
 		Tutoria tutoria = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==Integer.parseInt(id)){
+            if(((Tutoria)this.data.get(i)).getIdTutoria()==id){
                 tutoria = (Tutoria)this.data.get(i);
                 break;
             }

@@ -32,8 +32,7 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 	public Profesor consultar(String id) {
 		Profesor profesor = null;
         for (int i = 0; i < this.data.size(); i++) {
-        	int idProfesor=Integer.parseInt(id);
-            if(((Profesor)this.data.get(i)).getId()==idProfesor){
+            if(((Profesor)this.data.get(i)).getId()==id){
             	profesor = (Profesor)this.data.get(i);
                 break;
             }
@@ -90,4 +89,15 @@ public class ProfesorDao extends Dao implements IProfesorDao {
     	}
     	return instancia;
     }
+
+	@Override
+	public boolean consultarMateria(String idMateria, Profesor profesor) {
+		LinkedList<String> materias = profesor.getMaterias();
+		for(String materia: materias) {
+			if(idMateria.equals(materia)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
