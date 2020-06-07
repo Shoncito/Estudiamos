@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 
 $("#menuInicio").click(function(){
-	window.location.assign("index.html");
+	window.location.assign("inicio.html");
 });
 
 $("#menuCrear").click(function(){
