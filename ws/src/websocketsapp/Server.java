@@ -35,10 +35,12 @@ import modelo.dao.PublicacionDao;
 import modelo.dao.SnackDao;
 import modelo.dao.TutoriasDao;
 import modelo.dao.UsuariosDao;
+import modelo.dto.CategoriaSnack;
 import modelo.dto.Escuela;
 import modelo.dto.GrupoEstudio;
 import modelo.dto.Materia;
 import modelo.dto.Profesor;
+import modelo.dto.Snack;
 import modelo.dto.Tutoria;
 import modelo.dto.Usuario;
 
@@ -133,8 +135,26 @@ public class Server extends WebSocketServer {
 			eliminarSnack(conn, js);
 		}else if(js.getString("tipo").equals("apagar")) {
 			apagarServidor(conn,js);
+		}else if(js.getString("tipo").equals("consultar categorias")) {
+			consultarCategorias(conn,js);
 		}
 
+	}
+
+	private void consultarCategorias(WebSocket conn, JSONObject js) {
+		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
+		LinkedList<CategoriaSnack> categorias = categoriaSnackDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista categorias\"," + 
+				"	\"categorias\": [";
+		for (int i = 0; i < categorias.size(); i++) {
+			mensaje +=categorias.get(i).toJSON();
+			if(i<categorias.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]";
+		conn.send(mensaje);
 	}
 
 	private void crearTutoria(WebSocket conn, JSONObject js) {
@@ -315,14 +335,48 @@ public class Server extends WebSocketServer {
 	}
 
 	private void crearSnack(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
+		SnackDao snackDao = SnackDao.getInstancia();
+		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
+		Snack snack = new Snack();
+		snack.setNombreSnack(js.getString("nombreSnack"));
+		snack.setPrecio(js.getFloat("precio"));
+		snack.setImagen(js.getString("imagen"));
+		snack.setIdCategoria(js.getString("idCategoria"));
+		String idSnack = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		snack.setIdSnack(idSnack);
+		if(categoriaSnackDao.consultar(js.getString("idCategoria"))==null) {
+			
+		}
 	}
 
 	private void crearCategoriaSnack(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
+		CategoriaSnack categoria = new CategoriaSnack();
+		String idCategoria=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		categoria.setIdCategoria(idCategoria);
+		categoria.setNombreCategoria(js.getString("nombreCategoria"));
+		String mensaje="";
+		if(categoriaSnackDao.consultarPorNombre(categoria.getNombreCategoria())!=null) {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Esa escuela ya existe\"" + 
+					"}";
+		}else {
+			if(categoriaSnackDao.crear(categoria)) {
+				mensaje ="{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Categoría creada\"" +
+						"\"idCategoria\": \""+categoria.getIdCategoria()+"\""+
+						"}";
+			}
+		}
+		conn.send(mensaje);
 	}
-
+	/**
+	 * 
+	 * @param conn
+	 * @param js
+	 */
 	private void pedirTutoria(WebSocket conn, JSONObject js) {
 		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
 		UsuariosDao usuariosDao = UsuariosDao.getInstancia();

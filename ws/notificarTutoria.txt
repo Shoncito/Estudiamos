@@ -111,6 +111,7 @@ Crear Snack:
 	tipo: crear snack,
 	idCategoria: idCategoria,
 	nombreSnack: nombre snack,
+	imagen: imagen,
 	precio: precio
 }
 

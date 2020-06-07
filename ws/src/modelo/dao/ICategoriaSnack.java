@@ -7,5 +7,5 @@ import modelo.dto.CategoriaSnack;
  *
  */
 public interface ICategoriaSnack extends IDao<CategoriaSnack> {
-
+	CategoriaSnack consultarPorNombre(String nombre);
 }

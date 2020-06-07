@@ -32,5 +32,11 @@ public class CategoriaSnack {
     public void setNombreCategoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
     }
+
+
+
+	public String toJSON() {
+		return "{\"idCategoria\":\"" + idCategoria + "\", \"nombreCategoria\":\"" + nombreCategoria + "\"}";
+	}
     
 }

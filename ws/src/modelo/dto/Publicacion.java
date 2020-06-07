@@ -13,6 +13,7 @@ package modelo.dto;
 public class Publicacion {
     private String idPublicacion;
     private String idMateria;
+    private String usuario;
     private int titulo;
     private int contenido;
 
@@ -55,6 +56,20 @@ public class Publicacion {
 	 */
 	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public String getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
     
     

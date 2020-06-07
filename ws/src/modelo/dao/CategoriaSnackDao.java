@@ -100,4 +100,16 @@ public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
     	}
     	return instancia;
     }
+
+	@Override
+	public CategoriaSnack consultarPorNombre(String nombre) {
+		CategoriaSnack categoria = null;
+        for (int i = 0; i < this.data.size(); i++) {
+            if(((CategoriaSnack)this.data.get(i)).getNombreCategoria().equals(nombre)){
+                categoria = (CategoriaSnack)this.data.get(i);
+                break;
+            }
+        }
+        return categoria;
+	}
 }
