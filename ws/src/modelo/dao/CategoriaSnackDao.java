@@ -33,7 +33,7 @@ public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
 	public CategoriaSnack consultar(String id) {
 		CategoriaSnack categoria = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((CategoriaSnack)this.data.get(i)).getIdCategoria()==id){
+            if(((CategoriaSnack)this.data.get(i)).getIdCategoria().equals(id)){
                 categoria = (CategoriaSnack)this.data.get(i);
                 break;
             }

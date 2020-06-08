@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,6 +26,7 @@ import org.omg.Messaging.SyncScopeHelper;
 
 import funciones.Buscador;
 import funciones.Comparador;
+import funciones.Generador;
 import modelo.dao.CategoriaSnackDao;
 import modelo.dao.EscuelasDao;
 import modelo.dao.GruposEstudioDao;
@@ -166,7 +168,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 	}
 
@@ -474,7 +476,7 @@ public class Server extends WebSocketServer {
 			publicacion.setUsuario(usuario.getUsuario());
 			publicacion.setContenido(js.getString("contenido"));
 			publicacion.setTitulo(js.getString("contenido"));
-			String idPublicacion=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idPublicacion=Generador.generarId();
 			publicacion.setIdPublicacion(idPublicacion);
 			if(publicacionDao.crear(publicacion)) {
 				mensaje= "{" + 
@@ -514,7 +516,7 @@ public class Server extends WebSocketServer {
 	private void crearEscuela(WebSocket conn, JSONObject js) {
 		EscuelasDao escuelaDao = EscuelasDao.getInstancia();
 		Escuela escuela = new Escuela();
-		String idEscuela =""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idEscuela =Generador.generarId();
 		escuela.setIdEscuela(idEscuela);
 		escuela.setNombreEscuela(js.getString("nombreEscuela"));
 		String mensaje = "";
@@ -545,7 +547,7 @@ public class Server extends WebSocketServer {
 		snack.setPrecio(js.getFloat("precio"));
 		snack.setImagen(js.getString("imagen"));
 		snack.setIdCategoria(js.getString("idCategoria"));
-		String idSnack = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idSnack = Generador.generarId();
 		snack.setIdSnack(idSnack);
 		if(categoriaSnackDao.consultar(js.getString("idCategoria"))==null) {
 			mensaje ="{" + 
@@ -568,7 +570,8 @@ public class Server extends WebSocketServer {
 	private void crearCategoriaSnack(WebSocket conn, JSONObject js) {
 		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
 		CategoriaSnack categoria = new CategoriaSnack();
-		String idCategoria=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idCategoria=Generador.generarId();
+		System.out.println(idCategoria);
 		categoria.setIdCategoria(idCategoria);
 		categoria.setNombreCategoria(js.getString("nombreCategoria"));
 		String mensaje="";
@@ -670,7 +673,7 @@ public class Server extends WebSocketServer {
 					"}";
 		}else {
 			profesor = new Profesor();
-			String idProfesor = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idProfesor = Generador.generarId();
 			profesor.setId(idProfesor);
 			profesor.setNombre(js.getString("nombreProfesor"));
 			profesor.setMaterias(new LinkedList());
@@ -696,7 +699,7 @@ public class Server extends WebSocketServer {
 		grupo.getUsuarios().add(js.getString("idUsuario"));
 		grupo.setIdMateria(js.getString("idMateria"));
 		grupo.setLugar(js.getString("lugar"));
-		String idGrupo =""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idGrupo =Generador.generarId();
 		grupo.setIdGrupo(idGrupo);
 		if(gruposEstudioDao.consultarPorNombre(grupo.getNombreGrupo())!=null) {
 			mensaje ="{" + 
@@ -730,7 +733,7 @@ public class Server extends WebSocketServer {
 			MateriaDao materiaDao = MateriaDao.getInstancia();
 			Materia materia = new Materia();
 			materia.setIdEscuela(escuela.getIdEscuela());
-			String idMateria = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idMateria = Generador.generarId();
 			materia.setIdMateria(idMateria);
 			materia.setNombreMateria(js.getString("nombreMateria"));
 			if(materiaDao.consultar(materia.getIdMateria())!=null) {
@@ -766,7 +769,7 @@ public class Server extends WebSocketServer {
 			usuario.setUsuario(js.getString("usuario"));
 			usuario.setCorreo(js.getString("correo"));
 			usuario.setContraseña(js.getString("contraseña"));
-			usuario.setToken(usuario.getUsuario()+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND);
+			usuario.setToken(usuario.getUsuario()+Generador.generarId());
 			if(usuariosDao.crear(usuario)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\", " + 
