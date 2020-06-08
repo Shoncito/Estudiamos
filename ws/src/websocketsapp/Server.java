@@ -422,22 +422,76 @@ public class Server extends WebSocketServer {
 
 	private void agregarHorarioProfesor(WebSocket conn, JSONObject js) {
 		// TODO Auto-generated method stub
-
+		ProfesorDao profesorDao = ProfesorDao.getInstancia();
+		Profesor profesor = profesorDao.consultar(js.getString("idProfesor"));
+		profesor.getHorarios().add(js.getString("hora"));
+		String mensaje= "{" + 
+				"\"tipo\": \"ok\"," + 
+				"\"mensaje\": \"Publicación creada\"" +
+				"}";
+		conn.send(mensaje);
 	}
 
 	private void crearPublicacion(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		String mensaje="";
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
+		PublicacionDao publicacionDao = PublicacionDao.getInstancia();
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		Usuario usuario = usuariosDao.consultar(js.getString("idUsuario"));
+		Materia materia = materiaDao.consultar(js.getString("idMateria"));
+		if(usuario==null) {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Ese usuario no existe\"" + 
+					"}";
+		}else if (materia==null){
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Ese usuario no existe\"" + 
+					"}";
+		}else {
+			Publicacion publicacion = new Publicacion();
+			publicacion.setIdMateria(materia.getIdMateria());
+			publicacion.setUsuario(usuario.getUsuario());
+			publicacion.setContenido(js.getString("contenido"));
+			publicacion.setTitulo(js.getString("contenido"));
+			String idPublicacion=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			publicacion.setIdPublicacion(idPublicacion);
+			if(publicacionDao.crear(publicacion)) {
+				mensaje= "{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Publicación creada\"" +
+						"}";
+			}
+		}
+		conn.send(mensaje);
 	}
 
 	private void ingresarAGrupo(WebSocket conn, JSONObject js) {
+		String mensaje="";
 		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
 		GruposEstudioDao gruposEstudioDao = GruposEstudioDao.getInstancia();
 		Usuario usuario = usuariosDao.consultar(js.getString("idUsuario"));
 		GrupoEstudio grupoEstudio = gruposEstudioDao.consultar("idGrupo");
-
+		if(usuario==null) {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Ese usuario no existe\"" + 
+					"}";
+		}else if(grupoEstudio==null) {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Ese grupo no existe\"" + 
+					"}";
+		}else {
+			grupoEstudio.getUsuarios().add(usuario.getUsuario());
+			mensaje ="{" + 
+					"\"tipo\": \"ok\"," + 
+					"\"mensaje\": \"Se ha unido al grupo de estudio "+grupoEstudio.getNombreGrupo()+"\"" +
+					"}";
+		}
+		conn.send(mensaje);
 	}
-
 	private void crearEscuela(WebSocket conn, JSONObject js) {
 		EscuelasDao escuelaDao = EscuelasDao.getInstancia();
 		Escuela escuela = new Escuela();
