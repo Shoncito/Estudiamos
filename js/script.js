@@ -24,9 +24,7 @@ $('.toggle').click(function(){
 
 
 
-$("#menuCrear").click(function(){
-	window.location.assign("creargrup.html");
-});
+
 
 $("#menuUnirse").click(function(){
 	window.location.assign("nindex.html");

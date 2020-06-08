@@ -22,4 +22,8 @@ $("#login").click(function(evt){
         contraseña: contraseña
     }
     enviarMensaje(obj);
-})
+});
+
+$("#menuCrear").click(function(){
+	window.location.assign("creargrup.html");
+});
