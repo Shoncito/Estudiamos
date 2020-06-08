@@ -68,8 +68,8 @@ websocket.onmessage=function(event){
 				colocarEnSelectEscuelasGrupos(obj.escuelas);
 			}else if(document.title==="Estudiamos - Tutorías"){
 				colocarEnSelectEscuelasPedirTutoria(obj.escuelas);
-			}else if(document.title===""){
-
+			}else if(document.title==="Estudiamos - Foro"){
+				cargarSeccionesEscuelasForo(obj.escuelas);
 			}
 		}
 	}
