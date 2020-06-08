@@ -1,0 +1,308 @@
+2. notificarTutoria
+{
+tipo: notificacion,
+subtipo: tutoria,
+mensaje: 
+}
+
+Enviar  mensaje pomodoro
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: ¡A estudiar!. Estudia 20 minutos
+}
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: descansa tantos minutos 
+}
+
+Fin pomodoro
+{
+	tipo: notificacion,
+	subtipo: grupo,
+	mensaje: Grupo estudio finalizado
+}
+ping - pong
+{
+	tipo: ping
+}
+//Cliente
+ingresa
+{
+	tipo: login,
+	usuario: usuario,
+	contraseña: contraseña
+}
+Retorna: id (Hash)
+registro
+{
+	tipo: registro,
+	usuario: usuario,
+	contraseña: contraseña,
+	correo: correo
+}
+Retorna: ok
+Crear Materia:
+{
+	tipo: crear materia,
+	idEscuela: id escuela,
+	nombreMateria: nombre materia
+}
+
+Crear Grupo:
+{
+	tipo: crear grupo,
+	nombreGrupo: nombreGrupo,
+	idMateria: id materia,
+	tema: tema,
+	fecha: fecha,
+	hora: hora,
+	lugar: lugar,
+	idUsuario: id usuario
+}
+
+Crear Profesor:
+{
+	tipo: crear profesor,
+	idProfesor: idProfesor
+}
+Retorna ok
+
+Asociar materia a profesor:
+
+{
+	tipo: asociar materia,
+	idProfesor: id profesor,
+	idMateria: id materia
+}
+
+Retorna: ok
+
+Pedir Tutoría:
+{
+	tipo: pedir tutoria,
+	idUsuario: id usuario,
+	idTutoria: id tutoria
+}
+
+crearTutoria{
+	tipo: crear tutoria,
+	idMateria: id materia,
+	idProfesor: id profesor,
+	fecha: fecha,
+	hora: hora,
+	lugar: lugar
+}
+
+Retorna: id tutoria
+
+Crear categoría Snack:
+{
+	tipo: crear categoria snack,
+	nombreCategoria: nombre categoria
+}
+
+Retorna: id categoría
+
+Crear Snack:
+
+{
+	tipo: crear snack,
+	idCategoria: idCategoria,
+	nombreSnack: nombre snack,
+	imagen: imagen,
+	precio: precio
+}
+
+retorna: id snack
+
+Crear escuela:
+
+{
+	tipo: crear escuela,
+	nombreEscuela: nombre escuela
+}
+Retorna: id escuela
+
+Ingresar a grupo:
+{
+	tipo: ingresar a grupo,
+	idUsuario: idUsuario,
+	idGrupo: idGrupo
+}
+
+Retorna: ok
+
+Crear publicación:
+{
+	tipo: crear publicación,
+	idUsuario: idUsuario,
+	titulo: titulo,
+	contenido: contenido,
+	idMateria: idMateria
+}
+
+Retorna: ok
+
+Agregar horario disponible:
+{
+	tipo: agregar horario disponible,
+	fecha: fecha,
+	hora: hora
+}
+
+Retorna: ok
+
+- Consultar tutorías programadas:
+{
+	tipo: consultar tutorias
+}
+Retorna: un arreglo con todos los datos de las tutorías que están programadas
+
+
+- Consultar todas las publicaciones:
+{
+	tipo: consultar publicaciones
+}
+retorna: un arreglo con todos los datos de las publicaciones realizadas
+
+- Consultar todos los profesores:
+{
+	tipo: consultar profesores
+}
+Retorna un arreglo con nombre y id del profesor
+
+- Consultar profesor:
+Parámetros: id profesor
+{
+	tipo: consultar profesor,
+	id: idProfesor
+}
+Retorna: dos arreglos: uno con sus horarios disponibles y otro con las materias que dicta
+
+- Consultar todos los grupos de estudio:
+{
+	tipo: consultar grupos
+}
+Retorna: un arreglo con todos los datos de todos los grupos de estudio
+
+- Consultar todos los snacks:
+{
+	tipo: consultar snacks
+}
+Retorna: un arreglo con todos los datos de todos los snacks
+
+- Consultar escuela:
+{
+	tipo: consultar escuela,
+	idEscuela: id
+}
+
+- Consultar categorias snacks
+{
+	tipo: consultar categorias,
+}
+
+{
+	tipo: lista categorias,
+	categorias: [{},{},{}]
+}
+Put:
+- Editar grupo de estudio:
+{
+	tipo: editar grupo,
+	idMateria: idMateria,
+	tema: tema,
+	fecha: fecha,
+	hora: hora,
+	idGrupo: idGrupo
+}
+Parámetros: Materia, tema, fecha, hora, id grupo
+Retorna: ok
+
+
+- Editar publicación:
+{
+	tipo: editar publicación,
+	titulo: titulo,
+	contenido: contenido,
+	idPublicacion: id publicación
+}
+Retorna: ok
+
+- Eliminar Materia:
+{
+	tipo: eliminar materia,
+	idMateria: id
+}
+Parámetros: id materia
+Retorna: ok
+
+- Eliminar Grupo:
+{
+	tipo: eliminar grupo,
+	idGrupo: id
+}
+Parámetros: id grupo
+Retorna: ok
+
+- Borrar profesor:
+{
+	tipo: eliminar profesor,
+	idProfesor: id
+}
+Parámetros: id profesor
+Retorna: ok
+
+- Borrar publicación:
+{
+	tipo: eliminar publicación,
+	idPublicacion: id
+}
+Parámetros: id publicacion
+Retorna: ok
+
+- Cancelar Tutoría:
+{
+	tipo: cancelar tutoria,
+	idTutoria: idTutoria,
+	idUsuario: idUsuario 
+}
+Parámetros: id tutoria
+Retorna: ok
+
+- Eliminar tutoria:
+{
+	tipo: eliminar tutoria,
+	idTutoria: idTutoria
+}
+
+- Eliminar categoría Snack:
+{
+	tipo: eliminar categoria,
+	idCategoria: id
+}
+Parámetros: id categoria
+Retorna: ok
+
+- Eliminar Snack:
+{
+	tipo: eliminar snack,
+	idSnack: id
+}
+Parámetros: id snack
+retorna: ok
+
+
+válido
+{
+	tipo: ok
+	mensaje: mensaje
+}
+
+error
+{
+	tipo: error,
+	mensaje: mensaje
+}

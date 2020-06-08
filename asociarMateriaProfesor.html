@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Asociar Materia-Profesor</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">  
+	<link rel="stylesheet" type="text/css" href="css/unetegrupo.css" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+	<!-- Header -->
+	<div id="divHeader" class="ui grid">
+		<div class="two wide column">
+			<div class="menu" id="menu" onclick="myFunction(this)">
+				<div class="linea-1"></div>
+				<div class="linea-2"></div>
+				<div class="linea-3"></div>
+			</div>
+			<div class="menu-container" id="menu">
+				<div class="ui left fixed vertical menu" id="divMenuVertical">
+					<a id="menuInicio" class="item">Inicio</a>
+					<div class="item">
+						<div class="header">Grupos de estudio</div>
+						<div class="menu">
+							<a id="menuCrear" class="item">Crear</a>
+							<a id="menuUnirse" class="item">Unirse</a>
+							<a id="menuMisGrupos" class="item">Mis grupos</a>
+						</div>
+					</div>
+					<a id="menuForos" class="item">Foros</a>
+					<div class="item">
+						<div class="header">Snacks</div>
+						<div class="menu">
+							<a id="menuMenu" class="item">Menú</a>
+							<a id="menuPedido" class="item">Mis pedidos</a>
+						</div>
+					</div>
+					<a id="menuAboutUs" class="item">Sobre nosotros</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="twelve wide column">
+			<h1>
+				Estudiamos
+			</h1>
+		</div>
+		<div class="two wide column" id="saludoUsuario">
+			<p>Hola</p>
+			<p>Fulanito :3</p>
+		</div>
+	</div>
+	<div class="contenedor-form" id="ingresarProfesor">
+		<div class="ui center aligned container">
+			<div class="UneteGrupo">
+				<h2> Asociar materia-profesor </h2>
+				<form action="#">
+					<select class="amen" name="Profesores" required> 
+						<option value="">Seleccione un profesor</option>
+						<option value="1" >
+							William Frasser
+						</option>
+						<option value="2">
+							John Corredor 
+						</option>
+					</select>	
+						<select class="amen" name="Materia" required> 
+							<option value="">Seleccione una materia</option>
+							<option value="1" >
+								Programacion Aplicada
+							</option>
+							<option value="2">
+								Sistemas Operativos
+							</option>
+						</select>	
+						<input type="submit" value="Asociar" id="asociarMP" required>
+					</form>
+				</div>
+			</div>
+		</body>
+		<script src="js/semantic.min.js"></script>
+		<script src="js/notificaciones.js"></script>
+		<script src="js/webSocket.js"></script>
+		<script src="js/script.js"></script>
+		</html>
