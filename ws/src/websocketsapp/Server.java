@@ -252,8 +252,29 @@ public class Server extends WebSocketServer {
 	}
 
 	private void eliminarTutoria(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
+		Tutoria tutorias = tutoriasDao.consultar(js.getString("idTutoria"));
+		String mensaje = "";
+		if(tutorias!=null) {
+			if(tutoriasDao.eliminar(tutorias)) {
+				mensaje ="{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Tutoria eliminada\"" +
+						"}";
+			}else {
+				mensaje ="{" + 
+						"\"tipo\": \"error\"," + 
+						"\"mensaje\": \"Error al eliminar tutoria\"" + 
+						"}";
+			}
+				
+		}else {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Esa tutoria no existe\"" + 
+					"}";
+		}
+		conn.send(mensaje);
 	}
 
 	private void cancelarTutoria(WebSocket conn, JSONObject js) {
@@ -262,7 +283,30 @@ public class Server extends WebSocketServer {
 	}
 
 	private void eliminarPublicacion(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
+		PublicacionDao publicacionDao = PublicacionDao.getInstancia();
+		Publicacion publicacion = publicacionDao.consultar(js.getString("idPublicacion"));
+		String mensaje = "";
+		if(publicacion!=null) {
+			if(publicacionDao.eliminar(publicacion)) {
+				mensaje ="{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Publicacion eliminada\"" +
+						"}";
+			}else {
+				mensaje ="{" + 
+						"\"tipo\": \"error\"," + 
+						"\"mensaje\": \"Error al eliminar publicacion\"" + 
+						"}";
+			}
+				
+		}else {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Esa publicacion no existe\"" + 
+					"}";
+		}
+		conn.send(mensaje);
+
 
 	}
 
