@@ -36,7 +36,7 @@ websocket.onmessage=function(event){
 			alert("Error: "+obj.mensaje);
 		}
 		else if(obj.tipo ==="usuario"){
-			setCookie("token",obj.token,6);
+			setCookie("token",obj.mensaje.token,6);
 			//Se supone que aquí se accede a la página
 
 		}
