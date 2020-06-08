@@ -127,8 +127,8 @@ function enviarNotificacion(subtipo, mensaje){
 function pintarCategorias(lista){
 	for (let i = 0; i < lista.length; i++) {
 		var texto = '<div class="CategoriaSnack">'+
-						'<img src="img/Snacks/'+lista.nombreCategoria+'.png">'+
-						'<p>'+lista.nombreCategoria+'</p>'+
+						'<img src="img/Snacks/'+lista[i].nombreCategoria+'.png">'+
+						'<p>'+lista[i].nombreCategoria+'</p>'+
 					'</div>';
 		$("#menuSnacks").append(texto);
 	}
