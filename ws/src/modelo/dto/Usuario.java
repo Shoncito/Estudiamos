@@ -103,7 +103,7 @@ public class Usuario {
 	}
 	
 	public String toJSON() {
-		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \"}";
+		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \",\"token\":\""+token+"\"}";
 	}
 
 	

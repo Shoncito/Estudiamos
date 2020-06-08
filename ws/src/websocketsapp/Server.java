@@ -747,6 +747,7 @@ public class Server extends WebSocketServer {
 			usuario.setUsuario(js.getString("usuario"));
 			usuario.setCorreo(js.getString("correo"));
 			usuario.setContraseña(js.getString("contraseña"));
+			usuario.setToken(usuario.getUsuario()+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND);
 			if(usuariosDao.crear(usuario)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
