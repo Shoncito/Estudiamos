@@ -14,7 +14,7 @@ public class Publicacion {
     private String idPublicacion;
     private String idMateria;
     private String usuario;
-    private int titulo;
+    private String titulo;
     private String contenido;
 
     public Publicacion() {
@@ -28,11 +28,11 @@ public class Publicacion {
         this.idPublicacion = idPublicacion;
     }
 
-    public int getTitulo() {
+    public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(int titulo) {
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
