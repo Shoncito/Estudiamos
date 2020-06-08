@@ -61,7 +61,7 @@ public class Server extends WebSocketServer {
 		Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
 		if (usuario != null) {
 			usuario.setWebSocket(conn);
-			String mensaje = "{" + "	\"tipo\": \"carga usuario\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
+			String mensaje = "{" + "	\"tipo\": \"usuario carga\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
 			System.out.println(mensaje);
 			conn.send(mensaje);
 		}

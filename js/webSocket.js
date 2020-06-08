@@ -50,7 +50,7 @@ websocket.onmessage=function(event){
 		else if(obj.tipo==="notificacion"){ 
 			notificar(obj.subtipo,obj.mensaje);
 		}
-		else if(obj.tipo ==="carga usuario"){
+		else if(obj.tipo ==="usuario carga"){
 			usuario = obj.mensaje;
 			$("#nombreUser").append(usuario.usuario);
 			//websocket.close(1000,"cambio");
