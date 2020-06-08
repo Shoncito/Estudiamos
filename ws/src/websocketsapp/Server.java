@@ -220,8 +220,29 @@ public class Server extends WebSocketServer {
 	}
 
 	private void eliminarSnack(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		SnackDao snackDao = SnackDao.getInstancia();
+		Snack snack = snackDao.consultar(js.getString("idSnack"));
+		String mensaje = "";
+		if(snack!=null) {
+			if(snackDao.eliminar(snack)) {
+				mensaje ="{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Snack eliminado\"" +
+						"}";
+			}else {
+				mensaje ="{" + 
+						"\"tipo\": \"error\"," + 
+						"\"mensaje\": \"Error al eliminar snack\"" + 
+						"}";
+			}
+				
+		}else {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Ese snack no existe\"" + 
+					"}";
+		}
+		conn.send(mensaje);
 	}
 
 	private void eliminarCategoria(WebSocket conn, JSONObject js) {
