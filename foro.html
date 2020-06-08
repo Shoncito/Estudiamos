@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Estudiamos</title>
+	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/foro.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/semantic.min.js"></script>
+<body> 
+	<!-- Header -->
+		<div id="divHeader" class="ui grid">
+			<div class="two wide column">
+				<div class="menu" id="menu" onclick="myFunction(this)">
+			      <div class="linea-1"></div>
+			      <div class="linea-2"></div>
+			      <div class="linea-3"></div>
+			    </div>
+			    <div class="menu-container" id="menu">
+			    	<div class="ui left fixed vertical menu" id="divMenuVertical">
+		  				<a href="index.html" class="item">Inicio</a>
+		  				<div class="item">
+						    <div class="header">Grupos de estudio</div>
+						    <div class="menu">
+						    	<a href="creargrup.html" class="item">Crear</a>
+						    	<a href="nindex.html" class="item">Unirse</a>
+						    	<a class="item">Mis grupos</a>
+							</div>
+						</div>
+						<a href="foro.html" class="item">Foros</a>
+						<div class="item">
+						    <div class="header">Snacks</div>
+						    <div class="menu">
+						    	<a href="snacks.html" class="item">Menú</a>
+						    	<a href="pedidoSnacks.html" class="item">Mis pedidos</a>
+							</div>
+						</div>
+						<a class="item">Sobre nosotros</a>
+					</div>
+			    </div>
+				
+			</div>
+			<div class="twelve wide column">
+				<h1>
+					Estudiamos
+				</h1>
+			</div>
+			<div class="two wide column" id="saludoUsuario">
+				<p>Hola</p>
+				<p>Fulanito :3</p>
+			</div>
+		</div>
+	<div id="tabla">
+		<table>
+			<thead>
+				<tr>
+					<th>FORO ESCUELAS</th>
+				</tr>
+			</thead>
+			<tr class="carril" id="derecho">
+				<td>
+					ESCUELA MAYOR DE DERECHO
+					<button id="derecho_b"  class="ui right labeled icon button ">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>	
+					<div id="mataria_derecho"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="publicidad">
+				<td>
+					ESCUELA DE PUBLICIDAD
+					<button id="publicidad_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>	
+					<div id="mataria_publicidad"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="administracion">
+				<td>
+					ESCUELA INTERNACIONAL DE ADMINISTRACIÓN Y MARKETING
+					<button id="administracion_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>	
+					<div id="mataria_administracion"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="ingeneria">
+				<td>	
+					ESCUELA DE CIENCIAS EXACTAS E INGENIERÍA
+					<button id="ingeneria_b"  class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_ingeneria"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="deporte">
+				<td>
+					ESCUELA EN CIENCIAS DE LA SALUD Y EL DEPORTE
+					<button id="deporte_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_deporte"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="comunicacion">
+				<td>
+					ESCUELA DE CIENCIAS DE LA COMUNICACIÓN
+					<button id="comunicacion_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_comunicacion"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="musica">
+				<td>
+					ESCUELA DE ARTES Y MÚSICA
+					<button id="musica_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_musica"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="economia">
+				<td>
+					ESCUELA DE ECONOMÍA
+					<button id="economia_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_economia"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="humanidades">
+				<td>
+					ESCUELA DE FILOSOFÍA Y HUMANIDADES
+					<button id="humanidades_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_humanidades"></div>
+				</td>
+			</tr>
+			<tr class="carril" id="politica">
+				<td>
+					ESCUELA DE POLÍTICA Y RELACIONES INTERNACIONALES
+					<button id="politica_b" class="ui right labeled icon button">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>
+					<div id="mataria_politica"></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+<script type="text/javascript" src="js/foro.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/semantic.min.js"></script>
+</html>
