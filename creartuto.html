@@ -2,16 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Crear grupo</title>  
-    
+    <title>Crear tuto</title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">  
     <link rel="stylesheet" href="css/estilos2.css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
-    <!-- Fondo -->
-        <img src="img/fondo.png" id="BackgroundPrincipal">
         <!-- Header -->
         <div id="divHeader" class="ui grid">
             <div class="two wide column">
@@ -57,16 +55,17 @@
 <div id="categorys">
     <div class="contenedor-form" id="menucategory">     
         <div class="formulario">
-            <h2>Crear grupo</h2>
+            <h2>Crear tutoria.</h2>
             <form action="#">
-                <input  type="namec" placeholder="Nombre" required>
-                <select name="" id="amen">
-                    <option>Fisica</option> 
-                    </select>
-                <input  type="logoc" placeholder="Tema" required>
-                <input  type="logoc" placeholder="Fecha" required>
+                <input  type="namec" placeholder="Id Tutoria" required readonly> 
                 <input  type="logoc" placeholder="Hora" required>
-                <input class="ui button orange" id="rc" type="submit" value="Registrar grupo">
+                <input  type="logoc" placeholder="Profesor" required>
+                <select name="" id="amen">
+                    <option selected>Lugar</option> 
+                    <option value="Bloque n">Bloque n</option> 
+                    </select>
+                <input  type="logoc" placeholder="Usuario" required>
+                <input  type="date" placeholder="Fecha" required>
             </form>
         </div>
     </div>

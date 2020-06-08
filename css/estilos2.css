@@ -7,11 +7,23 @@
 }
 
 body {
-    background: url(../img/fondo.jpg);
     background-size: cover;
     background-attachment: fixed;
-    font-family: Courier;
+    font-family: 'Comfortaa', cursive;
 }
+
+.contenedor-form .formulario {
+    padding: 40px;
+}
+
+.contenedor-form .formulario:nth-child(2) {
+    display: block;
+}
+
+.registro{
+    display: none;
+}
+
 
 .contenedor-form {
     background: rgba(0,0,0,.7);
@@ -40,8 +52,8 @@ body {
 }
 
 .contenedor-form .toggle:hover {
-    border-top: 2px solid #0075d9;
-    border-bottom: 2px solid #0075d9;
+    border-top: 2px solid #ba7a3e;
+    border-bottom: 2px solid #ba7a3e;
 }
 
 .contenedor-form .toggle span {
@@ -55,11 +67,12 @@ body {
     line-height: 1;
 }
 .contenedor-form input[type="user"],
-.contenedor-form input[type="password"],
 .contenedor-form input[type="email"],
 .contenedor-form input[type="namec"],
 .contenedor-form input[type="descriptionc"],
-.contenedor-form input[type="logoc"] {
+.contenedor-form input[type="date"],
+.contenedor-form input[type="logoc"],
+.contenedor-form input[type="password"] {
     outline: none;
     display: block;
     width: 100%;
@@ -71,7 +84,7 @@ body {
     border-radius: 2px;
     border-bottom: 4px solid #ff851b;
     box-sizing: border-box;
-    font-family: Courier;
+    font-family: 'Comfortaa', cursive;
     font-size: 14px;
     font-weight:normal;
     transition: all .5s ease;
@@ -90,41 +103,34 @@ body {
     border-radius: 2px;
     border-bottom: 4px solid #ff851b;
     box-sizing: border-box;
-    font-family: Courier;
+    font-family: 'Comfortaa', cursive;
     font-size: 14px;
     font-weight:normal;
     transition: all .5s ease;
 }
 
-
-.contenedor-form input[type="logoc"]:focus {
-    border-bottom: 4px solid #0075d9;
+.contenedor-form input[type="namec"]:focus,
+.contenedor-form input[type="logoc"]:focus,
+.contenedor-form input[type="password"]:focus {
+    border-bottom: 4px solid #ba7a3e !important;
 }
 
 .contenedor-form input[type="submit"] {
-    background: #FF851B;
+    background-color: #f2711c;
     color: #FFF;
     width: 100%;
     border: none;
     padding: 10px 0;
     font-size: 16px;
     font-weight: normal;
-    font-family: Roboto;
+    font-family: 'Comfortaa', cursive;
     letter-spacing: 1px;
     cursor: pointer;
-   
 }
 
 .contenedor-form input[type="submit"]:hover {
-    background: rgba(0, 117, 217, 0.7);
+    background: #ba7a3e !important;
 }
-
-.contenedor-form .formulario {
- 
-    padding: 40px;
-}
-
-
 
 
 

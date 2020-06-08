@@ -11,6 +11,8 @@
 <body>
 	<!-- Principal -->
 	<div id="divPrincipal" >
+		<!-- Fondo -->
+		<img src="img/fondo.png" id="BackgroundPrincipal">
 		<!-- Header -->
 		<div id="divHeader" class="ui grid">
 			<div class="two wide column">
@@ -21,24 +23,24 @@
 			    </div>
 			    <div class="menu-container" id="menu">
 			    	<div class="ui left fixed vertical menu" id="divMenuVertical">
-		  				<a href="index.html" class="item">Inicio</a>
+		  				<a id="menuInicio" class="item">Inicio</a>
 		  				<div class="item">
 						    <div class="header">Grupos de estudio</div>
 						    <div class="menu">
-						    	<a href="creargrup.html" class="item">Crear</a>
-						    	<a href="nindex.html" class="item">Unirse</a>
-						    	<a class="item">Mis grupos</a>
+						    	<a id="menuCrear" class="item">Crear</a>
+						    	<a id="menuUnirse" class="item">Unirse</a>
+						    	<a id="menuMisGrupos" class="item">Mis grupos</a>
 							</div>
 						</div>
-						<a href="foro.html" class="item">Foros</a>
+						<a id="menuForos" class="item">Foros</a>
 						<div class="item">
 						    <div class="header">Snacks</div>
 						    <div class="menu">
-						    	<a href="snacks.html" class="item">Menú</a>
-						    	<a href="pedidoSnacks.html" class="item">Mis pedidos</a>
+						    	<a id="menuMenu" class="item">Menú</a>
+						    	<a id="menuPedido" class="item">Mis pedidos</a>
 							</div>
 						</div>
-						<a class="item">Sobre nosotros</a>
+						<a id="menuAboutUs" class="item">Sobre nosotros</a>
 					</div>
 			    </div>
 				
@@ -52,7 +54,6 @@
 				<p>Hola</p>
 				<p>Fulanito :3</p>
 			</div>
-		</div>
 		</div>
 		<!-- Snacks -->
 		<div id="divSnacks">
@@ -77,6 +78,7 @@
 			</div>
 			<div id="productosSnacks" class="ui especial four doubling cards">
 				<div name="PRODUCTO" class="card">
+					
 				</div>
 				<div name="PRODUCTO" class="card">
 
@@ -92,7 +94,7 @@
 			</div>
 			<div id="botonSnacks">
 				<div id="botonComprar" class="ui vertical animated button cc_pointer" tabindex="0">
-				  <a href="pedidoSnacks.html"><div class="hidden content cc_pointer">Comprar</div></a>
+				  <div class="hidden content cc_pointer">Comprar</div>
 				  <div class="visible content cc_pointer">
 				    <i class="shop icon cc_pointer"></i>
 				  </div>

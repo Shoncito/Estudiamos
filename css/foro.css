@@ -43,3 +43,53 @@ tr:nth-child(even){
 #tablamateria{
 	margin-left: 50px !important;
 }
+#derecho_b{
+	margin-left: 460px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#publicidad_b{
+	margin-left: 495px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#administracion_b{
+	margin-left: 245px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#ingeneria_b{
+	margin-left: 360px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#deporte_b{
+	margin-left: 330px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#comunicacion_b{
+	margin-left: 357px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#musica_b{
+	margin-left: 467px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#economia_b{
+	margin-left:500px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#humanidades_b{
+	margin-left: 388px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
+#politica_b{
+	margin-left: 285px !important;
+	background-color:#ff7043 !important;
+	color: white !important;
+}
