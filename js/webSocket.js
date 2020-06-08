@@ -55,9 +55,6 @@ websocket.onmessage=function(event){
 		else if(obj.tipo ==="usuario carga"){
 			usuario = obj.mensaje;
 			$("#nombreUser").append(usuario.usuario);
-			//websocket.close(1000,"cambio");
-			//window.location.assign("inicio.html");
-			//Se supone que aquí se accede a la página
 		}else if(obj.tipo==="lista categorias"){
 			if(document.title==="Estudiamos - Snacks"){
 				pintarCategorias(obj.categorias);
@@ -66,8 +63,14 @@ websocket.onmessage=function(event){
 				colocarEnSelect(obj.categorias);
 			}
 			categorias = obj.categorias;
-		}else if(obj.tipo===""){
+		}else if(obj.tipo==="lista escuelas"){
+			if(document.title==="Crear grupo"){
+				colocarEnSelectEscuelasGrupos(obj.escuelas);
+			}else if(document.title==="Estudiamos - Tutorías"){
+				colocarEnSelectEscuelasPedirTutoria(obj.escuelas);
+			}else if(document.title===""){
 
+			}
 		}
 	}
 }

@@ -34,6 +34,11 @@ public class Escuela implements Serializable {
         this.nombreEscuela = nombreEscuela;
     }
 
+	public String toJSON() {
+		return "{\"idEscuela\":\"" + idEscuela + "\", \"nombreEscuela\":\"" + nombreEscuela + "\"}";
+	}
+
+    
     
     
 }

@@ -215,6 +215,17 @@ Retorna: un arreglo con todos los datos de todos los snacks
 	tipo: lista categorias,
 	categorias: [{},{},{}]
 }
+
+Consultar escuelas
+{
+	tipo: consultar escuelas
+}
+
+retorna
+{
+	tipo: lista escuelas,
+	escuelas: [{},{},{}];
+}
 Put:
 - Editar grupo de estudio:
 {
