@@ -767,13 +767,15 @@ public class Server extends WebSocketServer {
 			mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
 		} else {
 			if (usuario.getContraseña().equals(js.getString("contraseña"))) {
-				mensaje = "{" + "	tipo: token," + "	mensaje: " + usuario.getToken() + "}";
+				mensaje = "{" + "	tipo: usuario," + "	mensaje: " + usuario.toString() + "}";
 				usuario.setWebSocket(conn);
 			} else {
 				mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
 			}
 		}
+		usuario.setWebSocket(conn);
 		conn.send(mensaje);
+		
 	}
 
 	@Override

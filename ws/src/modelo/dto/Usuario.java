@@ -101,6 +101,10 @@ public class Usuario {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \"}";
+	}
 
 	
 }
