@@ -357,7 +357,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 	}
 
@@ -373,7 +373,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 	}
 
@@ -394,7 +394,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 		
 	}
@@ -411,7 +411,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 	}
 
