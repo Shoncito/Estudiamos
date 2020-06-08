@@ -13,8 +13,17 @@ $(document).ready(function(){
 	});
 });
 
+$('.toggle').click(function(){
+    $('.formulario').animate({
+        height: "toggle",
+        'padding-top': 'toggle',
+        'padding-bottom': 'toggle',
+        opacity: 'toggle'
+    }, "slow");
+});
+
 $("#menuInicio").click(function(){
-	window.location.assign("index.html");
+	window.location.assign("inicio.html");
 });
 
 $("#menuCrear").click(function(){
