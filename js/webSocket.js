@@ -6,7 +6,7 @@ var wait = ms => new Promise((r, j) => setTimeout(r, ms));
 /**
 * Dirección con protocolo ws
 */
-var wsUri = "ws://localhost:8080";
+var wsUri = "ws://25.143.152.254:8080";
 /**
 * Websocket
 */
