@@ -72,6 +72,10 @@ public class Publicacion {
 		this.usuario = usuario;
 	}
     
-    
+	public String toJSON() {
+		return "{\"idPublicacion\":\"" + idPublicacion + "\", \" idMateria\" :\"" + idMateria + "\" , \" usuario\":\"" + usuario
+				+ "\", \" titulo\":\"" + titulo + "\", \" contenido\":\"" + contenido + "\"}";
+	}
+	
     
 }

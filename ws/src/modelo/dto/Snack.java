@@ -70,6 +70,12 @@ public class Snack {
 	public void setIdCategoria(String idCategoria) {
 		this.idCategoria = idCategoria;
 	}
+
+	
+	public String toJSON() {
+		return "{\"idSnack\":\"" + idSnack + "\", \"nombreSnack\":\"" + nombreSnack + "\", \"imagen\":\"" + imagen + "\", \"idCategoria\":\""
+				+ idCategoria + "\", \"precio\":\"" + precio + "\"}";
+	}
     
     
 }

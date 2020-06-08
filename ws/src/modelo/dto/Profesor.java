@@ -64,5 +64,10 @@ public class Profesor {
 		this.horarios = horarios;
 	}
 
+
+	public String toJSON() {
+		return "{\"id\":\"" + id + "\", \"nombre\":\"" + nombre + "\", \" materias\":\"" + materias + "\", \" horarios\":\"" + horarios + "\"}";
+	}
+
 	
 }

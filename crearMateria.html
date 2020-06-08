@@ -2,13 +2,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Crear profesor</title>  
+	<title>Crear materia</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">  
 	<link rel="stylesheet" type="text/css" href="css/unetegrupo.css" />
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
 	<!-- Header -->
 	<div id="divHeader" class="ui grid">
@@ -55,15 +54,25 @@
 	<div class="contenedor-form" id="ingresarProfesor">
 		<div class="ui center aligned container">
 			<div class="UneteGrupo">
-				<h2> Profesores </h2>
-				<input type="text" placeholder="Nombre"  id="nombreProfesor" required >
-				<input type="submit" value="Crear" id="crearProfesor" required>
-			</form>
+				<h2> Materia </h2>
+				<form action="#">
+					<select class="amen" name="Escuela" required> 
+						<option value="">Seleccione una Escuela</option>
+						<option value="1" >
+							Derecho
+						</option>
+						<option value="2">
+							Ciencias Exactas e Ingeniería
+						</option>
+					</select>
+					<input type="text" placeholder="Nombre Materia"  id="nombreMateria" required >
+					<input type="submit" value="Crear" id="crearMateria" required>
+				</form>
+			</div>
 		</div>
-	</div>
-</body>
-<script src="js/semantic.min.js"></script>
-<script src="js/notificaciones.js"></script>
-<script src="js/webSocket.js"></script>
-<script src="js/script.js"></script>
-</html>
+	</body>
+	<script src="js/semantic.min.js"></script>
+	<script src="js/notificaciones.js"></script>
+	<script src="js/webSocket.js"></script>
+	<script src="js/script.js"></script>
+	</html>

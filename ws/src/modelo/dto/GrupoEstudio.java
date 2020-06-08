@@ -124,5 +124,13 @@ public class GrupoEstudio {
 	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
 	}
+
+	public String toJSON() {
+		return "{\"idGrupo\":\"" + idGrupo + "\", \" usuarios\":\"" + usuarios + "\", \"nombreGrupo\":\"" + nombreGrupo
+				+ "\",\" tema\":\"" + tema + "\", \"fecha\":\"" + fecha + "\", \"hora\":\"" + hora + "\", \"lugar\":\"" + lugar + "\", \"idMateria\":\""
+				+ idMateria + "\"}";
+	}
+	
+	
 	
 }

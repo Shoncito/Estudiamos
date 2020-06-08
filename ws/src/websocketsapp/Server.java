@@ -346,13 +346,35 @@ public class Server extends WebSocketServer {
 	}
 
 	private void consultarSnacks(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		SnackDao snackDao = SnackDao.getInstancia();
+		LinkedList <Snack> snacks = snackDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"consultar snacks\"," + 
+				"	\"snacks\": [";
+		for (int i = 0; i < snacks.size(); i++) {
+			mensaje +=snacks.get(i).toJSON();
+			if(i<snacks.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]";
+		conn.send(mensaje);
 	}
 
 	private void consultarGrupos(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		GruposEstudioDao grupoEstudioDao = GruposEstudioDao.getInstancia();
+		LinkedList <GrupoEstudio> gruposEstudios = grupoEstudioDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"consultar grupos\"," + 
+				"	\"grupos\": [";
+		for (int i = 0; i < gruposEstudios.size(); i++) {
+			mensaje +=gruposEstudios.get(i).toJSON();
+			if(i<gruposEstudios.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]";
+		conn.send(mensaje);
 	}
 
 	private void consultarProfesor(WebSocket conn, JSONObject js) {
@@ -361,13 +383,36 @@ public class Server extends WebSocketServer {
 	}
 
 	private void consultarProfesores(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		ProfesorDao profesorDao = ProfesorDao.getInstancia();
+		LinkedList <Profesor> profesores = profesorDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"consultar profesores\"," + 
+				"	\"profesor\": [";
+		for (int i = 0; i < profesores.size(); i++) {
+			mensaje +=profesores.get(i).toJSON();
+			if(i<profesores.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]";
+		conn.send(mensaje);
+		
 	}
 
 	private void consultarPublicaciones(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
-
+		PublicacionDao publicacionesDao= PublicacionDao.getInstancia();
+		LinkedList <Publicacion> publicaciones =publicacionesDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"consultar publicaciones\"," + 
+				"	\"publicacion\": [";
+		for (int i = 0; i < publicaciones.size(); i++) {
+			mensaje +=publicaciones.get(i).toJSON();
+			if(i<publicaciones.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]";
+		conn.send(mensaje);
 	}
 
 	private void consultarTutorias(WebSocket conn, JSONObject js) {
