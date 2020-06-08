@@ -15,7 +15,7 @@ public class Publicacion {
     private String idMateria;
     private String usuario;
     private int titulo;
-    private int contenido;
+    private String contenido;
 
     public Publicacion() {
     }
@@ -36,11 +36,11 @@ public class Publicacion {
         this.titulo = titulo;
     }
 
-    public int getContenido() {
+    public String getContenido() {
         return contenido;
     }
 
-    public void setContenido(int contenido) {
+    public void setContenido(String contenido) {
         this.contenido = contenido;
     }
 

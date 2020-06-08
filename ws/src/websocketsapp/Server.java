@@ -40,6 +40,7 @@ import modelo.dto.Escuela;
 import modelo.dto.GrupoEstudio;
 import modelo.dto.Materia;
 import modelo.dto.Profesor;
+import modelo.dto.Publicacion;
 import modelo.dto.Snack;
 import modelo.dto.Tutoria;
 import modelo.dto.Usuario;
@@ -281,7 +282,22 @@ public class Server extends WebSocketServer {
 	}
 
 	private void editarPublicacion(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
+		String mensaje="";
+		PublicacionDao publicacionDao = PublicacionDao.getInstancia();
+		Publicacion publicacion= publicacionDao.consultar(js.getString("idPublicacion"));
+		publicacion.setContenido(js.getString("contenido"));
+		if(publicacionDao.actualizar(publicacion)) {
+			mensaje ="{" + 
+					"\"tipo\": \"ok\"," + 
+					"\"mensaje\": \"Publicación actualizada\"" +
+					"}";
+		}else {
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Error al actualizar\"" + 
+					"}";
+		}
+		conn.send(mensaje);
 
 	}
 
@@ -326,7 +342,10 @@ public class Server extends WebSocketServer {
 	}
 
 	private void ingresarAGrupo(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
+		GruposEstudioDao gruposEstudioDao = GruposEstudioDao.getInstancia();
+		Usuario usuario = usuariosDao.consultar(js.getString("idUsuario"));
+		GrupoEstudio grupoEstudio = gruposEstudioDao.consultar("idGrupo");
 
 	}
 
@@ -358,6 +377,7 @@ public class Server extends WebSocketServer {
 	private void crearSnack(WebSocket conn, JSONObject js) {
 		SnackDao snackDao = SnackDao.getInstancia();
 		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
+		String mensaje ="";
 		Snack snack = new Snack();
 		snack.setNombreSnack(js.getString("nombreSnack"));
 		snack.setPrecio(js.getFloat("precio"));
@@ -366,8 +386,21 @@ public class Server extends WebSocketServer {
 		String idSnack = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
 		snack.setIdSnack(idSnack);
 		if(categoriaSnackDao.consultar(js.getString("idCategoria"))==null) {
-			
+			mensaje ="{" + 
+					"\"tipo\": \"error\"," + 
+					"\"mensaje\": \"Esa categoria no existe\"" + 
+					"}";
+		}else {
+			if(snackDao.crear(snack)) {
+				mensaje ="{" + 
+						"\"tipo\": \"ok\"," + 
+						"\"mensaje\": \"Snack creado\"" +
+						"\"idSnack\": \""+snack.getIdSnack()+"\""+
+						"}";
+			}
 		}
+		
+		conn.send(mensaje);
 	}
 
 	private void crearCategoriaSnack(WebSocket conn, JSONObject js) {
@@ -415,8 +448,17 @@ public class Server extends WebSocketServer {
 						"\"tipo\": \"error\"," + 
 						"\"mensaje\": \"Ese usuario no existe\"" + 
 						"}";
+			}else {
+				if(tutoria.getUsuarios().add(usuario.getUsuario())) {
+					mensaje= "{" + 
+							"\"tipo\": \"ok\"" + 
+							"\"mensaje\": \"Ha ingresado a la tutoría\"" + 
+							"}";
+				}
 			}
+			
 		}
+		conn.send(mensaje);
 
 	}
 
