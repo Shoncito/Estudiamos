@@ -63,6 +63,7 @@ websocket.onmessage=function(event){
 				pintarCategorias(obj.categorias);
 			}
 			else if(document.title==="Crear snack"){
+				console.log(obj);
 				colocarEnSelect(obj.categorias);
 			}
 			categorias = obj.categorias;
@@ -135,7 +136,7 @@ function pintarCategorias(lista){
  */
 function colocarEnSelect(lista){
 	for (let i = 0; i < lista.length; i++) {
-		var texto= '<option value="'+lista[i].idCategoria+'" >'+
+		var texto= '<option value="'+lista[i].idCategoria+'" >'
 						+lista[i].nombreCategoria+
 					'</option>';
 		$("select").append(texto);

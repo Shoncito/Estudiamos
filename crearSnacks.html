@@ -9,6 +9,9 @@
 	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/semantic.min.js"></script>
+<script src="js/notificaciones.js"></script>
+<script src="js/webSocket.js"></script>
 <body>
 	<!-- Header -->
 	<div id="divHeader" class="ui grid">
@@ -57,19 +60,19 @@
 			<div class="UneteGrupo">
 				<h2>Snack</h2>
 				<form action="#">
-					<select class="amen" required> 
+					<select id="select" class="amen" required> 
 						<option value="">Seleccione una categoria</option>
 					</select>
+					<button id="btnListarCategoria" class="ui button orange">Listar categorias</button>
 					<input type="text" placeholder="Nombre"  id="nombreSnack" required >
 					<input type="text" placeholder="Precio"  id="precioSnack" required >
+					<input type="text" placeholder="Imagen"  id="imagenSnack" required >
 					<input type="submit" value="Crear" id="crearSnack" required>
 				</form>
 			</div>
 		</div>
 	</div>
 </body>
-<script src="js/semantic.min.js"></script>
-<script src="js/notificaciones.js"></script>
-<script src="js/webSocket.js"></script>
+<script src="js/snack.js"></script>
 <script src="js/script.js"></script>
 </html>

@@ -102,3 +102,5 @@ $("#menuInicio").click(function(){
     websocket.close(1000,"cambio");
 	window.location.assign("inicio.html");
 });
+
+
