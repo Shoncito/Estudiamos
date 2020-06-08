@@ -1,3 +1,5 @@
+var categorias;
+
 /**
 * Promesa
 * @param {*} ms 
@@ -56,6 +58,16 @@ websocket.onmessage=function(event){
 			//websocket.close(1000,"cambio");
 			//window.location.assign("inicio.html");
 			//Se supone que aquí se accede a la página
+		}else if(obj.tipo==="lista categorias"){
+			if(document.title==="Estudiamos - Snacks"){
+				pintarCategorias(obj.categorias);
+			}
+			else if(document.title==="Crear snack"){
+				colocarEnSelect(obj.categorias);
+			}
+			categorias = obj.categorias;
+		}else if(obj.tipo===""){
+
 		}
 	}
 }
@@ -103,4 +115,30 @@ function enviarMensaje(object){
  */
 function enviarNotificacion(subtipo, mensaje){
 	notificar(subtipo,mensaje);
+}
+/**
+ * 
+ * @param {Array} lista
+ */
+function pintarCategorias(lista){
+	for (let i = 0; i < lista.length; i++) {
+		var texto = '<div class="CategoriaSnack">'+
+						'<img src="img/Snacks/'+lista.nombreCategoria+'.png">'+
+						'<p>'+lista.nombreCategoria+'</p>'+
+					'</div>';
+		$("#menuSnacks").append(texto);
+	}
+}
+/**
+ * 
+ * @param {Array} lista 
+ */
+function colocarEnSelect(lista){
+	for (let i = 0; i < lista.length; i++) {
+		var texto= '<option value="'+lista[i].idCategoria+'" >'+
+						+lista[i].nombreCategoria+
+					'</option>';
+		$("select").append(texto);
+	}
+	
 }

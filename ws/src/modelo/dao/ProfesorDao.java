@@ -100,4 +100,16 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 		}
 		return false;
 	}
+
+	@Override
+	public Profesor consultarPorNombre(String nombre) {
+		Profesor profesor = null;
+        for (int i = 0; i < this.data.size(); i++) {
+            if(((Profesor)this.data.get(i)).getNombre().equals(nombre)){
+            	profesor = (Profesor)this.data.get(i);
+                break;
+            }
+        }
+        return profesor;
+	}
 }

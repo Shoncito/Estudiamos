@@ -527,7 +527,7 @@ public class Server extends WebSocketServer {
 			if(escuelaDao.crear(escuela)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Escuela creada\"" +
+						"\"mensaje\": \"Escuela creada\", " +
 						"\"idEscuela\": \""+escuela.getIdEscuela()+"\""+
 						"}";
 			}
@@ -555,8 +555,8 @@ public class Server extends WebSocketServer {
 		}else {
 			if(snackDao.crear(snack)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Snack creado\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Snack creado\", " +
 						"\"idSnack\": \""+snack.getIdSnack()+"\""+
 						"}";
 			}
@@ -574,14 +574,14 @@ public class Server extends WebSocketServer {
 		String mensaje="";
 		if(categoriaSnackDao.consultarPorNombre(categoria.getNombreCategoria())!=null) {
 			mensaje ="{" + 
-					"\"tipo\": \"error\"," + 
-					"\"mensaje\": \"Esa escuela ya existe\"" + 
+					"\"tipo\": \"error\", " + 
+					"\"mensaje\": \"Esa categoria ya existe\"" + 
 					"}";
 		}else {
 			if(categoriaSnackDao.crear(categoria)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Categoría creada\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Categoría creada\", " +
 						"\"idCategoria\": \""+categoria.getIdCategoria()+"\""+
 						"}";
 			}
@@ -613,7 +613,7 @@ public class Server extends WebSocketServer {
 			}else {
 				if(tutoria.getUsuarios().add(usuario.getUsuario())) {
 					mensaje= "{" + 
-							"\"tipo\": \"ok\"" + 
+							"\"tipo\": \"ok\", " + 
 							"\"mensaje\": \"Ha ingresado a la tutoría\"" + 
 							"}";
 				}
@@ -645,7 +645,7 @@ public class Server extends WebSocketServer {
 				if(materia!=null) {
 					profesor.getMaterias().add(materia.getIdMateria());
 					mensaje="{" + 
-							"\"tipo\": \"ok\"" + 
+							"\"tipo\": \"ok\", " + 
 							"\"mensaje\": \"Materia "+materia.getNombreMateria()+" vinculada a "+profesor.getNombre()+"\"" + 
 							"}";
 				}else {
@@ -661,7 +661,7 @@ public class Server extends WebSocketServer {
 
 	private void crearProfesor(WebSocket conn, JSONObject js) {
 		ProfesorDao profesorDao = ProfesorDao.getInstancia();
-		Profesor profesor = profesorDao.consultar(js.getString("idProfesor"));
+		Profesor profesor = profesorDao.consultarPorNombre(js.getString("nombreProfesor"));
 		String mensaje = "";
 		if(profesor!=null) {
 			mensaje ="{" + 
@@ -677,7 +677,7 @@ public class Server extends WebSocketServer {
 			if(profesorDao.crear(profesor)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Materia creada\"" +
+						"\"mensaje\": \"Profesor creado\", " +
 						"\"idProfesor\": \""+profesor.getId()+"\""+
 						"}";
 			}
@@ -707,7 +707,7 @@ public class Server extends WebSocketServer {
 			if(gruposEstudioDao.crear(grupo)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Materia creada\"" +
+						"\"mensaje\": \"Grupo creado\", " +
 						"\"idGrupo\": \""+idGrupo+"\""+
 						"}";
 			}
@@ -742,7 +742,7 @@ public class Server extends WebSocketServer {
 				if(materiaDao.crear(materia)) {
 					mensaje = "{" + 
 							"\"tipo\": \"ok\"," + 
-							"\"mensaje\": \"Materia creada\"" +
+							"\"mensaje\": \"Materia creada\", " +
 							"\"idMateria\": \""+materia.getIdMateria()+"\""+
 							"}";
 				}
