@@ -5,11 +5,13 @@
  */
 package modelo.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Val
  */
-public class CategoriaSnack {
+public class CategoriaSnack implements Serializable {
     private String idCategoria;
     private String nombreCategoria;
 

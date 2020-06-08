@@ -101,4 +101,16 @@ public class UsuariosDao extends Dao implements IUsuariosDao {
     	}
     	return instancia;
     }
+
+	@Override
+	public Usuario consultarPorToken(String token) {
+		Usuario usuario = null;
+        for (int i = 0; i < this.data.size(); i++) {
+            if(((Usuario)this.data.get(i)).getToken().equals(token)){
+                usuario = (Usuario)this.data.get(i);
+                break;
+            }
+        }
+        return usuario;
+	}
 }

@@ -1,8 +1,9 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Profesor {
+public class Profesor implements Serializable{
 	private String id;
 	private String nombre;
 	private LinkedList<String> materias;

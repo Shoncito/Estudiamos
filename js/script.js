@@ -22,9 +22,7 @@ $('.toggle').click(function(){
     }, "slow");
 });
 
-$("#menuInicio").click(function(){
-	window.location.assign("inicio.html");
-});
+
 
 $("#menuCrear").click(function(){
 	window.location.assign("creargrup.html");

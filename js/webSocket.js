@@ -12,6 +12,7 @@ var wsUri = "ws://localhost:8080";
 */
 var websocket = new WebSocket(wsUri);
 
+var usuario;
 
 var sonido=true;
 /**
@@ -32,16 +33,29 @@ websocket.onmessage=function(event){
 		console.log(event.data);
 	} else {
 		var obj = JSON.parse(event.data);
+		console.log(obj);
 		if(obj.tipo==="error"){
 			alert("Error: "+obj.mensaje);
 		}
 		else if(obj.tipo ==="usuario"){
-			setCookie("token",obj.mensaje.token,6);
+			setCookie("token",obj.mensaje.token,0);
+			usuario = obj.mensaje;
+			websocket.close(1000,"cambio");
+			window.location.assign("inicio.html");
 			//Se supone que aquí se accede a la página
-
+		}
+		else if(obj.tipo==="ok"){
+			alert(JSON.stringify(obj));
 		}
 		else if(obj.tipo==="notificacion"){ 
 			notificar(obj.subtipo,obj.mensaje);
+		}
+		else if(obj.tipo ==="carga usuario"){
+			usuario = obj.mensaje;
+			$("#nombreUser").append(usuario.usuario);
+			//websocket.close(1000,"cambio");
+			//window.location.assign("inicio.html");
+			//Se supone que aquí se accede a la página
 		}
 	}
 }

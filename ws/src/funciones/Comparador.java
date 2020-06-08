@@ -8,7 +8,8 @@ import modelo.dto.Usuario;
 public class Comparador {
 	public static Usuario comparar(LinkedList <Usuario> usuarios, InetSocketAddress dir2) {
 		for(Usuario usuario: usuarios) {
-			if(usuario.getDireccion().equals(dir2)) {
+			System.out.println(usuario.getDireccion().getHostString()+"|"+dir2.getHostString());
+			if(usuario.getDireccion().getHostString().equals(dir2.getHostString())) {
 				return usuario;
 			}
 		}

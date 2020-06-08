@@ -1,8 +1,9 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class GrupoEstudio {
+public class GrupoEstudio implements Serializable{
 	private String idGrupo;
 	private LinkedList<String> usuarios;
 	private String nombreGrupo;

@@ -61,6 +61,9 @@ public class Server extends WebSocketServer {
 		Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
 		if (usuario != null) {
 			usuario.setWebSocket(conn);
+			String mensaje = "{" + "	\"tipo\": \"carga usuario\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
+			System.out.println(mensaje);
+			conn.send(mensaje);
 		}
 
 		// System.out.println(clients.size());
@@ -138,8 +141,17 @@ public class Server extends WebSocketServer {
 			apagarServidor(conn,js);
 		}else if(js.getString("tipo").equals("consultar categorias")) {
 			consultarCategorias(conn,js);
+		}else if(js.getString("tipo").equals("consultar token")) {
+			consultarToken(conn,js);
 		}
 
+	}
+
+	private void consultarToken(WebSocket conn, JSONObject js) {
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
+		Usuario usuario = usuariosDao.consultarPorToken(js.getString("token"));
+		String mensaje = "{" + "	\"tipo\": \"usuario carga\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
+		conn.send(mensaje);
 	}
 
 	private void consultarCategorias(WebSocket conn, JSONObject js) {
@@ -197,6 +209,13 @@ public class Server extends WebSocketServer {
 	}
 
 	private void apagarServidor(WebSocket conn, JSONObject js) {
+		LinkedList<Usuario> usuarios = UsuariosDao.getInstancia().listarTodos();
+		for(Usuario usuario: usuarios) {
+			if(usuario.getWebSocket()!=null) {
+				usuario.getWebSocket().close();
+				usuario.setWebSocket(null);
+			}		
+		}
 		System.out.println("Guardando repositorios");
 		try {
 			IDao daos[]= {UsuariosDao.getInstancia(),
@@ -750,8 +769,8 @@ public class Server extends WebSocketServer {
 			usuario.setToken(usuario.getUsuario()+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND);
 			if(usuariosDao.crear(usuario)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Usuario creado\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Usuario creado\", " +
 						"\"hash\": \""+usuario.hashCode()+"\""+
 						"}";
 			}
@@ -762,21 +781,23 @@ public class Server extends WebSocketServer {
 
 	private void loginUsuario(WebSocket conn, JSONObject js) {
 		UsuariosDao usuarioDao =UsuariosDao.getInstancia();
+		
 		Usuario usuario = usuarioDao.consultar(js.getString("usuario"));
 		String mensaje = "";
 		if (usuario == null) {
 			mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 		} else {
 			if (usuario.getContraseña().equals(js.getString("contraseña"))) {
+				System.out.println("Entré a login");
 				mensaje = "{" + "	\"tipo\": \"usuario\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
 				usuario.setWebSocket(conn);
+				usuario.setDireccion(conn.getRemoteSocketAddress());
 			} else {
 				mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 			}
 		}
-		usuario.setWebSocket(conn);
 		conn.send(mensaje);
-		
+		usuarios.add(usuario);
 	}
 
 	@Override
@@ -794,6 +815,7 @@ public class Server extends WebSocketServer {
 	@Override
 	public void onError(WebSocket conn, Exception exc) {
 		System.out.println("Error happened: " + exc.getMessage());
+		exc.printStackTrace();
 	}
 
 	public void sendToAll(WebSocket conn, String message) {

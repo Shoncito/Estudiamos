@@ -154,6 +154,13 @@ Agregar horario disponible:
 
 Retorna: ok
 
+
+- Consultar token
+{
+	tipo: consultar token,
+	token: token
+}
+
 - Consultar tutorías programadas:
 {
 	tipo: consultar tutorias

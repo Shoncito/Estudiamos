@@ -1,11 +1,12 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.LinkedList;
 
 import org.java_websocket.WebSocket;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	
 	private WebSocket webSocket;
 	private String token;
