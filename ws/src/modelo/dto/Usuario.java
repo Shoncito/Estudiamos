@@ -101,8 +101,8 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
+	
+	public String toJSON() {
 		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \"}";
 	}
 

@@ -764,13 +764,13 @@ public class Server extends WebSocketServer {
 		Usuario usuario = usuarioDao.consultar(js.getString("usuario"));
 		String mensaje = "";
 		if (usuario == null) {
-			mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
+			mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 		} else {
 			if (usuario.getContraseña().equals(js.getString("contraseña"))) {
-				mensaje = "{" + "	tipo: usuario," + "	mensaje: " + usuario.toString() + "}";
+				mensaje = "{" + "	\"tipo\": \"usuario\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
 				usuario.setWebSocket(conn);
 			} else {
-				mensaje = "{" + "	tipo: error," + "	mensaje: usuario o contraseña inválidos" + "}";
+				mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 			}
 		}
 		usuario.setWebSocket(conn);
