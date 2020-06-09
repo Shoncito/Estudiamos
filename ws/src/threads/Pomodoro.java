@@ -7,16 +7,24 @@ import org.java_websocket.WebSocket;
 import modelo.dao.UsuariosDao;
 import modelo.dto.GrupoEstudio;
 import modelo.dto.Usuario;
-
+/**
+ * Clase hilo pomodoro
+ * @author Valeria Bermúdez, Johan Miranda y Santiago Pérez
+ * @version 2.0
+ * @since 2020-06-09
+ */
 public class Pomodoro implements Runnable {
 
 	GrupoEstudio grupoEstudio;
+	LinkedList<GrupoEstudio> grupos;
 	
 	/**
-	 * @param grupoEstudio
+	 * Constructor de pomodoro
+	 * @param grupoEstudio que es el grupo de estudio que recibe las notificaciones
 	 */
-	public Pomodoro(GrupoEstudio grupoEstudio) {
+	public Pomodoro(GrupoEstudio grupoEstudio,LinkedList<GrupoEstudio> grupos) {
 		this.grupoEstudio = grupoEstudio;
+		this.grupos=grupos;
 	}
 
 	@Override
@@ -51,7 +59,7 @@ public class Pomodoro implements Runnable {
 						"	mensaje: Grupo estudio finalizado" + 
 						"}";
 			}
-			
+			this.grupos.remove(this.grupoEstudio);
 		}catch(InterruptedException ex) {
 			System.out.println("Error: "+ex.getMessage());
 		}
