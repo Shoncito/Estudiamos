@@ -85,17 +85,12 @@ websocket.onmessage=function(event){
 			}
 			categorias = obj.categorias;
 		}else if(obj.tipo==="lista escuelas"){
-			if(document.title==="Crear grupo"){
-				colocarEnSelectEscuelasGrupos(obj.escuelas);
-			}else if(document.title==="Estudiamos - Tutorías"){
-				colocarEnSelectEscuelasPedirTutoria(obj.escuelas);
+			if(document.title==="Crear grupo" || document.title==="Estudiamos - Tutorías" || document.title==="Crear tutoria"  || document.title=="Crear materia"){
+				colocarEnSelectEscuelas(obj.escuelas);
 			}else if(document.title==="Estudiamos - Foro"){
 				cargarSeccionesEscuelasForo(obj.escuelas);
-			}else if(document.title==="Crear tutoria"){
-				colocarEnSelectEscuelasCrearTutoria(obj.escuelas);
-			}else if(document.title=="Crear materia"){
-				colocarEnSelecEscuelasCrearMateria(obj.escuelas);
 			}
+			
 		}else if(obj.tipo==="lista profesores"){
 
 		}else if(obj.tipo==="lista tutorias"){
@@ -112,6 +107,9 @@ websocket.onmessage=function(event){
 	}
 }
 ;
+
+
+
 /**
 * Cuando el websocket se cierra
 */
@@ -125,6 +123,18 @@ websocket.onclose=function(event){
 websocket.onerror=function(event){
 	alert("Error de conexión "+event.data);
 }
+/**
+ * 
+ * @param {array} escuelas 
+ */
+function colocarEnSelectEscuelas(escuelas){
+
+	var text="";
+
+
+}
+
+
 
 /**
 * Pong

@@ -92,8 +92,7 @@ body {
     transition: all .5s ease;
 }
 /* estilo formulario*/
-#amen{
-
+.amen{
     outline: none;
     display: block;
     width: 100%;
