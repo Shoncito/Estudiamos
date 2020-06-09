@@ -17,6 +17,8 @@ var websocket = new WebSocket(wsUri);
 var usuario;
 
 var sonido=true;
+
+var num=0;
 /**
 * Cuando se abre la conexión
 */
@@ -137,14 +139,13 @@ websocket.onerror=function(event){
 function listarMaterias(materias){
 var text="";
 for(var i=0;i<materias.length;i++){
-	     text +=`
-                    <tr class="carril">
+    text +=`
+                <tr class="carril">
 					<td>${materias[i].nombreMateria}</td>
-					</tr>`
-$("#"+materias[i].idEscuela).append(text);
-text="";
+					</tr>`;
+		$("#"+materias[i].idEscuela).append(text);
+	text="";
 }
-
 
 }
 
@@ -160,11 +161,11 @@ function cargarSeccionesEscuelasForo(escuelas){
 		<tr class="carril">
 				<td>
 				   ${escuelas[i].nombreEscuela}
-					<button id="derecho_b"  class="ui right labeled icon button ">
+					<button id="${i}"  class="ui right labeled icon button ">
   						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
   						Mas
 					</font></font></button>	
-					<div class="materias">
+					<div id="${escuelas[i].idEscuela}-${i}" class="materias">
 					<table id="${escuelas[i].idEscuela}">
 					<thead id="materia">
 					<tr>
@@ -180,14 +181,19 @@ function cargarSeccionesEscuelasForo(escuelas){
 			</tr>
 		` 
 		$("#tabla2").append(texto);
-		$("#"+escuelas[i].idEscuela).toggle("slow");
+		//$("#"+escuelas[i].idEscuela).toggle("slow");
 		texto="";
 	}
-	
+	var obj ={
+		tipo: "consultar materias" 
+	}
+	enviarMensaje(obj);
     
 }
-
-
+$(".ui.right.labeled.icon.button").click(function() {
+	console.log("boton sirve");
+   $("#"+escuelas[$(this).id].idEscuela+"-"+$(this).id).toggle("slow");
+});
 /**
  * 
  * @param {array} escuelas 
