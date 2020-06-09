@@ -161,11 +161,11 @@ function cargarSeccionesEscuelasForo(escuelas){
 		<tr class="carril">
 				<td>
 				   ${escuelas[i].nombreEscuela}
-					<button id="${i}"  class="ui right labeled icon button ">
+					<button id="${i}"  class="ui right labeled icon button " onclick="amen(${escuelas[i].idEscuela})">
   						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
   						Mas
 					</font></font></button>	
-					<div id="${escuelas[i].idEscuela}-${i}" class="materias">
+					<div id="${escuelas[i].idEscuela}+1" class="materias" >
 					<table id="${escuelas[i].idEscuela}">
 					<thead id="materia">
 					<tr>
@@ -180,15 +180,21 @@ function cargarSeccionesEscuelasForo(escuelas){
 				</td>
 			</tr>
 		` 
+		
 		$("#tabla2").append(texto);
 		//$("#"+escuelas[i].idEscuela).toggle("slow");
 		texto="";
+		$("#"+escuelas[i].idEscuela).hide();
 	}
 	var obj ={
 		tipo: "consultar materias" 
 	}
 	enviarMensaje(obj);
     
+}
+function amen(escuelas){
+	console.log("sirve")
+	$("#"+escuelas).show();
 }
 $(".ui.right.labeled.icon.button").click(function() {
 	console.log("boton sirve");
