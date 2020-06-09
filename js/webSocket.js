@@ -42,6 +42,13 @@ websocket.onopen = function(event){
 		enviarMensaje(obj);
 		obj.tipo="consultar profesores";
 		enviarMensaje(obj);
+	}else if(document.title==="Estudiamos - Foro"){
+		var obj ={
+			tipo: "consultar escuelas" 
+		}
+		enviarMensaje(obj);
+		obj.tipo="consultar materias";
+		enviarMensaje(obj);
 	}
 	
 }
@@ -103,12 +110,12 @@ websocket.onmessage=function(event){
 
 		}else if(obj.tipo==="lista escuelas"){
 
+		}else if(obj.tipo==="lista materias"){
+		 listarMaterias(obj.materias);	
 		}
 	}
 }
 ;
-
-
 
 /**
 * Cuando el websocket se cierra
@@ -125,13 +132,73 @@ websocket.onerror=function(event){
 }
 /**
  * 
+ * @param {array} materias 
+ */
+function listarMaterias(materias){
+var text="";
+for(var i=0;i<materias.length;i++){
+	     text +=`
+                    <tr class="carril">
+					<td>${materias[i].nombreMateria}</td>
+					</tr>`
+$("#"+materias[i].idEscuela).append(text);
+text="";
+}
+
+
+}
+
+/**
+ * 
+ * @param {array} escuelas 
+ */
+function cargarSeccionesEscuelasForo(escuelas){
+	
+	var texto="";
+	for(var i=0;i<escuelas.length;i++){
+		texto +=`
+		<tr class="carril">
+				<td>
+				   ${escuelas[i].nombreEscuela}
+					<button id="derecho_b"  class="ui right labeled icon button ">
+  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  						Mas
+					</font></font></button>	
+					<div class="materias">
+					<table id="${escuelas[i].idEscuela}">
+					<thead id="materia">
+					<tr>
+					<th>MATERIAS</th>
+					</tr>
+					</thead>
+
+				   </table>	
+					
+					
+					</div>
+				</td>
+			</tr>
+		` 
+		$("#tabla2").append(texto);
+		$("#"+escuelas[i].idEscuela).toggle("slow");
+		texto="";
+	}
+	
+    
+}
+
+
+/**
+ * 
  * @param {array} escuelas 
  */
 function colocarEnSelectEscuelas(escuelas){
-
 	var text="";
-
-
+for(var i=0;i<escuelas.length;i++){
+	text +=`
+	<option value="${escuelas[i].idEscuela}">${escuelas[i].nombreEscuela}</option>` 
+}
+$("#escuelas").append(text);
 }
 
 

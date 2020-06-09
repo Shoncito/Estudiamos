@@ -58,7 +58,8 @@ var imagenProducto=["img/estudio.jpg", "img/estudio.jpg", "img/estudio.jpg", "im
 
  var PRODUCTO = document.getElementsByName("PRODUCTO");
  for (i in nombreProducto){
- 	PRODUCTO[i].innerHTML = '<div class="content"><div name="NOMBREPRODUCTO" class="header">'+nombreProducto[i]+' </div></div><img src="' +imagenProducto[i]+ '"><div name="PRECIOPRODUCTO" class="meta">' +precioProducto[i]+ '</div><div class="extra content ui large buttons"><button class="ui brown button" id="disminuir" onclick="carrito(this)" value="disminuir'+i+'">-</button><div id="p"><p id="contador'+i+'" value="">0</p></div><button class="ui orange button" id="aumentar" onclick="carrito(this)" value="aumentar'+i+'">+</button></div>';
+	
+ 	PRODUCTO[i].innerHTML = `<div class="content"><div name="NOMBREPRODUCTO" class="header">${nombreProducto[i]}</div></div><img src="${imagenProducto[i]}"><div name="PRECIOPRODUCTO" class="meta">${precioProducto[i]}</div><div class="extra content ui large buttons"><button class="ui brown button" id="disminuir" onclick="carrito(this)" value="disminuir${i}">-</button><div id="p"><p id="contador${i}" value="">0</p></div><button class="ui orange button" id="aumentar" onclick="carrito(this)" value="aumentar${i}">+</button></div>`
 }
 
 var valor=[];
