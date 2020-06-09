@@ -131,8 +131,24 @@ public class Server extends WebSocketServer {
 			consultarToken(conn,js);
 		}else if(js.getString("tipo").equals("consultar escuelas")) {
 			consultarEscuelas(conn,js);
+		}else if(js.getString("tipo").equals("consultar materias")) {
+			consultarMaterias(conn,js);
 		}
-
+	}
+	private void consultarMaterias(WebSocket conn, JSONObject js) {
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		LinkedList<Materia> materias=materiaDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista materias\"," + 
+				"	\"materias\": [";
+		for (int i = 0; i < materias.size(); i++) {
+			mensaje+=materias.get(i).toJSON();
+			if(i<materias.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);	
 	}
 
 	private void consultarEscuelas(WebSocket conn, JSONObject js) {

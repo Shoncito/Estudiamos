@@ -56,6 +56,10 @@ public class Materia implements Serializable{
 	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
 	}
+
+	public String toJSON() {
+		return "{\"idMateria\":\"" + idMateria + "\", \"nombreMateria\":\"" + nombreMateria + "\", \"idEscuela\": \"" + idEscuela+ "\"}";
+	}
     
     
 }

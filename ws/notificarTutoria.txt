@@ -226,6 +226,18 @@ retorna
 	tipo: lista escuelas,
 	escuelas: [{},{},{}];
 }
+
+
+Consultar materias
+{
+	tipo: consultar materias
+}
+
+retorna
+{
+	tipo: lista materias,
+	materias: [{},{},{}]
+}
 Put:
 - Editar grupo de estudio:
 {
