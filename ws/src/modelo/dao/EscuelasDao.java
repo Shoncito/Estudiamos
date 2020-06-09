@@ -43,7 +43,7 @@ public class EscuelasDao extends Dao implements IEscuelasDao {
 	@Override
 	public boolean actualizar(Escuela dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdEscuela() == (((Escuela)this.data.get(i)).getIdEscuela())){
+			if(((Escuela)this.data.get(i)).getIdEscuela().equals(dto.getIdEscuela())){
                 this.data.set(i, dto);
                 return true;
             }
