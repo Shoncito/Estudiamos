@@ -18,6 +18,8 @@ var usuario;
 
 var sonido=true;
 
+var idEscuela=0;
+
 var num=0;
 /**
 * Cuando se abre la conexión
@@ -94,7 +96,7 @@ websocket.onmessage=function(event){
 			}
 			categorias = obj.categorias;
 		}else if(obj.tipo==="lista escuelas"){
-			if(document.title==="Crear grupo" || document.title==="Estudiamos - Tutorías" || document.title==="Crear tutoria"  || document.title=="Crear materia"){
+			if(document.title==="Crear grupo" || document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"  || document.title=="Crear materia"){
 				colocarEnSelectEscuelas(obj.escuelas);
 			}else if(document.title==="Estudiamos - Foro"){
 				cargarSeccionesEscuelasForo(obj.escuelas);
@@ -113,7 +115,13 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista escuelas"){
 
 		}else if(obj.tipo==="lista materias"){
-		 listarMaterias(obj.materias);	
+		 	if(document.title==="Estudiamos - Tutorias"){
+				filtarMaterias(obj.materias);
+			 }else if(document.title==="Estudiamos - Foro"){
+				listarMaterias(obj.materias);	
+			 }
+
+		
 		}
 	}
 }
@@ -146,7 +154,21 @@ for(var i=0;i<materias.length;i++){
 		$("#"+materias[i].idEscuela).append(text);
 	text="";
 }
+}
+function filtarMaterias(materias){
+var materiasFil=new Array();
 
+for(var i=0;i<materias.length;i++){
+if(idEscuela===materias[i].idEscuela){
+materiasFil.push(materias[i]);
+}
+}
+$("#selectMateria").empty();
+var text=`<option value="">Seleccione una materia</option>`;
+for(var j=0;j<materiasFil.length;j++){
+	text +=`<option value="${materiasFil[j].idMateria}">${materiasFil[j].nombreMateria}</option>`
+}
+$("#selectMateria").append(text);
 }
 
 /**
@@ -161,7 +183,7 @@ function cargarSeccionesEscuelasForo(escuelas){
 		<tr class="carril">
 				<td>
 				   ${escuelas[i].nombreEscuela}
-					<button id="${i}"  class="ui right labeled icon button " onclick="amen(${escuelas[i].idEscuela})">
+					<button id="${i}"  class="ui right labeled icon button " onclick="enviarId(${escuelas[i].idEscuela})">
   						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
   						Mas
 					</font></font></button>	
@@ -180,7 +202,6 @@ function cargarSeccionesEscuelasForo(escuelas){
 				</td>
 			</tr>
 		` 
-		
 		$("#tabla2").append(texto);
 		//$("#"+escuelas[i].idEscuela).toggle("slow");
 		texto="";
@@ -192,7 +213,11 @@ function cargarSeccionesEscuelasForo(escuelas){
 	enviarMensaje(obj);
     
 }
-function amen(escuelas){
+/**
+ * Se envia la id cuando da click en el boton para mostrar las materias de cada escuela en foro.html
+ * @param {array} escuelas 
+ */
+function enviarId(escuelas){
 	console.log("sirve")
 	$("#"+escuelas).show();
 }
@@ -212,8 +237,21 @@ for(var i=0;i<escuelas.length;i++){
 }
 $("#escuelas").append(text);
 }
+/**
+ * Se envia la id en cuando seleccionan una escuela para mostrar materias en tutorias.html
+ * @param {id} idEscuela 
+ */
+function enviarId2(id){
+console.log(id);
+}
 
-
+$("#escuelas").click(function(){
+	idEscuela=$(this).val();
+var obj ={
+	tipo: "consultar materias" 
+}
+enviarMensaje(obj);
+});
 
 /**
 * Pong
