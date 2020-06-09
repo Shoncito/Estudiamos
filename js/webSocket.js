@@ -23,6 +23,26 @@ var sonido=true;
 websocket.onopen = function(event){
 	console.log("Conectado..."); //... y aparecerá en la pantalla
 	ping();
+	if(document.title==="Crear snack"){
+		var obj ={
+			tipo: "consultar categorias" 
+		}
+		enviarMensaje(obj);
+	}else if(document.title==="Crear materia"){
+		var obj ={
+			tipo: "consultar escuelas" 
+		}
+		enviarMensaje(obj);
+	}else if(document.title==="Estudiamos - Tutorias"){
+		var obj ={
+			tipo: "consultar escuelas" 
+		}
+		enviarMensaje(obj);
+		obj.tipo="consultar materias";
+		enviarMensaje(obj);
+		obj.tipo="consultar profesores";
+		enviarMensaje(obj);
+	}
 	
 }
 /**
@@ -71,7 +91,23 @@ websocket.onmessage=function(event){
 				colocarEnSelectEscuelasPedirTutoria(obj.escuelas);
 			}else if(document.title==="Estudiamos - Foro"){
 				cargarSeccionesEscuelasForo(obj.escuelas);
+			}else if(document.title==="Crear tutoria"){
+				colocarEnSelectEscuelasCrearTutoria(obj.escuelas);
+			}else if(document.title=="Crear materia"){
+				colocarEnSelecEscuelasCrearMateria(obj.escuelas);
 			}
+		}else if(obj.tipo==="lista profesores"){
+
+		}else if(obj.tipo==="lista tutorias"){
+
+		}else if(obj.tipo==="lista grupos"){
+
+		}else if(obj.tipo==="lista snacks"){
+
+		}else if(obj.tipo==="lista publicaciones"){
+
+		}else if(obj.tipo==="lista escuelas"){
+
 		}
 	}
 }

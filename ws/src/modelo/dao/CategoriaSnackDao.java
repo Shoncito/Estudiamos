@@ -44,7 +44,7 @@ public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
 	@Override
 	public boolean actualizar(CategoriaSnack dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdCategoria() == (((CategoriaSnack)this.data.get(i)).getIdCategoria())){
+			if(((CategoriaSnack)this.data.get(i)).getIdCategoria().equals(dto.getIdCategoria())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -55,7 +55,7 @@ public class CategoriaSnackDao extends Dao implements ICategoriaSnack {
 	@Override
 	public boolean eliminar(CategoriaSnack dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((CategoriaSnack)this.data.get(i)).getIdCategoria()==(dto.getIdCategoria())){
+            if(((CategoriaSnack)this.data.get(i)).getIdCategoria().equals(dto.getIdCategoria())){
                 this.data.remove(i);
                 return true;
             }

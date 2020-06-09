@@ -32,7 +32,7 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 	public Profesor consultar(String id) {
 		Profesor profesor = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Profesor)this.data.get(i)).getId()==id){
+            if(((Profesor)this.data.get(i)).getId().equals(id)){
             	profesor = (Profesor)this.data.get(i);
                 break;
             }
@@ -43,7 +43,7 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 	@Override
 	public boolean actualizar(Profesor dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getId()==((Profesor)this.data.get(i)).getId()){
+			if(((Profesor)this.data.get(i)).getId().equals(dto.getId())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -54,7 +54,7 @@ public class ProfesorDao extends Dao implements IProfesorDao {
 	@Override
 	public boolean eliminar(Profesor dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Profesor)this.data.get(i)).getId()==dto.getId()){
+            if(((Profesor)this.data.get(i)).getId().equals(dto.getId())){
                 this.data.remove(i);
                 return true;
             }

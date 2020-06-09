@@ -32,7 +32,7 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	public Tutoria consultar(String id) {
 		Tutoria tutoria = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==id){
+            if(((Tutoria)this.data.get(i)).getIdTutoria().equals(id)){
                 tutoria = (Tutoria)this.data.get(i);
                 break;
             }
@@ -43,7 +43,7 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	@Override
 	public boolean actualizar(Tutoria dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdTutoria() == (((Tutoria)this.data.get(i)).getIdTutoria())){
+			if(((Tutoria)this.data.get(i)).getIdTutoria().equals(dto.getIdTutoria())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -54,7 +54,7 @@ public class TutoriasDao extends Dao implements ITutoriasDao {
 	@Override
 	public boolean eliminar(Tutoria dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Tutoria)this.data.get(i)).getIdTutoria()==(dto.getIdTutoria())){
+            if(((Tutoria)this.data.get(i)).getIdTutoria().equals(dto.getIdTutoria())){
                 this.data.remove(i);
                 return true;
             }

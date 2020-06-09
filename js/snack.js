@@ -14,10 +14,3 @@ $("#crearSnack").click(function(evt){
     enviarMensaje(obj);
 });
 
-
-$("#btnListarCategoria").click(function(){
-	var obj ={
-		tipo: "consultar categorias" 
-	}
-	enviarMensaje(obj);
-});

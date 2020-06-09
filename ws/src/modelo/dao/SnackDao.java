@@ -44,7 +44,7 @@ public class SnackDao extends Dao implements ISnackDao {
 	@Override
 	public boolean actualizar(Snack dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdSnack()==((Snack)this.data.get(i)).getIdSnack()){
+			if(((Snack)this.data.get(i)).getIdSnack().equals(dto.getIdSnack())){
                 this.data.set(i, dto);
                 return true;
             }

@@ -2,28 +2,12 @@ package websocketsapp;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import javax.print.attribute.Size2DSyntax;
-
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.Messaging.SyncScopeHelper;
-
 import funciones.Buscador;
 import funciones.Comparador;
 import funciones.Generador;
@@ -214,7 +198,7 @@ public class Server extends WebSocketServer {
 			tutoria.setLugar(js.getString("lugar"));
 			tutoria.setUsuarios(new LinkedList());
 			tutoria.setFecha(js.getString("fecha"));
-			String idTutoria= ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idTutoria= Generador.generarId();
 			tutoria.setIdTutoria(idTutoria);
 			if(tutoriasDao.crear(tutoria)) {
 				mensaje ="{" + 

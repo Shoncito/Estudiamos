@@ -43,7 +43,7 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
 	@Override
 	public boolean actualizar(GrupoEstudio dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdGrupo() == (((GrupoEstudio)this.data.get(i)).getIdGrupo())){
+			if(((GrupoEstudio)this.data.get(i)).getIdGrupo().equals(dto.getIdGrupo())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -54,7 +54,7 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
 	@Override
 	public boolean eliminar(GrupoEstudio dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==(dto.getIdGrupo())){
+            if(((GrupoEstudio)this.data.get(i)).getIdGrupo().equals(dto.getIdGrupo())){
                 this.data.remove(i);
                 return true;
             }
