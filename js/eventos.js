@@ -46,12 +46,18 @@ $("#btnCrear").click(function(){
  * Al unirse a un grupo
  */
 $("#menuMisGrupos").click(function(){
-    websocket.close(1000,"cambio");
+    var obj={
+        tipo: "consultar mis grupos"
+    }
+    websocket.close(4000,JSON.stringify(obj));
 	window.location.assign("misGrupos.html");
 });
 
 $("#btnMisGrupos").click(function(){
-    websocket.close(1000,"cambio");
+    var obj={
+        tipo: "consultar mis grupos"
+    }
+    websocket.close(4000,JSON.stringify(obj));
 	window.location.assign("misGrupos.html");
 });
 /**
