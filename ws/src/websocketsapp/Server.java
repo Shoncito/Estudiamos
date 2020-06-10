@@ -200,6 +200,14 @@ public class Server extends WebSocketServer {
 		String mensaje ="{" + 
 				"	\"tipo\": \"lista profesores\"," + 
 				"	\"profesores\": [";
+		for(int i =0 ;i<profesoresFiltrados.size();i++) {
+			mensaje+=profesoresFiltrados.get(i).toJSON();
+			if(i<profesoresFiltrados.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);
 	}
 
 	private void consultarTutoriasPor(WebSocket conn, JSONObject js) {
@@ -327,7 +335,7 @@ public class Server extends WebSocketServer {
 			if(tutoriasDao.crear(tutoria)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Tutoría creada\"" +
+						"\"mensaje\": \"Tutoría creada\", " +
 						"\"idTutoria\": \""+tutoria.getIdTutoria()+"\""+
 						"}";
 			}
@@ -397,7 +405,11 @@ public class Server extends WebSocketServer {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * Método que permite eliminar una tutoria
+	 * @param conn que es el webSocket del usuario
+	 * @param js que es el objeto json entrante
+	 */
 	private void eliminarTutoria(WebSocket conn, JSONObject js) {
 		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
 		Tutoria tutorias = tutoriasDao.consultar(js.getString("idTutoria"));
@@ -428,7 +440,11 @@ public class Server extends WebSocketServer {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * Método que permite eliminar una publicación
+	 * @param conn que es el websocket del usuario que elimina la publicación
+	 * @param js que es el objeto json entrante
+	 */
 	private void eliminarPublicacion(WebSocket conn, JSONObject js) {
 		PublicacionDao publicacionDao = PublicacionDao.getInstancia();
 		Publicacion publicacion = publicacionDao.consultar(js.getString("idPublicacion"));
@@ -471,7 +487,11 @@ public class Server extends WebSocketServer {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * Método que permite editar una publicación
+	 * @param conn que es el websocket del usuario que edita la publicación
+	 * @param js que es el objeto json entrante
+	 */
 	private void editarPublicacion(WebSocket conn, JSONObject js) {
 		String mensaje="";
 		PublicacionDao publicacionDao = PublicacionDao.getInstancia();
@@ -491,7 +511,11 @@ public class Server extends WebSocketServer {
 		conn.send(mensaje);
 
 	}
-
+	/**
+	 * Método que se encarga de consultar todos los snacks
+	 * @param conn que es el webSocket del usuario
+	 * @param js objeto json entrante
+	 */
 	private void consultarSnacks(WebSocket conn, JSONObject js) {
 		SnackDao snackDao = SnackDao.getInstancia();
 		LinkedList <Snack> snacks = snackDao.listarTodos();
@@ -507,21 +531,31 @@ public class Server extends WebSocketServer {
 		mensaje+="]}";
 		conn.send(mensaje);
 	}
-
+	
+	/**
+	 * Método que se encarga de consultar todos los grupos de un usuario y verifica si el usuario está o no en ellos
+	 * @param conn que es el webSocket del usuario
+	 * @param js objeto json entrante
+	 */
 	private void consultarGrupos(WebSocket conn, JSONObject js) {
 		GruposEstudioDao grupoEstudioDao = GruposEstudioDao.getInstancia();
-		LinkedList <GrupoEstudio> gruposEstudios = grupoEstudioDao.listarTodos();
-		String mensaje ="{" + 
-				"	\"tipo\": \"consultar grupos\"," + 
-				"	\"grupos\": [";
-		for (int i = 0; i < gruposEstudios.size(); i++) {
-			mensaje +=gruposEstudios.get(i).toJSON();
-			if(i<gruposEstudios.size()-1) {
-				mensaje+=", ";
-			}
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		Usuario usuario = Buscador.buscarUsuario(conn, usuarios);
+		LinkedList <GrupoEstudio> gruposEstudio = grupoEstudioDao.listarTodos();
+		String mensaje ="{\"tipo\": \"lista grupos\"}";
+		JSONObject objToSend = new JSONObject(mensaje);
+		JSONArray array = new JSONArray();
+		for(GrupoEstudio grupoEstudio: gruposEstudio) {
+			JSONObject grupo = new JSONObject(grupoEstudio.toJSON());
+			Materia materia = materiaDao.consultar(grupoEstudio.getIdMateria());
+			String stringMateria = materia.toJSON();
+			grupo.put("materia", materia.toJSON());
+			array.put(grupo);
+			grupo.put("unido", Buscador.estaUsuarioEnGrupo(usuario,grupoEstudio));
 		}
-		mensaje+="]}";
-		conn.send(mensaje);
+		objToSend.put("grupos", array);
+		System.out.println(objToSend.toString());
+		usuario.getWebSocket().send(objToSend.toString());
 	}
 
 	private void consultarProfesor(WebSocket conn, JSONObject js) {
