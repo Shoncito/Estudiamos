@@ -61,32 +61,23 @@
                     <h2> Crear Tutoria </h2>
                     <form action="#">
                         <select class="amen" id="escuelas">
-                            <option value="">Seleccione una escuela</option>
+                            <option value="">Seleccione una Escuela</option>
                         </select>
-                        <select class="amen" name="Materia" required> 
+                        <select class="amen" id="materias" required> 
                             <option value="">Seleccione una materia</option>
-                            <option value="1" >
-                                Programacion Aplicada
-                            </option>
-                            <option value="2">
-                                Sistemas Operativos
-                            </option>
-                        </select>   
-                        <select class="amen" name="Profesores" required> 
-                            <option value="">Seleccione un profesor</option>
-                            <option value="1" >
-                                William Frasser
-                            </option>
-                            <option value="2">
-                                John Corredor 
-                            </option>
-                        </select> 
-                        <input  type="date" placeholder="Fecha" required>
-                        <select class="amen" name="Hora" required>
-                            <option>2:00 - 3:00 pm</option>
                         </select>
-                        <select class="amen" name="Lugar" required>
+                        <select class="amen" id="profesores" required> 
+                            <option value="">Seleccione un profesor</option>
+                        </select> 
+                        <select class="amen" name="Hora" id="hora" required>
+                            <option>14:00</option>
+                            <option>13:00</option>
+                            <option>16:00</option>
+                        </select>
+                        <select class="amen" name="Lugar" id="lugar" required>
                             <option>Bloque N</option>
+                            <option>Bloque B Escaleras Internas</option>
+                            <option>Bloque Administrativo</option>
                         </select>
                         <input type="submit" value="Crear" id="crearTutoria" required>
                     </form>
@@ -99,5 +90,6 @@
     <script src="js/notificaciones.js"></script>
     <script src="js/webSocket.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/creartutorias.js"></script>
     <script type="text/javascript" src="js/sonido.js"></script>
     </html>

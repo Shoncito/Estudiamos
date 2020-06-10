@@ -57,32 +57,24 @@
 			<div class="UneteGrupo">
 				<h2> Asociar materia-profesor </h2>
 				<form action="#">
-					<select class="amen" name="Profesores" required> 
+					<select class="amen" id="profesores" required> 
 						<option value="">Seleccione un profesor</option>
-						<option value="1" >
-							William Frasser
-						</option>
-						<option value="2">
-							John Corredor 
-						</option>
+					</select>
+					<select class="amen" id="materias" required> 
+						<option value="">Seleccione una materia</option>
 					</select>	
-						<select class="amen" name="Materia" required> 
-							<option value="">Seleccione una materia</option>
-							<option value="1" >
-								Programacion Aplicada
-							</option>
-							<option value="2">
-								Sistemas Operativos
-							</option>
-						</select>	
-						<input type="submit" value="Asociar" id="asociarMP" required>
-					</form>
-				</div>
+					<input type="submit" value="Asociar" id="asociarMP" required>
+				</form>
 			</div>
-		</body>
-		<script src="js/semantic.min.js"></script>
-		<script src="js/notificaciones.js"></script>
-		<script src="js/webSocket.js"></script>
-		<script src="js/script.js"></script>
-		<script type="text/javascript" src="js/sonido.js"></script>
-		</html>
+
+		</div>
+	</body>
+	<script src="js/semantic.min.js"></script>
+	<script src="js/notificaciones.js"></script>
+	<script src="js/webSocket.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/asociarMateriaProfesor.js"></script>
+	<script type="text/javascript" src="js/sonido.js"></script>
+	</html>
+
+

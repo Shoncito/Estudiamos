@@ -117,3 +117,10 @@ $("#menuInicio").click(function(){
 });
 
 
+$("#btnCrearTuto").click(function(){
+    websocket.close(1000,"cambio");
+    window.location.assign("creartuto.html");
+});
+
+
+

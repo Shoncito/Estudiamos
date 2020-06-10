@@ -1,4 +1,4 @@
-$("#btnCrearSnack").click(function(evt){
+$("#crearProfesor").click(function(evt){
     evt.preventDefault();
     var nombreProfesor = $("#nombreProfesor").val();
     var obj={
