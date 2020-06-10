@@ -168,7 +168,7 @@ for(var i=0;i<grupos.length;i++){
 		  Lugar: ${grupos[i].lugar} <br>
 		  Fecha: ${grupos[i].fecha} <br>
 		  Hora: ${grupos[i].hora}:00 <br>
-        <div  class="ui basic orange button">Unirse</div>
+        <div  class="ui basic orange button" id="${grupos[i].idGrupo}" onclick="enviarIdgrupo(${grupos[i].idGrupo})">Unirse</div>
         </div>
         </div>
 		` 
@@ -200,6 +200,19 @@ for(var i=0;i<grupos.length;i++){
 		text="";
 	}
 }
+}
+/**
+ * idGrupos y envia al momento de unirse a grupo
+ * @param {id} idGrupos 
+ */
+function enviarIdgrupo(idGrupo){
+	idGrupo=idGrupo.toString();
+	var obj={
+		tipo: "ingresar a grupo",
+		idUsuario: usuario.usuario,
+		idGrupo: idGrupo
+	}
+	enviarMensaje(obj);
 }
 
 
