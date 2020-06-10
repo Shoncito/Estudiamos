@@ -59,6 +59,8 @@ public class Server extends WebSocketServer {
 						usuario.setMotivoDesconexion(null);
 					}else if(js.getString("tipo").equals("consultar mis grupos")) {
 						consultarGruposDeUsuario(usuario);
+					}else if(js.getString("tipo").equals("consultar grupos")) {
+						consultarGrupos(conn,js);
 					}
 					
 				}
@@ -548,10 +550,29 @@ public class Server extends WebSocketServer {
 		for(GrupoEstudio grupoEstudio: gruposEstudio) {
 			JSONObject grupo = new JSONObject(grupoEstudio.toJSON());
 			Materia materia = materiaDao.consultar(grupoEstudio.getIdMateria());
-			String stringMateria = materia.toJSON();
-			grupo.put("materia", materia.toJSON());
-			array.put(grupo);
-			grupo.put("unido", Buscador.estaUsuarioEnGrupo(usuario,grupoEstudio));
+			if(!(js.get("idEscuela")instanceof String)) {
+				String stringMateria = materia.toJSON();
+				grupo.put("materia", materia.toJSON());
+				array.put(grupo);
+				grupo.put("unido", Buscador.estaUsuarioEnGrupo(usuario,grupoEstudio));
+			}else {
+				if(!(js.get("idMateria") instanceof String)) {
+					if(materia.getIdEscuela().equals(js.getString("idEscuela"))) {
+						String stringMateria = materia.toJSON();
+						grupo.put("materia", materia.toJSON());
+						array.put(grupo);
+						grupo.put("unido", Buscador.estaUsuarioEnGrupo(usuario,grupoEstudio));
+					}
+				}else {
+					if(js.getString("idMateria").equals(grupoEstudio.getIdMateria())) {
+						String stringMateria = materia.toJSON();
+						grupo.put("materia", materia.toJSON());
+						array.put(grupo);
+						grupo.put("unido", Buscador.estaUsuarioEnGrupo(usuario,grupoEstudio));
+					}
+				}
+			}
+			
 		}
 		objToSend.put("grupos", array);
 		System.out.println(objToSend.toString());
