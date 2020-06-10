@@ -192,7 +192,28 @@ Retorna: dos arreglos: uno con sus horarios disponibles y otro con las materias 
 {
 	tipo: consultar grupos
 }
-Retorna: un arreglo con todos los datos de todos los grupos de estudio
+
+{
+	tipo: lista grupos,
+	grupos: [
+		{
+			idGrupo:idGrupo,
+			nombreGrupo:nombreGrupo,
+			tema: tema ,
+			fecha: fecha, 
+			hora:hora, 
+			lugar:lugar ,
+			materia:{
+				idMateria: idMateria,
+				nombreMateria: nombreMateria
+			}
+			unido: boolean
+		},
+		{},
+		{},
+		{}
+	]
+}
 
 - Consultar todos los snacks:
 {
@@ -258,19 +279,40 @@ responde
 	tipo: mis grupos,
 	grupos: [
 		{
-			\"idGrupo\":\"" + idGrupo + , "
+			idGrupo:idGrupo,
 			nombreGrupo:nombreGrupo,
 			tema: tema ,
 			fecha: fecha, 
 			hora:hora, 
-			lugar: + lugar ,
-			idMateria:idMateria;
+			lugar:lugar ,
+			materia:{
+				idMateria: idMateria,
+				nombreMateria: nombreMateria
+			}
 		},
 		{
-
+			idGrupo:idGrupo,
+			nombreGrupo:nombreGrupo,
+			tema: tema ,
+			fecha: fecha, 
+			hora:hora, 
+			lugar:lugar ,
+			materia:{
+				idMateria: idMateria,
+				nombreMateria: nombreMateria
+			}
 		},
 		{
-
+			idGrupo:idGrupo,
+			nombreGrupo:nombreGrupo,
+			tema: tema ,
+			fecha: fecha, 
+			hora:hora, 
+			lugar:lugar ,
+			materia:{
+				idMateria: idMateria,
+				nombreMateria: nombreMateria
+			}
 		}
 	]
 }
