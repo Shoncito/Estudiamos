@@ -105,7 +105,7 @@ body {
     transition: box-shadow .1s ease,width .1s ease,-webkit-box-shadow .1s ease;
 }
 
-#amen{
+.amen{
     outline: none;
     display: block;
     width: 100%;
