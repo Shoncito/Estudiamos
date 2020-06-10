@@ -85,7 +85,7 @@ websocket.onmessage=function(event){
 		}
 		else if(obj.tipo ==="usuario carga"){
 			usuario = obj.mensaje;
-			
+
 			$("#nombreUser").append(usuario.usuario);
 		}else if(obj.tipo==="lista categorias"){
 			if(document.title==="Estudiamos - Snacks"){
@@ -108,11 +108,13 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista tutorias"){
 
 		}else if(obj.tipo==="lista grupos"){
-
+			
 		}else if(obj.tipo==="lista snacks"){
 
 		}else if(obj.tipo==="lista publicaciones"){
 
+		}else if(obj.tipo==="mis grupos"){
+			misgrupos(obj.grupos);
 		}else if(obj.tipo==="lista escuelas"){
 
 		}else if(obj.tipo==="lista materias"){
@@ -125,6 +127,37 @@ websocket.onmessage=function(event){
 	}
 }
 ;
+/**
+ * 
+ * @param {array} grupos 
+ */
+function misgrupos(grupos){
+var text="";
+for(var i=0;i<grupos.length;i++){
+	text +=`<div class="card">
+	<div class="content">
+	  <div class="header grupo">
+	  ${grupos[i].nombreGrupo}
+	  </div>
+	  <div class="meta grupo">
+	  ${JSON.parse(grupos[i].materia).nombreMateria}
+	  </div>
+	  <div class="description">
+	  ${grupos[i].tema}
+	  </div>
+	</div>
+	<div class="extra content">
+	${grupos[i].hora}
+	 <br>  
+	 ${grupos[i].fecha}
+	 <br>
+	 ${grupos[i].lugar}
+	</div>
+</div>`
+$("#divGrupos").append(text);
+text="";
+}
+}
 
 /**
 * Cuando el websocket se cierra
