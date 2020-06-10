@@ -24,6 +24,8 @@ var num=0;
 
 var idMateria=0;
 
+var a=false;
+
 /**
 * Cuando se abre la conexión
 */
@@ -341,8 +343,16 @@ websocket.onerror=function(event){
  * @param {array} escuelas 
  */
  function enviarId(escuelas){
- 	console.log("sirve")
- 	$("#"+escuelas).show();
+	 
+    if(!a){
+		a=true;
+	console.log("sirve")
+	$("#"+escuelas).show();
+	}else{
+		a=false;
+		console.log("sirve")
+		$("#"+escuelas).hide();
+	}
  }
  $(".ui.right.labeled.icon.button").click(function() {
  	console.log("boton sirve");
