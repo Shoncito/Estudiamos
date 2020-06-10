@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Estudiamos</title>
+	<title>Estudiamos unirse grupos</title>
 	<link href="css/estilos2.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -60,26 +60,15 @@
 		<div class="ui center aligned container">
 			<div class="formulario">
 				<h2>Únete</h2>
-				<form action="#">
-					<select class="amen">
-						<option value="1" >
-							Fisica
-						</option>
-						<option value="2">
-							Especiales
-						</option>
+				<div>
+					<select class="amen" id="escuelas">
+						<option disabled selected>Selecciona una escuela</option>
 					</select>
-					<select class="amen">
-						<option value="1" >
-							Electro
-						</option>
-						<option value="2">
-							Mecanica
-						</option>
-					</select>
-					<input type="logoc" placeholder="Tema"  id="temaGrupo"  >
+					<select class="amen" id="selectMateria">
+                        <option disabled selected value="1">Selecciona una materia</option>
+                    </select>
 					<input class="ui button orange" type="submit" value="Buscar" id="BuscarGrupo">
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>

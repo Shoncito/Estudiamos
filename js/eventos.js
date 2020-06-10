@@ -45,6 +45,17 @@
 /**
  * Al unirse a un grupo
  */
+$("#BuscarGrupo").click(function(){
+    var idMateria=$("#selectMateria").val();
+    var obj={
+        tipo: "consultar grupos",
+        idMateria: idMateria
+    }
+    websocket.close(4000,JSON.stringify(obj));
+    window.location.assign("buscarGrupo.html");
+
+});
+
  $("#menuMisGrupos").click(function(){
     var obj={
         tipo: "consultar mis grupos"
@@ -65,12 +76,12 @@
 */
 $("#menuUnirse").click(function(){
     websocket.close(1000,"cambio");
-    window.location.assign("nindex.html");
+    window.location.assign("unirsegrup.html");
 });
 
 $("#btnUnirse").click(function(){
     websocket.close(1000,"cambio");
-    window.location.assign("nindex.html");
+    window.location.assign("unirsegrup.html");
 });
 
 /**

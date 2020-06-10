@@ -23,6 +23,7 @@ var idEscuela=0;
 var num=0;
 
 var idMateria=0;
+
 /**
 * Cuando se abre la conexión
 */
@@ -52,6 +53,11 @@ websocket.onopen = function(event){
 		obj.tipo="consultar materias";
 		enviarMensaje(obj);
 	}else if (document.title==="Crear Tutoria") {
+		var obj ={
+			tipo: "consultar escuelas" 
+		}
+		enviarMensaje(obj);
+	}else if (document.title==="Estudiamos unirse grupos") {
 		var obj ={
 			tipo: "consultar escuelas" 
 		}
@@ -100,7 +106,7 @@ websocket.onmessage=function(event){
 			}
 			categorias = obj.categorias;
 		}else if(obj.tipo==="lista escuelas"){
-			if(document.title==="Crear grupo" || document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"  || document.title=="Crear materia"){
+			if(document.title==="Crear grupo" || document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"  || document.title=="Crear materia" || document.title==="Estudiamos unirse grupos"){
 				colocarEnSelectEscuelas(obj.escuelas);
 			}else if(document.title==="Estudiamos - Foro"){
 				cargarSeccionesEscuelasForo(obj.escuelas);
@@ -113,6 +119,9 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista tutorias"){
 
 		}else if(obj.tipo==="lista grupos"){
+			if(document.title==="Estudiamos - Buscar grupo de estudio"){
+				pintarGrupos(obj.grupos);
+			}
 			
 		}else if(obj.tipo==="lista snacks"){
 
@@ -123,7 +132,7 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista escuelas"){
 
 		}else if(obj.tipo==="lista materias"){
-			if(document.title==="Estudiamos - Tutorias" || document.title==="Crear grupo" || document.title==="Crear Tutoria"){
+			if(document.title==="Estudiamos - Tutorias" || document.title==="Crear grupo" || document.title==="Crear Tutoria" || document.title==="Estudiamos unirse grupos"){
 				filtarMaterias(obj.materias);
 				console.log(obj.materias);
 			}else if(document.title==="Estudiamos - Foro"){
@@ -133,6 +142,67 @@ websocket.onmessage=function(event){
 	}
 }
 ;
+
+/**
+ * 
+ * @param {array} grupos 
+ */
+function pintarGrupos(grupos){
+var text="";
+for(var i=0;i<grupos.length;i++){
+	if(!grupos[i].unido){
+		text +=`
+		<div class="ui link card grupo">
+          <div class="content grupo">
+            <div class="header grupo">
+              ${grupos[i].nombreGrupo}
+            </div>
+            <div class="meta grupo">
+			${JSON.parse(grupos[i].materia).nombreMateria}
+            </div>
+            <div class="description">
+			${grupos[i].tema}
+            </div>
+          </div>
+		  <div class="extra content">
+		  Lugar: ${grupos[i].lugar} <br>
+		  Fecha: ${grupos[i].fecha} <br>
+		  Hora: ${grupos[i].hora}:00 <br>
+        <div  class="ui basic orange button">Unirse</div>
+        </div>
+        </div>
+		` 
+		$("#divGruposB").append(text);
+		text="";
+	}else{
+		text +=`
+        <div class="ui link card grupo">
+          <div class="content grupo">
+            <div class="header grupo">
+			${grupos[i].nombreGrupo}
+            </div>
+            <div class="meta grupo">
+			${JSON.parse(grupos[i].materia).nombreMateria}
+            </div>
+            <div class="description">
+			${grupos[i].tema}
+            </div>
+          </div>
+		  <div class="extra content ">
+
+		  Lugar: ${grupos[i].lugar} <br>
+		  Fecha: ${grupos[i].fecha} <br>
+		  Hora: ${grupos[i].hora}:00 <br>
+            <div class="ui orange button">Unido</div>
+          </div>
+        </div>`
+		$("#divGruposB").append(text);
+		text="";
+	}
+}
+}
+
+
 /**
  * 
  * @param {array} grupos 
@@ -204,7 +274,7 @@ websocket.onerror=function(event){
  		}
  	}
  	$("#selectMateria").empty();
- 	var text=`<option value="">Seleccione una materia</option>`;
+ 	var text=`<option value="1">Seleccione una materia</option>`;
  	for(var j=0;j<materiasFil.length;j++){
  		text +=`<option value="${materiasFil[j].idMateria}">${materiasFil[j].nombreMateria}</option>`
  	}
@@ -293,13 +363,24 @@ websocket.onerror=function(event){
  	enviarMensaje(obj);
  });
 
+
+
  $("#selectMateria").click(function(){
- 	idMateria=$(this).val();
- 	var obj ={
- 		tipo: "consultar profesor por materia",
- 		idMateria: idMateria
- 	}
- 	enviarMensaje(obj);
+	 if(document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"){
+		idMateria=$(this).val();
+		var obj ={
+			tipo: "consultar profesor por materia",
+			idMateria: idMateria
+		}
+		enviarMensaje(obj);
+	 }
+	 else if(document.title==="Estudiamos unirse grupos"){
+		var obj={
+			tipo: "consultar escuelas",
+		}
+		enviarMensaje(obj);	 
+	}
+ 	
  });
 
 
