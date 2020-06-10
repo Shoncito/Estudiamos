@@ -1,7 +1,7 @@
 /**
  * Al registrar un usuario
  */
-$("#registro").click(function(evt){
+ $("#registro").click(function(evt){
     evt.preventDefault();
     var usuario = $("#nombreRegistro").val();
     var contraseña = $("#contraRegistro").val();
@@ -17,7 +17,7 @@ $("#registro").click(function(evt){
 /**
  * Al ingresar un usuario
  */
-$("#login").click(function(evt){
+ $("#login").click(function(evt){
     evt.preventDefault();
     var usuario = $("#nombreLogin").val();
     var contraseña = $("#contraLogin").val();
@@ -31,13 +31,13 @@ $("#login").click(function(evt){
 /**
  * Al cambiar a crear un grupo
  */
-$("#menuCrear").click(function(){
+ $("#menuCrear").click(function(){
     websocket.close(1000,"cambio");
     console.log(websocket);
-	window.location.assign("creargrup.html");
+    window.location.assign("creargrup.html");
 });
 
-$("#btnCrear").click(function(){
+ $("#btnCrear").click(function(){
     websocket.close(1000,"cambio");
     console.log(websocket);
     window.location.assign("creargrup.html");
@@ -45,20 +45,20 @@ $("#btnCrear").click(function(){
 /**
  * Al unirse a un grupo
  */
-$("#menuMisGrupos").click(function(){
+ $("#menuMisGrupos").click(function(){
     var obj={
         tipo: "consultar mis grupos"
     }
     websocket.close(4000,JSON.stringify(obj));
-	window.location.assign("misGrupos.html");
+    window.location.assign("misGrupos.html");
 });
 
-$("#btnMisGrupos").click(function(){
+ $("#btnMisGrupos").click(function(){
     var obj={
         tipo: "consultar mis grupos"
     }
     websocket.close(4000,JSON.stringify(obj));
-	window.location.assign("misGrupos.html");
+    window.location.assign("misGrupos.html");
 });
 /**
 * Ver los grupos unidos
@@ -76,56 +76,66 @@ $("#btnUnirse").click(function(){
 /**
  * Al acceder al foro
  */
-$("#menuForos").click(function(){
+ $("#menuForos").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("foro.html");
+    window.location.assign("foro.html");
 });
 
-$("#btnForo").click(function(){
+ $("#btnForo").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("foro.html");
+    window.location.assign("foro.html");
 });
 /**
  * Al acceder al menú de snacks
  */
-$("#menuMenu").click(function(){
+ $("#menuMenu").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("snacks.html");
+    window.location.assign("snacks.html");
 });
 
-$("#btnMenu").click(function(){
+ $("#btnMenu").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("snacks.html");
+    window.location.assign("snacks.html");
 });
 /**
  * Al acceder al pedido
  */
-$("#menuPedido").click(function(){
+ $("#menuPedido").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("pedidoSnacks.html");
+    window.location.assign("pedidoSnacks.html");
 });
 
-$("#btnPedido").click(function(){
+ $("#btnPedido").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("pedidoSnacks.html");
+    window.location.assign("pedidoSnacks.html");
 });
 
-$("#botonComprar").click(function(){
+ $("#botonComprar").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("pedidoSnacks.html");
+    window.location.assign("pedidoSnacks.html");
 });
 /**
  * Al inicio
  */
-$("#menuInicio").click(function(){
+ $("#menuInicio").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("inicio.html");
+    window.location.assign("inicio.html");
 });
 
 
-$("#btnCrearTuto").click(function(){
+ $("#btnCrearTuto").click(function(){
     websocket.close(1000,"cambio");
     window.location.assign("creartuto.html");
+});
+
+ $("#btnTutorias").click(function(){
+    var obj={
+        tipo: "consultar tutorias",
+        idMateria: idMateria,
+        idProfesor: idProfesor
+    }
+    websocket.close(4000,JSON.stringify(obj));
+    window.location.assign("buscartutorias.html");
 });
 
 

@@ -21,6 +21,8 @@ var sonido=true;
 var idEscuela=0;
 
 var num=0;
+
+var idMateria=0;
 /**
 * Cuando se abre la conexión
 */
@@ -42,16 +44,17 @@ websocket.onopen = function(event){
 			tipo: "consultar escuelas" 
 		}
 		enviarMensaje(obj);
-		obj.tipo="consultar materias";
-		enviarMensaje(obj);
-		obj.tipo="consultar profesores";
-		enviarMensaje(obj);
 	}else if(document.title==="Estudiamos - Foro"){
 		var obj ={
 			tipo: "consultar escuelas" 
 		}
 		enviarMensaje(obj);
 		obj.tipo="consultar materias";
+		enviarMensaje(obj);
+	}else if (document.title==="Crear Tutoria") {
+		var obj ={
+			tipo: "consultar escuelas" 
+		}
 		enviarMensaje(obj);
 	}
 	
@@ -104,7 +107,9 @@ websocket.onmessage=function(event){
 			}
 			
 		}else if(obj.tipo==="lista profesores"){
-
+			if (document.title==="Crear Tutoria"||document.title==="Estudiamos - Tutorias" ) {
+				filtrarProfesores(obj.profesores);
+			}
 		}else if(obj.tipo==="lista tutorias"){
 
 		}else if(obj.tipo==="lista grupos"){
@@ -118,11 +123,12 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista escuelas"){
 
 		}else if(obj.tipo==="lista materias"){
-		 	if(document.title==="Estudiamos - Tutorias" || document.title==="Crear grupo"){
+			if(document.title==="Estudiamos - Tutorias" || document.title==="Crear grupo" || document.title==="Crear Tutoria"){
 				filtarMaterias(obj.materias);
-			 }else if(document.title==="Estudiamos - Foro"){
+				console.log(obj.materias);
+			}else if(document.title==="Estudiamos - Foro"){
 				listarMaterias(obj.materias);	
-			 }	
+			}	
 		}
 	}
 }
@@ -131,33 +137,33 @@ websocket.onmessage=function(event){
  * 
  * @param {array} grupos 
  */
-function misgrupos(grupos){
-var text="";
-for(var i=0;i<grupos.length;i++){
-	text +=`<div class="card">
-	<div class="content">
-	  <div class="header grupo">
-	  ${grupos[i].nombreGrupo}
-	  </div>
-	  <div class="meta grupo">
-	  ${JSON.parse(grupos[i].materia).nombreMateria}
-	  </div>
-	  <div class="description">
-	  ${grupos[i].tema}
-	  </div>
-	</div>
-	<div class="extra content">
-	${grupos[i].hora}
-	 <br>  
-	 ${grupos[i].fecha}
-	 <br>
-	 ${grupos[i].lugar}
-	</div>
-</div>`
-$("#divGrupos").append(text);
-text="";
-}
-}
+ function misgrupos(grupos){
+ 	var text="";
+ 	for(var i=0;i<grupos.length;i++){
+ 		text +=`<div class="card">
+ 		<div class="content">
+ 		<div class="header grupo">
+ 		${grupos[i].nombreGrupo}
+ 		</div>
+ 		<div class="meta grupo">
+ 		${JSON.parse(grupos[i].materia).nombreMateria}
+ 		</div>
+ 		<div class="description">
+ 		${grupos[i].tema}
+ 		</div>
+ 		</div>
+ 		<div class="extra content">
+ 		${grupos[i].hora}
+ 		<br>  
+ 		${grupos[i].fecha}
+ 		<br>
+ 		${grupos[i].lugar}
+ 		</div>
+ 		</div>`
+ 		$("#divGrupos").append(text);
+ 		text="";
+ 	}
+ }
 
 /**
 * Cuando el websocket se cierra
@@ -176,65 +182,67 @@ websocket.onerror=function(event){
  * 
  * @param {array} materias 
  */
-function listarMaterias(materias){
-var text="";
-for(var i=0;i<materias.length;i++){
-    text +=`
-                <tr class="carril">
-					<td>${materias[i].nombreMateria}</td>
-					</tr>`;
-		$("#"+materias[i].idEscuela).append(text);
-	text="";
-}
-}
-function filtarMaterias(materias){
-var materiasFil=new Array();
+ function listarMaterias(materias){
+ 	var text="";
+ 	for(var i=0;i<materias.length;i++){
+ 		text +=`
+ 		<tr class="carril">
+ 		<td>${materias[i].nombreMateria}</td>
+ 		</tr>`;
+ 		$("#"+materias[i].idEscuela).append(text);
+ 		text="";
+ 	}
+ }
 
-for(var i=0;i<materias.length;i++){
-if(idEscuela===materias[i].idEscuela){
-materiasFil.push(materias[i]);
-}
-}
-$("#selectMateria").empty();
-var text=`<option value="">Seleccione una materia</option>`;
-for(var j=0;j<materiasFil.length;j++){
-	text +=`<option value="${materiasFil[j].idMateria}">${materiasFil[j].nombreMateria}</option>`
-}
-$("#selectMateria").append(text);
-}
+
+ function filtarMaterias(materias){
+ 	var materiasFil=new Array();
+
+ 	for(var i=0;i<materias.length;i++){
+ 		if(idEscuela===materias[i].idEscuela){
+ 			materiasFil.push(materias[i]);
+ 		}
+ 	}
+ 	$("#selectMateria").empty();
+ 	var text=`<option value="">Seleccione una materia</option>`;
+ 	for(var j=0;j<materiasFil.length;j++){
+ 		text +=`<option value="${materiasFil[j].idMateria}">${materiasFil[j].nombreMateria}</option>`
+ 	}
+ 	$("#selectMateria").append(text);
+ }
 
 /**
  * 
  * @param {array} escuelas 
  */
-function cargarSeccionesEscuelasForo(escuelas){
-	
-	var texto="";
-	for(var i=0;i<escuelas.length;i++){
-		texto +=`
-		<tr class="carril">
-				<td>
-				   ${escuelas[i].nombreEscuela}
-					<button id="${i}"  class="ui right labeled icon button " onclick="enviarId(${escuelas[i].idEscuela})">
-  						<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-  						Mas
-					</font></font></button>	
-					<div id="${escuelas[i].idEscuela}+1" class="materias" >
-					<table id="${escuelas[i].idEscuela}">
-					<thead id="materia">
-					<tr>
-					<th>MATERIAS</th>
-					</tr>
-					</thead>
+ function cargarSeccionesEscuelasForo(escuelas){
 
-				   </table>	
-					
-					
-					</div>
-				</td>
-			</tr>
-		` 
-		$("#tabla2").append(texto);
+ 	var texto="";
+ 	for(var i=0;i<escuelas.length;i++){
+ 		texto +=`
+ 		<tr class="carril">
+ 		<td>
+ 		${escuelas[i].nombreEscuela}
+ 		<button id="${i}"  class="ui right labeled icon button " onclick="enviarId(${escuelas[i].idEscuela})">
+ 		<i class="right arrow icon"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+ 		Mas
+ 		</font></font></button>	
+ 		<div id="${escuelas[i].idEscuela}+1" class="materias" >
+ 		<table id="${escuelas[i].idEscuela}">
+ 		<thead id="materia">
+ 		<tr>
+ 		<th>MATERIAS</th>
+ 		</tr>
+ 		</thead>
+
+ 		</table>	
+
+
+ 		</div>
+ 		</td>
+ 		</tr>
+ 		` 
+ 		$("#tabla2").append(texto);
 		//$("#"+escuelas[i].idEscuela).toggle("slow");
 		texto="";
 		$("#"+escuelas[i].idEscuela).hide();
@@ -243,47 +251,68 @@ function cargarSeccionesEscuelasForo(escuelas){
 		tipo: "consultar materias" 
 	}
 	enviarMensaje(obj);
-    
+
 }
 /**
  * Se envia la id cuando da click en el boton para mostrar las materias de cada escuela en foro.html
  * @param {array} escuelas 
  */
-function enviarId(escuelas){
-	console.log("sirve")
-	$("#"+escuelas).show();
-}
-$(".ui.right.labeled.icon.button").click(function() {
-	console.log("boton sirve");
-   $("#"+escuelas[$(this).id].idEscuela+"-"+$(this).id).toggle("slow");
-});
+ function enviarId(escuelas){
+ 	console.log("sirve")
+ 	$("#"+escuelas).show();
+ }
+ $(".ui.right.labeled.icon.button").click(function() {
+ 	console.log("boton sirve");
+ 	$("#"+escuelas[$(this).id].idEscuela+"-"+$(this).id).toggle("slow");
+ });
 /**
  * 
  * @param {array} escuelas 
  */
-function colocarEnSelectEscuelas(escuelas){
-	var text="";
-for(var i=0;i<escuelas.length;i++){
-	text +=`
-	<option value="${escuelas[i].idEscuela}">${escuelas[i].nombreEscuela}</option>` 
-}
-$("#escuelas").append(text);
-}
+ function colocarEnSelectEscuelas(escuelas){
+ 	var text="";
+ 	for(var i=0;i<escuelas.length;i++){
+ 		text +=`
+ 		<option value="${escuelas[i].idEscuela}">${escuelas[i].nombreEscuela}</option>` 
+ 	}
+ 	$("#escuelas").append(text);
+ }
 /**
  * Se envia la id en cuando seleccionan una escuela para mostrar materias en tutorias.html
  * @param {id} idEscuela 
  */
-function enviarId2(id){
-console.log(id);
-}
+ function enviarId2(id){
+ 	console.log(id);
+ }
 
-$("#escuelas").click(function(){
-	idEscuela=$(this).val();
-var obj ={
-	tipo: "consultar materias" 
-}
-enviarMensaje(obj);
-});
+ $("#escuelas").click(function(){
+ 	idEscuela=$(this).val();
+ 	var obj ={
+ 		tipo: "consultar materias" 
+ 	}
+ 	enviarMensaje(obj);
+ });
+
+ $("#selectMateria").click(function(){
+ 	idMateria=$(this).val();
+ 	var obj ={
+ 		tipo: "consultar profesor por materia",
+ 		idMateria: idMateria
+ 	}
+ 	enviarMensaje(obj);
+ });
+
+
+ function filtrarProfesores(profesores){
+ 	$("#profesores").empty();
+ 	var text=`<option value="">Seleccione un profesor</option>`;
+ 	for(var j=0;j<profesores.length;j++){
+ 		text +=`<option value="${profesores[j].idProfesor}">${profesores[j].nombre}</option>`
+ 	}
+ 	$("#profesores").append(text);
+ }
+
+
 
 /**
 * Pong
@@ -301,43 +330,43 @@ function ping(){
  * Función que envía un mensaje al servidor
  * @param {*} object 
  */
-function enviarMensaje(object){
-	var stringObject = JSON.stringify(object);
-	websocket.send(stringObject);
-	console.log("Enviando: "+stringObject);
-}
+ function enviarMensaje(object){
+ 	var stringObject = JSON.stringify(object);
+ 	websocket.send(stringObject);
+ 	console.log("Enviando: "+stringObject);
+ }
 
 /**
  * Función que envía una notificación
  * @param {String} subtipo que es el título de la notificación Pomodoro o tutoría
  * @param {String} mensaje que es el mensaje
  */
-function enviarNotificacion(subtipo, mensaje){
-	notificar(subtipo,mensaje);
-}
+ function enviarNotificacion(subtipo, mensaje){
+ 	notificar(subtipo,mensaje);
+ }
 /**
  * 
  * @param {Array} lista
  */
-function pintarCategorias(lista){
-	for (let i = 0; i < lista.length; i++) {
-		var texto = '<div class="CategoriaSnack">'+
-						'<img src="img/Snacks/'+lista[i].nombreCategoria+'.png">'+
-						'<p>'+lista[i].nombreCategoria+'</p>'+
-					'</div>';
-		$("#menuSnacks").append(texto);
-	}
-}
+ function pintarCategorias(lista){
+ 	for (let i = 0; i < lista.length; i++) {
+ 		var texto = '<div class="CategoriaSnack">'+
+ 		'<img src="img/Snacks/'+lista[i].nombreCategoria+'.png">'+
+ 		'<p>'+lista[i].nombreCategoria+'</p>'+
+ 		'</div>';
+ 		$("#menuSnacks").append(texto);
+ 	}
+ }
 /**
  * 
  * @param {Array} lista 
  */
-function colocarEnSelect(lista){
-	for (let i = 0; i < lista.length; i++) {
-		var texto= '<option value="'+lista[i].idCategoria+'" >'
-						+lista[i].nombreCategoria+
-					'</option>';
-		$("select").append(texto);
-	}
-	
-}
+ function colocarEnSelect(lista){
+ 	for (let i = 0; i < lista.length; i++) {
+ 		var texto= '<option value="'+lista[i].idCategoria+'" >'
+ 		+lista[i].nombreCategoria+
+ 		'</option>';
+ 		$("select").append(texto);
+ 	}
+
+ }
