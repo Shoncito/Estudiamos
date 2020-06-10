@@ -32,7 +32,7 @@ websocket.onopen = function(event){
 			tipo: "consultar categorias" 
 		}
 		enviarMensaje(obj);
-	}else if(document.title==="Crear materia"){
+	}else if(document.title==="Crear materia" || document.title==="Crear grupo"){
 		var obj ={
 			tipo: "consultar escuelas" 
 		}
@@ -115,13 +115,11 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="lista escuelas"){
 
 		}else if(obj.tipo==="lista materias"){
-		 	if(document.title==="Estudiamos - Tutorias"){
+		 	if(document.title==="Estudiamos - Tutorias" || document.title==="Crear grupo"){
 				filtarMaterias(obj.materias);
 			 }else if(document.title==="Estudiamos - Foro"){
 				listarMaterias(obj.materias);	
-			 }
-
-		
+			 }	
 		}
 	}
 }

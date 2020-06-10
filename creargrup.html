@@ -13,11 +13,7 @@
     <!-- Fondo -->
     <img src="img/fondo.png" id="BackgroundPrincipal">
     <!-- Header -->
-<<<<<<< HEAD
-    <div id="divHeader" class="ui grid">
-=======
         <div id="divHeader" class="ui grid">
->>>>>>> websocket
             <div class="two wide column">
                 <div class="menu" id="menu" onclick="myFunction(this)">
                     <div class="linea-1"></div>
@@ -63,20 +59,16 @@
             <div class="formulario">
                 <h2>Crear grupo</h2>
                 <form action="#">
-                    <input  type="namec" placeholder="Nombre" required>
+                    <input  type="namec" placeholder="Nombre" required id="nombreGru">
                     <select class="amen" id="escuelas">
                     <option disabled selected>Selecciona una escuela</option> 
                     </select>
-                    <select class="amen" id="materias">
+                    <select class="amen" id="selectMateria">
                         <option disabled selected>Selecciona una materia</option>
-                        <option>Fisica</option>
-                        <option>Cálculo diferencial</option>
-                        <option>Modelación matemática</option>
-                        <option>Programación aplicada</option> 
                     </select>
-                    <input  type="logoc" placeholder="Tema" required>
-                    <input  type="date" placeholder="Fecha" required>
-                    <input  type="logoc" placeholder="Hora" required>
+                    <input  type="logoc" placeholder="Tema" required id="tema">
+                    <input  type="date" placeholder="Fecha" required id="fecha">
+                    <input  type="logoc" placeholder="Hora" required id="hora">
                     <input class="ui button orange" id="rc" type="submit" value="Registrar grupo">
                 </form>
             </div>
