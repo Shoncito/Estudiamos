@@ -1,14 +1,16 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Tutoria {
+public class Tutoria implements Serializable{
 	private String idTutoria;
 	private int hora;
 	private Profesor profesor;
 	private String lugar;
 	private LinkedList<String> usuarios;
 	private String fecha;
+	private String idMateria;
 	
 	
 	
@@ -108,6 +110,21 @@ public class Tutoria {
 	 */
 	public void setUsuarios(LinkedList<String> usuarios) {
 		this.usuarios = usuarios;
+	}
+	/**
+	 * @return the idMateria
+	 */
+	public String getIdMateria() {
+		return idMateria;
+	}
+	/**
+	 * @param idMateria the idMateria to set
+	 */
+	public void setIdMateria(String idMateria) {
+		this.idMateria = idMateria;
+	}
+	public String toJSON() {
+		return "{\"idTutoria\":\"" + idTutoria + "\", \"hora\":\"" + hora + "\", \"profesor\":\"" + profesor.getId() + "\", \"lugar\":\"" + lugar+ "\", \"fecha\":\"" + fecha + "\", \"idMateria\":\"" + idMateria + "\"}";
 	}
 	
 	

@@ -1,9 +1,10 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Profesor {
-	private String id;
+public class Profesor implements Serializable{
+	private String idProfesor;
 	private String nombre;
 	private LinkedList<String> materias;
 	private LinkedList<String> horarios;
@@ -12,14 +13,14 @@ public class Profesor {
 	 * @return the id
 	 */
 	public String getId() {
-		return id;
+		return idProfesor;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String idProfesor) {
+		this.idProfesor = idProfesor;
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class Profesor {
 
 
 	public String toJSON() {
-		return "{\"id\":\"" + id + "\", \"nombre\":\"" + nombre + "\", \" materias\":\"" + materias + "\", \" horarios\":\"" + horarios + "\"}";
+		return "{\"idProfesor\":\"" + idProfesor + "\", \"nombre\":\"" + nombre + "\", \" materias\":\"" + materias + "\", \" horarios\":\"" + horarios + "\"}";
 	}
 
 	

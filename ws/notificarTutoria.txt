@@ -154,6 +154,13 @@ Agregar horario disponible:
 
 Retorna: ok
 
+
+- Consultar token
+{
+	tipo: consultar token,
+	token: token
+}
+
 - Consultar tutorías programadas:
 {
 	tipo: consultar tutorias
@@ -207,6 +214,29 @@ Retorna: un arreglo con todos los datos de todos los snacks
 {
 	tipo: lista categorias,
 	categorias: [{},{},{}]
+}
+
+Consultar escuelas
+{
+	tipo: consultar escuelas
+}
+
+retorna
+{
+	tipo: lista escuelas,
+	escuelas: [{},{},{}];
+}
+
+
+Consultar materias
+{
+	tipo: consultar materias
+}
+
+retorna
+{
+	tipo: lista materias,
+	materias: [{},{},{}]
 }
 Put:
 - Editar grupo de estudio:

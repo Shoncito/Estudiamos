@@ -6,6 +6,7 @@
 	<link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/estilos2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/semantic.min.js"></script>
@@ -19,26 +20,31 @@
             <span>Cambiar</span>
         </div>
        
-        <div class="formulario">
+        <div class="ui center aligned container formulario">
             <h2>Log in</h2>
             <form action="#">
-                <input id="name" type="logoc" placeholder="Usuario" required>
-                <input id="pas" type="password" placeholder="Contraseña" required>
-                <input class="ui button orange" id="log" type="submit" value="Entrar">
+                <input id="nombreLogin" type="logoc" placeholder="Usuario" required>
+                <input id="contraLogin" type="password" placeholder="Contraseña" required>
+                <input class="ui button orange" id="login" type="submit" value="Ingresar">
             </form>
         </div>
 
-        <div class="formulario registro">
+        <div id="registroLogin" class="ui center aligned container formulario registro">
             <h2>Registrarse</h2>
             <form action="#">
-                <input id="name" type="logoc" placeholder="Usuario" required>
-                <input id="email2" type="logoc" placeholder="Correo electrónico" required>
-                <input id="pas2" type="password" placeholder="Contraseña" required>
-                <input class="ui button orange" id="rg" type="submit" value="Registrarse">
+                <input id="nombreRegistro" type="logoc" placeholder="Usuario" required>
+                <input id="emailRegistro" type="logoc" placeholder="Correo electrónico" required>
+                <input id="contraRegistro" type="password" placeholder="Contraseña" required>
+                <input class="ui button orange" id="registro" type="submit" value="Registrarse">
             </form>
         </div>
     </div>
 
 </body>
+<script type="text/javascript" src="js/funcionesPrincipales.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/notificaciones.js"></script>
+<script type="text/javascript" src="js/webSocket.js"></script>
+<script src="js/eventos.js"></script>
+<script type="text/javascript" src="js/sonido.js"></script>
 </html>

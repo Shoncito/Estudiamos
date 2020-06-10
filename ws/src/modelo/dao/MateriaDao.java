@@ -44,7 +44,7 @@ public class MateriaDao extends Dao implements IMateriaDao {
 	@Override
 	public boolean actualizar(Materia dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdMateria()==((Materia)this.data.get(i)).getIdMateria()){
+			if(((Materia)this.data.get(i)).getIdMateria().equals(dto.getIdMateria())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -55,7 +55,7 @@ public class MateriaDao extends Dao implements IMateriaDao {
 	@Override
 	public boolean eliminar(Materia dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Materia)this.data.get(i)).getIdMateria()==dto.getIdMateria()){
+            if(((Materia)this.data.get(i)).getIdMateria().equals(dto.getIdMateria())){
                 this.data.remove(i);
                 return true;
             }

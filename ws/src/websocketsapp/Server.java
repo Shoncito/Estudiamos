@@ -2,29 +2,15 @@ package websocketsapp;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import javax.print.attribute.Size2DSyntax;
-
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.Messaging.SyncScopeHelper;
-
 import funciones.Buscador;
 import funciones.Comparador;
+import funciones.Generador;
 import modelo.dao.CategoriaSnackDao;
 import modelo.dao.EscuelasDao;
 import modelo.dao.GruposEstudioDao;
@@ -61,10 +47,22 @@ public class Server extends WebSocketServer {
 		Usuario usuario = Comparador.comparar(usuarios, conn.getRemoteSocketAddress());
 		if (usuario != null) {
 			usuario.setWebSocket(conn);
+			String mensaje = "{" + "	\"tipo\": \"usuario carga\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
+			System.out.println(mensaje);
+			conn.send(mensaje);
+			if(usuario.getMotivoDesconexion()!=null) {
+				if(!usuario.getMotivoDesconexion().equals("")) {
+					JSONObject js = new JSONObject(usuario.getMotivoDesconexion());
+					consultarTutoriasPor(usuario.getWebSocket(),js);
+					usuario.setMotivoDesconexion(null);
+				}
+			}
+			
 		}
 
 		// System.out.println(clients.size());
 	}
+
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
@@ -138,8 +136,92 @@ public class Server extends WebSocketServer {
 			apagarServidor(conn,js);
 		}else if(js.getString("tipo").equals("consultar categorias")) {
 			consultarCategorias(conn,js);
+		}else if(js.getString("tipo").equals("consultar token")) {
+			consultarToken(conn,js);
+		}else if(js.getString("tipo").equals("consultar escuelas")) {
+			consultarEscuelas(conn,js);
+		}else if(js.getString("tipo").equals("consultar materias")) {
+			consultarMaterias(conn,js);
 		}
+	}
 
+	private void consultarTutoriasPor(WebSocket conn, JSONObject js) {
+		LinkedList<Tutoria> tutoriasFiltradas = new LinkedList();
+		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
+		LinkedList<Tutoria> tutorias = tutoriasDao.listarTodos();
+		String idProfesor=js.getString("idProfesor");
+		String idMateria= js.getString("idMateria");
+		if(idProfesor.equals("")&&idMateria.equals("")) {
+			this.consultarTutorias(conn, js);
+			return;
+		}else if(idProfesor.equals("")&&!idMateria.equals("")){
+			for(Tutoria tutoria: tutorias) {
+				if(tutoria.getIdMateria().equals(idMateria)) {
+					tutoriasFiltradas.add(tutoria);
+				}
+			}
+		}else if(!idProfesor.equals("")&&idMateria.equals("")) {
+			for(Tutoria tutoria: tutorias) {
+				if(tutoria.getProfesor().getId().equals(idProfesor)) {
+					tutoriasFiltradas.add(tutoria);
+				}
+			}
+		}else {
+			for(Tutoria tutoria: tutorias) {
+				if(tutoria.getProfesor().getId().equals(idProfesor) && tutoria.getIdMateria().equals(idMateria)) {
+					tutoriasFiltradas.add(tutoria);
+				}
+			}
+		}
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista tutorias\"," + 
+				"	\"tutorias\": [";
+		for(int i =0; i<tutoriasFiltradas.size();i++) {
+			mensaje+=tutoriasFiltradas.get(i).toJSON();
+			if(i<tutoriasFiltradas.size()) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);
+	}
+	private void consultarMaterias(WebSocket conn, JSONObject js) {
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		LinkedList<Materia> materias=materiaDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista materias\"," + 
+				"	\"materias\": [";
+		for (int i = 0; i < materias.size(); i++) {
+			mensaje+=materias.get(i).toJSON();
+			if(i<materias.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);	
+	}
+
+	private void consultarEscuelas(WebSocket conn, JSONObject js) {
+		EscuelasDao escuelasDao = EscuelasDao.getInstancia();
+		LinkedList<Escuela> escuelas = escuelasDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista escuelas\"," + 
+				"	\"escuelas\": [";
+		for (int i = 0; i < escuelas.size(); i++) {
+			mensaje+=escuelas.get(i).toJSON();
+			if(i<escuelas.size()-1) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);
+	}
+
+	private void consultarToken(WebSocket conn, JSONObject js) {
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
+		Usuario usuario = usuariosDao.consultarPorToken(js.getString("token"));
+		String mensaje = "{" + "	\"tipo\": \"usuario carga\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
+		conn.send(mensaje);
 	}
 
 	private void consultarCategorias(WebSocket conn, JSONObject js) {
@@ -154,7 +236,7 @@ public class Server extends WebSocketServer {
 				mensaje+=", ";
 			}
 		}
-		mensaje+="]";
+		mensaje+="]}";
 		conn.send(mensaje);
 	}
 
@@ -182,7 +264,7 @@ public class Server extends WebSocketServer {
 			tutoria.setLugar(js.getString("lugar"));
 			tutoria.setUsuarios(new LinkedList());
 			tutoria.setFecha(js.getString("fecha"));
-			String idTutoria= ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idTutoria= Generador.generarId();
 			tutoria.setIdTutoria(idTutoria);
 			if(tutoriasDao.crear(tutoria)) {
 				mensaje ="{" + 
@@ -197,6 +279,13 @@ public class Server extends WebSocketServer {
 	}
 
 	private void apagarServidor(WebSocket conn, JSONObject js) {
+		LinkedList<Usuario> usuarios = UsuariosDao.getInstancia().listarTodos();
+		for(Usuario usuario: usuarios) {
+			if(usuario.getWebSocket()!=null) {
+				usuario.getWebSocket().close();
+				usuario.setWebSocket(null);
+			}		
+		}
 		System.out.println("Guardando repositorios");
 		try {
 			IDao daos[]= {UsuariosDao.getInstancia(),
@@ -386,8 +475,8 @@ public class Server extends WebSocketServer {
 		ProfesorDao profesorDao = ProfesorDao.getInstancia();
 		LinkedList <Profesor> profesores = profesorDao.listarTodos();
 		String mensaje ="{" + 
-				"	\"tipo\": \"consultar profesores\"," + 
-				"	\"profesor\": [";
+				"	\"tipo\": \"lista profesores\"," + 
+				"	\"profesores\": [";
 		for (int i = 0; i < profesores.size(); i++) {
 			mensaje +=profesores.get(i).toJSON();
 			if(i<profesores.size()-1) {
@@ -416,7 +505,19 @@ public class Server extends WebSocketServer {
 	}
 
 	private void consultarTutorias(WebSocket conn, JSONObject js) {
-		// TODO Auto-generated method stub
+		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
+		LinkedList<Tutoria> tutorias = tutoriasDao.listarTodos();
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista tutorias\"," + 
+				"	\"tutorias\": [";
+		for(int i =0; i<tutorias.size();i++) {
+			mensaje+=tutorias.get(i).toJSON();
+			if(i<tutorias.size()) {
+				mensaje+=", ";
+			}
+		}
+		mensaje+="]}";
+		conn.send(mensaje);
 
 	}
 
@@ -424,10 +525,13 @@ public class Server extends WebSocketServer {
 		// TODO Auto-generated method stub
 		ProfesorDao profesorDao = ProfesorDao.getInstancia();
 		Profesor profesor = profesorDao.consultar(js.getString("idProfesor"));
+		if(profesor.getHorarios()==null) {
+			profesor.setHorarios(new LinkedList());
+		}
 		profesor.getHorarios().add(js.getString("hora"));
 		String mensaje= "{" + 
 				"\"tipo\": \"ok\"," + 
-				"\"mensaje\": \"Publicación creada\"" +
+				"\"mensaje\": \"Horario asignado\"" +
 				"}";
 		conn.send(mensaje);
 	}
@@ -455,7 +559,7 @@ public class Server extends WebSocketServer {
 			publicacion.setUsuario(usuario.getUsuario());
 			publicacion.setContenido(js.getString("contenido"));
 			publicacion.setTitulo(js.getString("contenido"));
-			String idPublicacion=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idPublicacion=Generador.generarId();
 			publicacion.setIdPublicacion(idPublicacion);
 			if(publicacionDao.crear(publicacion)) {
 				mensaje= "{" + 
@@ -495,7 +599,7 @@ public class Server extends WebSocketServer {
 	private void crearEscuela(WebSocket conn, JSONObject js) {
 		EscuelasDao escuelaDao = EscuelasDao.getInstancia();
 		Escuela escuela = new Escuela();
-		String idEscuela =""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idEscuela =Generador.generarId();
 		escuela.setIdEscuela(idEscuela);
 		escuela.setNombreEscuela(js.getString("nombreEscuela"));
 		String mensaje = "";
@@ -508,7 +612,7 @@ public class Server extends WebSocketServer {
 			if(escuelaDao.crear(escuela)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Escuela creada\"" +
+						"\"mensaje\": \"Escuela creada\", " +
 						"\"idEscuela\": \""+escuela.getIdEscuela()+"\""+
 						"}";
 			}
@@ -526,7 +630,7 @@ public class Server extends WebSocketServer {
 		snack.setPrecio(js.getFloat("precio"));
 		snack.setImagen(js.getString("imagen"));
 		snack.setIdCategoria(js.getString("idCategoria"));
-		String idSnack = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idSnack = Generador.generarId();
 		snack.setIdSnack(idSnack);
 		if(categoriaSnackDao.consultar(js.getString("idCategoria"))==null) {
 			mensaje ="{" + 
@@ -536,8 +640,8 @@ public class Server extends WebSocketServer {
 		}else {
 			if(snackDao.crear(snack)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Snack creado\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Snack creado\", " +
 						"\"idSnack\": \""+snack.getIdSnack()+"\""+
 						"}";
 			}
@@ -549,20 +653,21 @@ public class Server extends WebSocketServer {
 	private void crearCategoriaSnack(WebSocket conn, JSONObject js) {
 		CategoriaSnackDao categoriaSnackDao = CategoriaSnackDao.getInstancia();
 		CategoriaSnack categoria = new CategoriaSnack();
-		String idCategoria=""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idCategoria=Generador.generarId();
+		System.out.println(idCategoria);
 		categoria.setIdCategoria(idCategoria);
 		categoria.setNombreCategoria(js.getString("nombreCategoria"));
 		String mensaje="";
 		if(categoriaSnackDao.consultarPorNombre(categoria.getNombreCategoria())!=null) {
 			mensaje ="{" + 
-					"\"tipo\": \"error\"," + 
-					"\"mensaje\": \"Esa escuela ya existe\"" + 
+					"\"tipo\": \"error\", " + 
+					"\"mensaje\": \"Esa categoria ya existe\"" + 
 					"}";
 		}else {
 			if(categoriaSnackDao.crear(categoria)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Categoría creada\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Categoría creada\", " +
 						"\"idCategoria\": \""+categoria.getIdCategoria()+"\""+
 						"}";
 			}
@@ -594,7 +699,7 @@ public class Server extends WebSocketServer {
 			}else {
 				if(tutoria.getUsuarios().add(usuario.getUsuario())) {
 					mensaje= "{" + 
-							"\"tipo\": \"ok\"" + 
+							"\"tipo\": \"ok\", " + 
 							"\"mensaje\": \"Ha ingresado a la tutoría\"" + 
 							"}";
 				}
@@ -626,7 +731,7 @@ public class Server extends WebSocketServer {
 				if(materia!=null) {
 					profesor.getMaterias().add(materia.getIdMateria());
 					mensaje="{" + 
-							"\"tipo\": \"ok\"" + 
+							"\"tipo\": \"ok\", " + 
 							"\"mensaje\": \"Materia "+materia.getNombreMateria()+" vinculada a "+profesor.getNombre()+"\"" + 
 							"}";
 				}else {
@@ -642,7 +747,7 @@ public class Server extends WebSocketServer {
 
 	private void crearProfesor(WebSocket conn, JSONObject js) {
 		ProfesorDao profesorDao = ProfesorDao.getInstancia();
-		Profesor profesor = profesorDao.consultar(js.getString("idProfesor"));
+		Profesor profesor = profesorDao.consultarPorNombre(js.getString("nombreProfesor"));
 		String mensaje = "";
 		if(profesor!=null) {
 			mensaje ="{" + 
@@ -651,14 +756,14 @@ public class Server extends WebSocketServer {
 					"}";
 		}else {
 			profesor = new Profesor();
-			String idProfesor = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idProfesor = Generador.generarId();
 			profesor.setId(idProfesor);
 			profesor.setNombre(js.getString("nombreProfesor"));
 			profesor.setMaterias(new LinkedList());
 			if(profesorDao.crear(profesor)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Materia creada\"" +
+						"\"mensaje\": \"Profesor creado\", " +
 						"\"idProfesor\": \""+profesor.getId()+"\""+
 						"}";
 			}
@@ -677,7 +782,7 @@ public class Server extends WebSocketServer {
 		grupo.getUsuarios().add(js.getString("idUsuario"));
 		grupo.setIdMateria(js.getString("idMateria"));
 		grupo.setLugar(js.getString("lugar"));
-		String idGrupo =""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+		String idGrupo =Generador.generarId();
 		grupo.setIdGrupo(idGrupo);
 		if(gruposEstudioDao.consultarPorNombre(grupo.getNombreGrupo())!=null) {
 			mensaje ="{" + 
@@ -688,7 +793,7 @@ public class Server extends WebSocketServer {
 			if(gruposEstudioDao.crear(grupo)) {
 				mensaje ="{" + 
 						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Materia creada\"" +
+						"\"mensaje\": \"Grupo creado\", " +
 						"\"idGrupo\": \""+idGrupo+"\""+
 						"}";
 			}
@@ -711,7 +816,7 @@ public class Server extends WebSocketServer {
 			MateriaDao materiaDao = MateriaDao.getInstancia();
 			Materia materia = new Materia();
 			materia.setIdEscuela(escuela.getIdEscuela());
-			String idMateria = ""+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND;
+			String idMateria = Generador.generarId();
 			materia.setIdMateria(idMateria);
 			materia.setNombreMateria(js.getString("nombreMateria"));
 			if(materiaDao.consultar(materia.getIdMateria())!=null) {
@@ -723,7 +828,7 @@ public class Server extends WebSocketServer {
 				if(materiaDao.crear(materia)) {
 					mensaje = "{" + 
 							"\"tipo\": \"ok\"," + 
-							"\"mensaje\": \"Materia creada\"" +
+							"\"mensaje\": \"Materia creada\", " +
 							"\"idMateria\": \""+materia.getIdMateria()+"\""+
 							"}";
 				}
@@ -747,11 +852,11 @@ public class Server extends WebSocketServer {
 			usuario.setUsuario(js.getString("usuario"));
 			usuario.setCorreo(js.getString("correo"));
 			usuario.setContraseña(js.getString("contraseña"));
-			usuario.setToken(usuario.getUsuario()+Calendar.YEAR+(Calendar.MONTH+1)+Calendar.DAY_OF_MONTH+Calendar.HOUR+Calendar.MINUTE+Calendar.SECOND);
+			usuario.setToken(usuario.getUsuario()+Generador.generarId());
 			if(usuariosDao.crear(usuario)) {
 				mensaje ="{" + 
-						"\"tipo\": \"ok\"," + 
-						"\"mensaje\": \"Usuario creado\"" +
+						"\"tipo\": \"ok\", " + 
+						"\"mensaje\": \"Usuario creado\", " +
 						"\"hash\": \""+usuario.hashCode()+"\""+
 						"}";
 			}
@@ -762,38 +867,45 @@ public class Server extends WebSocketServer {
 
 	private void loginUsuario(WebSocket conn, JSONObject js) {
 		UsuariosDao usuarioDao =UsuariosDao.getInstancia();
+		
 		Usuario usuario = usuarioDao.consultar(js.getString("usuario"));
 		String mensaje = "";
 		if (usuario == null) {
 			mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 		} else {
 			if (usuario.getContraseña().equals(js.getString("contraseña"))) {
+				System.out.println("Entré a login");
 				mensaje = "{" + "	\"tipo\": \"usuario\"," + "	\"mensaje\": " + usuario.toJSON() + "}";
 				usuario.setWebSocket(conn);
+				usuario.setDireccion(conn.getRemoteSocketAddress());
 			} else {
 				mensaje = "{" + "	\"tipo\": \"error\"," + "	\"mensaje\": \"usuario o contraseña inválidos\"" + "}";
 			}
 		}
-		usuario.setWebSocket(conn);
+		usuarios.add(usuario);
 		conn.send(mensaje);
 		
 	}
 
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		if (!reason.equals("cambio")) {
+		if(code==1002) {
+			Usuario usuario = Buscador.buscarUsuario(conn, usuarios);
+			usuario.setMotivoDesconexion(reason);
+		}else if (!reason.equals("cambio")) {
 			Usuario usuario = Buscador.buscarUsuario(conn, usuarios);
 			if(usuario!=null) {
 				this.usuarios.remove(usuario);
 				usuario.setWebSocket(null);
 			}
 		}
-		System.out.println("Client disconnected: " + reason);
+		System.out.println("Client disconnected: " + reason+" "+code);
 	}
 
 	@Override
 	public void onError(WebSocket conn, Exception exc) {
 		System.out.println("Error happened: " + exc.getMessage());
+		exc.printStackTrace();
 	}
 
 	public void sendToAll(WebSocket conn, String message) {

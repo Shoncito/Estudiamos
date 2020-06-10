@@ -7,5 +7,5 @@ import modelo.dto.Usuario;
  *
  */
 public interface IUsuariosDao extends IDao <Usuario> {
-
+	Usuario consultarPorToken(String token);
 }

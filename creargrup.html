@@ -6,39 +6,44 @@
     <link rel="stylesheet" href="css/estilos2.css">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link href="css/semantic.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
     <!-- Fondo -->
     <img src="img/fondo.png" id="BackgroundPrincipal">
     <!-- Header -->
+<<<<<<< HEAD
     <div id="divHeader" class="ui grid">
+=======
+        <div id="divHeader" class="ui grid">
+>>>>>>> websocket
             <div class="two wide column">
                 <div class="menu" id="menu" onclick="myFunction(this)">
-                  <div class="linea-1"></div>
-                  <div class="linea-2"></div>
-                  <div class="linea-3"></div>
+                    <div class="linea-1"></div>
+                    <div class="linea-2"></div>
+                    <div class="linea-3"></div>
                 </div>
                 <div class="menu-container" id="menu">
                     <div class="ui left fixed vertical menu" id="divMenuVertical">
-                        <a id="menuInicio" class="item">Inicio</a>
+                        <a id="menuInicio" class="item" oncontextmenu="audioInicio.play()">Inicio</a>
                         <div class="item">
                             <div class="header">Grupos de estudio</div>
                             <div class="menu">
-                                <a id="menuCrear" class="item">Crear</a>
-                                <a id="menuUnirse" class="item">Unirse</a>
-                                <a id="menuMisGrupos" class="item">Mis grupos</a>
+                                <a id="menuCrear" class="item" oncontextmenu="audioCrearGrupo.play()">Crear</a>
+                                <a id="menuUnirse" class="item" oncontextmenu="audioUnirse.play()">Unirse</a>
+                                <a id="menuMisGrupos" class="item" oncontextmenu="audioMisGrupos.play()">Mis grupos</a>
                             </div>
                         </div>
-                        <a id="menuForos" class="item">Foros</a>
+                        <a id="menuForos" class="item" oncontextmenu="audioForo.play()">Foro</a>
                         <div class="item">
                             <div class="header">Snacks</div>
                             <div class="menu">
-                                <a id="menuMenu" class="item">Menú</a>
-                                <a id="menuPedido" class="item">Mis pedidos</a>
+                                <a id="menuMenu" class="item" oncontextmenu="audioMenuSnacks.play()">Menú</a>
+                                <a id="menuPedido" class="item" oncontextmenu="audioPedidoSnacks.play()">Mis pedidos</a>
                             </div>
                         </div>
-                        <a id="menuAboutUs" class="item">Sobre nosotros</a>
+                        <a id="menuAboutUs" class="item" oncontextmenu="audioSobreNosotros.play()">Sobre nosotros</a>
                     </div>
                 </div>
                 
@@ -50,16 +55,19 @@
             </div>
             <div class="two wide column" id="saludoUsuario">
                 <p>Hola</p>
-                <p>Fulanito :3</p>
+                <p id="nombreUser"></p>
             </div>
-    </div>
-    <div id="categorys">
+        </div>
+    <div class="ui center aligned container" id="categorys">
         <div class="contenedor-form" id="menucategory">     
             <div class="formulario">
                 <h2>Crear grupo</h2>
                 <form action="#">
                     <input  type="namec" placeholder="Nombre" required>
-                    <select name="" id="amen">
+                    <select class="amen" id="escuelas">
+                    <option disabled selected>Selecciona una escuela</option> 
+                    </select>
+                    <select class="amen" id="materias">
                         <option disabled selected>Selecciona una materia</option>
                         <option>Fisica</option>
                         <option>Cálculo diferencial</option>
@@ -67,7 +75,7 @@
                         <option>Programación aplicada</option> 
                     </select>
                     <input  type="logoc" placeholder="Tema" required>
-                    <input  type="logoc" placeholder="Fecha" required>
+                    <input  type="date" placeholder="Fecha" required>
                     <input  type="logoc" placeholder="Hora" required>
                     <input class="ui button orange" id="rc" type="submit" value="Registrar grupo">
                 </form>
@@ -76,7 +84,10 @@
     </div>    
 </body>
 <script src="js/semantic.min.js"></script>
-<script src="js/notificaciones.js"></script>
-<script src="js/webSocket.js"></script>
-<script src="js/script.js"></script>
+<script type="text/javascript" src="js/funcionesPrincipales.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/notificaciones.js"></script>
+<script type="text/javascript" src="js/webSocket.js"></script>
+<script src="js/eventos.js"></script>
+<script type="text/javascript" src="js/sonido.js"></script>
 </html>

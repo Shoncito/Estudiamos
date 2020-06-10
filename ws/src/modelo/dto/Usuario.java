@@ -1,11 +1,12 @@
 package modelo.dto;
 
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.LinkedList;
 
 import org.java_websocket.WebSocket;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	
 	private WebSocket webSocket;
 	private String token;
@@ -13,7 +14,7 @@ public class Usuario {
 	private String correo;
 	private String usuario;
 	private String contraseña;
-	
+	private String motivoDesconexion;
 	
 	
 	
@@ -104,6 +105,18 @@ public class Usuario {
 	
 	public String toJSON() {
 		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \",\"token\":\""+token+"\"}";
+	}
+	/**
+	 * @return the motivoDesconexion
+	 */
+	public String getMotivoDesconexion() {
+		return motivoDesconexion;
+	}
+	/**
+	 * @param motivoDesconexion the motivoDesconexion to set
+	 */
+	public void setMotivoDesconexion(String motivoDesconexion) {
+		this.motivoDesconexion = motivoDesconexion;
 	}
 
 	

@@ -22,26 +22,25 @@ body {
     display: block;
 }
 
-.registro{
+#registroLogin{
     display: none;
 }
 
-
 .contenedor-form {
-    background: rgba(0,0,0,.7);
+    background: rgba(135, 54, 0, 0.7);
     max-width: 500px;
     width: 100%;
     margin: 48px auto;
-    border-radius: 5px;
-    color: #fff;
+    border-radius: 6px;
+    color: white;
     position: relative;
     /*padding: 40px;*/
 }
 
 .contenedor-form .toggle {
     position: absolute;
-    top: 7px;
-    right: 7px;
+    top: 15px;
+    right: 15px;
     width: 100px;
     height: 30px;
     font-size: 12px;
@@ -54,12 +53,13 @@ body {
 }
 
 .contenedor-form .toggle:hover {
-    border-top: 2px solid #ba7a3e;
-    border-bottom: 2px solid #ba7a3e;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
 }
 
 .contenedor-form .toggle span {
     letter-spacing: 1px;
+    font-family: 'Balsamiq Sans', cursive;
 }
 
 .contenedor-form h2 {
@@ -67,7 +67,9 @@ body {
     font-size: 20px;
     font-weight: 400;
     line-height: 1;
+    font-family: 'Balsamiq Sans', cursive;
 }
+
 .contenedor-form input[type="user"],
 .contenedor-form input[type="email"],
 .contenedor-form input[type="namec"],
@@ -86,14 +88,14 @@ body {
     border-radius: 2px;
     border-bottom: 4px solid #ff851b;
     box-sizing: border-box;
-    font-family: Courier;
+    font-family: 'Balsamiq Sans', cursive;
     font-size: 14px;
     font-weight:normal;
     transition: all .5s ease;
 }
-/* estilo formulario*/
-#amen{
 
+/* estilo formulario*/
+.amen{
     outline: none;
     display: block;
     width: 100%;
@@ -105,16 +107,25 @@ body {
     border-radius: 2px;
     border-bottom: 4px solid #ff851b;
     box-sizing: border-box;
-    font-family: Courier;
+    font-family: 'Balsamiq Sans', cursive;
     font-size: 14px;
     font-weight:normal;
     transition: all .5s ease;
 }
 
+::-webkit-input-placeholder {
+    color: rgba(255,255,255,0.6);
+} 
+
+option:disabled {
+  color: rgba(255,255,255,0.6);
+}
+
 .contenedor-form input[type="namec"]:focus,
 .contenedor-form input[type="logoc"]:focus,
-.contenedor-form input[type="password"]:focus {
-    border-bottom: 4px solid #ba7a3e !important;
+.contenedor-form input[type="password"]:focus,
+#amen:focus {
+    border-bottom: 4px solid white;
 }
 
 .contenedor-form input[type="submit"] {
@@ -124,38 +135,9 @@ body {
     padding: 10px 0;
     font-size: 16px;
     font-weight: normal;
-    font-family: Roboto;
+    font-family: 'Balsamiq Sans', cursive;
     letter-spacing: 1px;
     cursor: pointer;
-   
+    margin: 0px !important;
 }
-
-.contenedor-form input[type="submit"]:hover {
-    background: #ba7a3e !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

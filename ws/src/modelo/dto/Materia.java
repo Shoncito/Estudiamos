@@ -5,11 +5,13 @@
  */
 package modelo.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Val
  */
-public class Materia {
+public class Materia implements Serializable{
     private String idMateria;
     private String nombreMateria;
     private String idEscuela;
@@ -53,6 +55,10 @@ public class Materia {
 	 */
 	public void setIdMateria(String idMateria) {
 		this.idMateria = idMateria;
+	}
+
+	public String toJSON() {
+		return "{\"idMateria\":\"" + idMateria + "\", \"nombreMateria\":\"" + nombreMateria + "\", \"idEscuela\": \"" + idEscuela+ "\"}";
 	}
     
     

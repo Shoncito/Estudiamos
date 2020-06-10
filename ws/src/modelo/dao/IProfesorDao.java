@@ -9,4 +9,5 @@ import modelo.dto.Profesor;
 
 public interface IProfesorDao extends IDao <Profesor>{
 	boolean consultarMateria(String idMateria, Profesor profesor);
+	Profesor consultarPorNombre(String nombre);
 }

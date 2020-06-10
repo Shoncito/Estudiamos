@@ -1,6 +1,7 @@
 *{
 	margin:0;
 	padding: 0;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 a{
@@ -100,6 +101,7 @@ a:hover{
 	text-align: center;
 	position: relative;
 	border-bottom: 3px solid brown;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 .grid{
@@ -108,11 +110,12 @@ a:hover{
 
 #divHeader h1{
 	position: relative;
-	margin-top: -15px;
+	margin-top: -8px;
 	font-size: 600%;
 	background: -webkit-linear-gradient(#fff 50%, #ff7043);
   	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
+  	font-family: 'Balsamiq Sans', cursive;
 }
 
 #divHeader p{
@@ -140,6 +143,7 @@ a:hover{
 #divMenuVertical{
 	display: none;
 	margin-top: 86px;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 .menu {
@@ -183,6 +187,11 @@ a:hover{
 	margin-top: 50px;
 	text-align: center;
 	font-size: 20px;
+	font-family: 'Balsamiq Sans', cursive !important;
+}
+
+#divInicio .header{
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 .hidden{
@@ -197,6 +206,7 @@ a:hover{
 .button{
 	margin: 5px !important;
 	width: 140px;
+	font-family: 'Balsamiq Sans', cursive !important;
 }
 
 #infoCard1{
@@ -251,9 +261,10 @@ a:hover{
 	color: #3f4041;
 }
 
-#divSnacks h1{
+#divSnacks h1, #divMisGrupos h1, #divBusquedaGrupos h1{
 	font-size: 55px;
 	margin-bottom: 0px !important;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 #menuSnacks{
@@ -272,6 +283,11 @@ a:hover{
 	margin-left: 140px;
 	margin-top: -360px;
 	overflow : auto;
+}
+
+#productosSnacks .content,
+#productosSnacks .header{
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 .CategoriaSnack{
@@ -304,6 +320,7 @@ a:hover{
 
 #productosSnacks .card{
 	height: 58%;
+
 }
 
 #productosSnacks .extra{
@@ -315,7 +332,7 @@ a:hover{
 }
 
 #productosSnacks #p{
-	margin-top: 14px;
+	margin-top: 13px;
 	margin-left: 55px;
 	border-radius: 50%;
 	background-color: white;
@@ -326,11 +343,16 @@ a:hover{
 	align-content: center;
 }
 
+#productosSnacks p{
+	margin-top: 3px;
+}
+
 #productosSnacks img{
 	width: 90px;
 	height: 90px;
 	margin-left: 25px;
 	margin-top: -10px;
+	margin-bottom: 6px;
 }
 
 #productosSnacks .meta{
@@ -356,6 +378,7 @@ a:hover{
 #divPedido h1{
 	font-size: 55px;
 	margin-bottom: 0px !important;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 #divPedido .card{
@@ -367,10 +390,12 @@ a:hover{
 
 #divPedido .header{
 	font-size: 22px;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 #divPedido .meta{
 	font-size: 20px;
+	font-family: 'Balsamiq Sans', cursive;
 }
 
 #divPedido .grid{
@@ -396,4 +421,49 @@ a:hover{
 	margin-left: 0px;
 	margin-top: 0px;
 	overflow : auto;
+}
+
+#divMisGrupos{
+	background-color: #ce9f74;
+	width: 920px;
+	height: 470px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 228px;
+	color: white;
+	text-align: center;
+}
+
+#divGrupos{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}
+
+#divBusquedaGrupos{
+	background-color: #ce9f74;
+	width: 920px;
+	height: 470px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 228px;
+	color: white;
+	text-align: center;
+}
+
+#divGruposB{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}
+
+#divGruposB .description, 
+#divGrupos .description{
+	margin-bottom: auto !important; 
 }

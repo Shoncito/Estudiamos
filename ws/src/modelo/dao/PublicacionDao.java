@@ -32,7 +32,7 @@ public class PublicacionDao extends Dao implements IPublicacionDao {
 	public Publicacion consultar(String id) {
 		Publicacion publicacion = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((Publicacion)this.data.get(i)).getIdPublicacion()==id){
+            if(((Publicacion)this.data.get(i)).getIdPublicacion().equals(id)){
             	publicacion = (Publicacion)this.data.get(i);
                 break;
             }
@@ -43,7 +43,7 @@ public class PublicacionDao extends Dao implements IPublicacionDao {
 	@Override
 	public boolean actualizar(Publicacion dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(dto.getIdPublicacion()==((Publicacion)this.data.get(i)).getIdPublicacion()){
+			if(((Publicacion)this.data.get(i)).getIdPublicacion().equals(dto.getIdPublicacion())){
                 this.data.set(i, dto);
                 return true;
             }
@@ -54,7 +54,7 @@ public class PublicacionDao extends Dao implements IPublicacionDao {
 	@Override
 	public boolean eliminar(Publicacion dto) {
 		for (int i = 0; i < this.data.size(); i++) {
-            if(((Publicacion)this.data.get(i)).getIdPublicacion()==dto.getIdPublicacion()){
+            if(((Publicacion)this.data.get(i)).getIdPublicacion().equals(dto.getIdPublicacion())){
                 this.data.remove(i);
                 return true;
             }
