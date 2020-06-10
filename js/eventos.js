@@ -46,10 +46,12 @@
  * Al unirse a un grupo
  */
 $("#BuscarGrupo").click(function(){
+    var idEscuela=$("#escuelas").val();
     var idMateria=$("#selectMateria").val();
     var obj={
         tipo: "consultar grupos",
-        idMateria: idMateria
+        idMateria: idMateria,
+        idEscuela: idEscuela
     }
     websocket.close(4000,JSON.stringify(obj));
     window.location.assign("buscarGrupo.html");
