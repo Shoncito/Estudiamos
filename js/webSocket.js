@@ -85,6 +85,7 @@ websocket.onmessage=function(event){
 		}
 		else if(obj.tipo ==="usuario carga"){
 			usuario = obj.mensaje;
+			
 			$("#nombreUser").append(usuario.usuario);
 		}else if(obj.tipo==="lista categorias"){
 			if(document.title==="Estudiamos - Snacks"){
