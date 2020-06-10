@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import funciones.Buscador;
 import funciones.Comparador;
@@ -53,8 +54,13 @@ public class Server extends WebSocketServer {
 			if(usuario.getMotivoDesconexion()!=null) {
 				if(!usuario.getMotivoDesconexion().equals("")) {
 					JSONObject js = new JSONObject(usuario.getMotivoDesconexion());
-					consultarTutoriasPor(usuario.getWebSocket(),js);
-					usuario.setMotivoDesconexion(null);
+					if(js.getString("tipo").equals("consultar tutorias")) {
+						consultarTutoriasPor(usuario.getWebSocket(),js);
+						usuario.setMotivoDesconexion(null);
+					}else if(js.getString("tipo").equals("consultar mis grupos")) {
+						consultarGruposDeUsuario(usuario);
+					}
+					
 				}
 			}
 			
@@ -62,7 +68,6 @@ public class Server extends WebSocketServer {
 
 		// System.out.println(clients.size());
 	}
-
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
@@ -85,7 +90,7 @@ public class Server extends WebSocketServer {
 			asociarMateria(conn, js);
 		} else if (js.getString("tipo").equals("pedir tutoria")) {
 			pedirTutoria(conn, js);
-		}else if (js.getString("tipo").equals("pedir tutoria")) {
+		}else if (js.getString("tipo").equals("crear tutoria")) {
 			crearTutoria(conn, js);
 		}
 		else if (js.getString("tipo").equals("crear categoria snack")) {
@@ -142,7 +147,59 @@ public class Server extends WebSocketServer {
 			consultarEscuelas(conn,js);
 		}else if(js.getString("tipo").equals("consultar materias")) {
 			consultarMaterias(conn,js);
+		}else if(js.getString("tipo").equals("consultar profesor por materia")) {
+			consultarProfesorPorMateria(conn,js);
 		}
+	}
+
+
+	private void consultarGruposDeUsuario(Usuario usuario) {
+		GruposEstudioDao gruposEstudioDao = GruposEstudioDao.getInstancia();
+		LinkedList<GrupoEstudio> gruposEstudio = gruposEstudioDao.listarTodos();
+		LinkedList<GrupoEstudio> gruposMios = new LinkedList();
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		String mensaje ="{\"tipo\": \"mis grupos\" }";
+		JSONObject objToSend = new JSONObject(mensaje);
+		for(GrupoEstudio grupoEstudio: gruposEstudio) {
+			LinkedList<String> nombreUsuarios = grupoEstudio.getUsuarios();
+			cicloUsuario:
+			for(String nombreUsuario: nombreUsuarios) {
+				if(nombreUsuario.equals(usuario.getUsuario())) {
+					gruposMios.add(grupoEstudio);
+					break cicloUsuario;
+				}
+			}
+		}
+		JSONArray array = new JSONArray();
+		for(GrupoEstudio grupoEstudio: gruposMios) {
+			JSONObject grupo = new JSONObject(grupoEstudio.toJSON());
+			Materia materia = materiaDao.consultar(grupoEstudio.getIdMateria());
+			String stringMateria = materia.toJSON();
+			grupo.put("materia", materia.toJSON());
+			array.put(grupo);
+		}
+		objToSend.put("grupos", array);
+		System.out.println(objToSend.toString());
+		usuario.getWebSocket().send(objToSend.toString());
+	}
+	
+	private void consultarProfesorPorMateria(WebSocket conn, JSONObject js) {
+		String idMateria = js.getString("idMateria");
+		ProfesorDao profesorDao = ProfesorDao.getInstancia();
+		LinkedList<Profesor> profesores = profesorDao.listarTodos();
+		LinkedList<Profesor> profesoresFiltrados= new LinkedList();
+		for(Profesor profesor: profesores) {
+			LinkedList<String> materias = profesor.getMaterias();
+			for(String materia: materias) {
+				if(materia.equals(idMateria)) {
+					profesoresFiltrados.add(profesor);
+				}
+			}
+		}
+		
+		String mensaje ="{" + 
+				"	\"tipo\": \"lista profesores\"," + 
+				"	\"profesores\": [";
 	}
 
 	private void consultarTutoriasPor(WebSocket conn, JSONObject js) {
@@ -264,6 +321,7 @@ public class Server extends WebSocketServer {
 			tutoria.setLugar(js.getString("lugar"));
 			tutoria.setUsuarios(new LinkedList());
 			tutoria.setFecha(js.getString("fecha"));
+			tutoria.setIdMateria(js.getString("idMateria"));
 			String idTutoria= Generador.generarId();
 			tutoria.setIdTutoria(idTutoria);
 			if(tutoriasDao.crear(tutoria)) {
@@ -782,6 +840,7 @@ public class Server extends WebSocketServer {
 		grupo.getUsuarios().add(js.getString("idUsuario"));
 		grupo.setIdMateria(js.getString("idMateria"));
 		grupo.setLugar(js.getString("lugar"));
+		grupo.setNombreGrupo(js.getString("nombreGrupo"));
 		String idGrupo =Generador.generarId();
 		grupo.setIdGrupo(idGrupo);
 		if(gruposEstudioDao.consultarPorNombre(grupo.getNombreGrupo())!=null) {
@@ -889,7 +948,7 @@ public class Server extends WebSocketServer {
 
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		if(code==1002) {
+		if(code==4000) {
 			Usuario usuario = Buscador.buscarUsuario(conn, usuarios);
 			usuario.setMotivoDesconexion(reason);
 		}else if (!reason.equals("cambio")) {

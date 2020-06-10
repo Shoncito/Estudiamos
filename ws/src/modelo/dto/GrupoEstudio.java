@@ -127,9 +127,12 @@ public class GrupoEstudio implements Serializable{
 	}
 
 	public String toJSON() {
-		return "{\"idGrupo\":\"" + idGrupo + "\", \" usuarios\":\"" + usuarios + "\", \"nombreGrupo\":\"" + nombreGrupo
-				+ "\",\" tema\":\"" + tema + "\", \"fecha\":\"" + fecha + "\", \"hora\":\"" + hora + "\", \"lugar\":\"" + lugar + "\", \"idMateria\":\""
-				+ idMateria + "\"}";
+		return "{\"idGrupo\":\"" + idGrupo + "\", "
+				+ " \"nombreGrupo\":\"" + nombreGrupo+ "\", "
+			    + "\"tema\":\"" + tema + "\", "
+			    + "\"fecha\":\"" + fecha + "\", "
+			    + "\"hora\":\"" + hora + "\", "
+			    + " \"lugar\":\"" + lugar + "\"}";
 	}
 	
 	

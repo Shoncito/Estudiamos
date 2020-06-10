@@ -238,6 +238,42 @@ retorna
 	tipo: lista materias,
 	materias: [{},{},{}]
 }
+
+consultar profesor por materia
+
+{
+	tipo: consultar profesor por materia,
+	idMateria: idMateria
+}
+
+
+consultar mis grupos
+{
+	tipo: consultar mis grupos
+}
+
+responde
+
+{
+	tipo: mis grupos,
+	grupos: [
+		{
+			\"idGrupo\":\"" + idGrupo + , "
+			nombreGrupo:nombreGrupo,
+			tema: tema ,
+			fecha: fecha, 
+			hora:hora, 
+			lugar: + lugar ,
+			idMateria:idMateria;
+		},
+		{
+
+		},
+		{
+
+		}
+	]
+}
 Put:
 - Editar grupo de estudio:
 {
