@@ -45,15 +45,28 @@ $("#btnCrear").click(function(){
 /**
  * Al unirse a un grupo
  */
+$("#menuMisGrupos").click(function(){
+    websocket.close(1000,"cambio");
+	window.location.assign("misGrupos.html");
+});
+
+$("#btnMisGrupos").click(function(){
+    websocket.close(1000,"cambio");
+	window.location.assign("misGrupos.html");
+});
+/**
+* Ver los grupos unidos
+*/
 $("#menuUnirse").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("nindex.html");
+    window.location.assign("nindex.html");
 });
 
 $("#btnUnirse").click(function(){
     websocket.close(1000,"cambio");
-	window.location.assign("nindex.html");
+    window.location.assign("nindex.html");
 });
+
 /**
  * Al acceder al foro
  */

@@ -261,7 +261,7 @@ a:hover{
 	color: #3f4041;
 }
 
-#divSnacks h1{
+#divSnacks h1, #divMisGrupos h1, #divBusquedaGrupos h1{
 	font-size: 55px;
 	margin-bottom: 0px !important;
 	font-family: 'Balsamiq Sans', cursive;
@@ -421,4 +421,49 @@ a:hover{
 	margin-left: 0px;
 	margin-top: 0px;
 	overflow : auto;
+}
+
+#divMisGrupos{
+	background-color: #ce9f74;
+	width: 920px;
+	height: 470px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 228px;
+	color: white;
+	text-align: center;
+}
+
+#divGrupos{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}
+
+#divBusquedaGrupos{
+	background-color: #ce9f74;
+	width: 920px;
+	height: 470px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 228px;
+	color: white;
+	text-align: center;
+}
+
+#divGruposB{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}
+
+#divGruposB .description, 
+#divGrupos .description{
+	margin-bottom: auto !important; 
 }

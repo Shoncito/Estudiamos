@@ -18,32 +18,32 @@
 		<div id="divHeader" class="ui grid">
 			<div class="two wide column">
 				<div class="menu" id="menu" onclick="myFunction(this)">
-			      <div class="linea-1"></div>
-			      <div class="linea-2"></div>
-			      <div class="linea-3"></div>
-			    </div>
-			    <div class="menu-container" id="menu">
-			    	<div class="ui left fixed vertical menu" id="divMenuVertical">
-		  				<a id="menuInicio" class="item">Inicio</a>
-		  				<div class="item">
-						    <div class="header">Grupos de estudio</div>
-						    <div class="menu">
-						    	<a id="menuCrear" class="item">Crear</a>
-						    	<a id="menuUnirse" class="item">Unirse</a>
-						    	<a id="menuMisGrupos" class="item">Mis grupos</a>
-							</div>
-						</div>
-						<a id="menuForos" class="item">Foros</a>
+					<div class="linea-1"></div>
+					<div class="linea-2"></div>
+					<div class="linea-3"></div>
+				</div>
+				<div class="menu-container" id="menu">
+					<div class="ui left fixed vertical menu" id="divMenuVertical">
+						<a id="menuInicio" class="item" oncontextmenu="audioInicio.play()">Inicio</a>
 						<div class="item">
-						    <div class="header">Snacks</div>
-						    <div class="menu">
-						    	<a id="menuMenu" class="item">Menú</a>
-						    	<a id="menuPedido" class="item">Mis pedidos</a>
+							<div class="header">Grupos de estudio</div>
+							<div class="menu">
+								<a id="menuCrear" class="item" oncontextmenu="audioCrearGrupo.play()">Crear</a>
+								<a id="menuUnirse" class="item" oncontextmenu="audioUnirse.play()">Unirse</a>
+								<a id="menuMisGrupos" class="item" oncontextmenu="audioMisGrupos.play()">Mis grupos</a>
 							</div>
 						</div>
-						<a id="menuAboutUs" class="item">Sobre nosotros</a>
+						<a id="menuForos" class="item" oncontextmenu="audioForo.play()">Foro</a>
+						<div class="item">
+							<div class="header">Snacks</div>
+							<div class="menu">
+								<a id="menuMenu" class="item" oncontextmenu="audioMenuSnacks.play()">Menú</a>
+								<a id="menuPedido" class="item" oncontextmenu="audioPedidoSnacks.play()">Mis pedidos</a>
+							</div>
+						</div>
+						<a id="menuAboutUs" class="item" oncontextmenu="audioSobreNosotros.play()">Sobre nosotros</a>
 					</div>
-			    </div>
+				</div>
 				
 			</div>
 			<div class="twelve wide column">
@@ -109,4 +109,5 @@
 <script type="text/javascript" src="js/notificaciones.js"></script>
 <script type="text/javascript" src="js/webSocket.js"></script>
 <script src="js/eventos.js"></script>
+<script type="text/javascript" src="js/sonido.js"></script>
 </html>

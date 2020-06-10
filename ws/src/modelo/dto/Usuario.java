@@ -14,7 +14,7 @@ public class Usuario implements Serializable{
 	private String correo;
 	private String usuario;
 	private String contraseña;
-	
+	private String motivoDesconexion;
 	
 	
 	
@@ -105,6 +105,18 @@ public class Usuario implements Serializable{
 	
 	public String toJSON() {
 		return "{\"correo\":\"" + correo + "\", \"usuario\":\"" + usuario + "\", \"contraseña\": \"No tendrás la contraseña :v \",\"token\":\""+token+"\"}";
+	}
+	/**
+	 * @return the motivoDesconexion
+	 */
+	public String getMotivoDesconexion() {
+		return motivoDesconexion;
+	}
+	/**
+	 * @param motivoDesconexion the motivoDesconexion to set
+	 */
+	public void setMotivoDesconexion(String motivoDesconexion) {
+		this.motivoDesconexion = motivoDesconexion;
 	}
 
 	
