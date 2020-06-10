@@ -274,7 +274,7 @@ websocket.onerror=function(event){
  		}
  	}
  	$("#selectMateria").empty();
- 	var text=`<option value="1">Seleccione una materia</option>`;
+ 	var text=`<option value="">Seleccione una materia</option>`;
  	for(var j=0;j<materiasFil.length;j++){
  		text +=`<option value="${materiasFil[j].idMateria}">${materiasFil[j].nombreMateria}</option>`
  	}
