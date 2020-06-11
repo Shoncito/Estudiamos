@@ -468,6 +468,20 @@ a:hover{
 	margin-bottom: auto !important; 
 }
 
+.titpub, .contpub, #pub, .cont{
+	width: 800px !important;
+}
+
+.contpub, .cont{
+	height: 230px;
+}
+
+.contenedor-form{
+	padding-right: 880px;
+	margin-top: 30px;
+}
+
+
 .cont{
 	outline: none;
     width: 100%;
