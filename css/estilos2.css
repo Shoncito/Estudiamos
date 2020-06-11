@@ -92,6 +92,7 @@ body {
     font-size: 14px;
     font-weight:normal;
     transition: all .5s ease;
+    vertical-align: middle !important;
 }
 
 /* estilo formulario*/
@@ -124,6 +125,7 @@ option:disabled {
 .contenedor-form input[type="namec"]:focus,
 .contenedor-form input[type="logoc"]:focus,
 .contenedor-form input[type="password"]:focus,
+.cont,
 #amen:focus {
     border-bottom: 4px solid white;
 }
