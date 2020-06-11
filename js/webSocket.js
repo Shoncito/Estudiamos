@@ -24,6 +24,8 @@ var num=0;
 
 var idMateria=0;
 
+var idTutoria=0;
+
 /**
 * Cuando se abre la conexión
 */
@@ -117,6 +119,9 @@ websocket.onmessage=function(event){
 				filtrarProfesores(obj.profesores);
 			}
 		}else if(obj.tipo==="lista tutorias"){
+			if (document.title==="Tutorías") {
+				pintarTutorias(obj.tutorias);
+			}
 
 		}else if(obj.tipo==="lista grupos"){
 			if(document.title==="Estudiamos - Buscar grupo de estudio"){
@@ -143,64 +148,65 @@ websocket.onmessage=function(event){
 }
 ;
 
+
 /**
  * 
  * @param {array} grupos 
  */
-function pintarGrupos(grupos){
-var text="";
-for(var i=0;i<grupos.length;i++){
-	if(!grupos[i].unido){
-		text +=`
-		<div class="ui link card grupo">
-          <div class="content grupo">
-            <div class="header grupo">
-              ${grupos[i].nombreGrupo}
-            </div>
-            <div class="meta grupo">
-			${JSON.parse(grupos[i].materia).nombreMateria}
-            </div>
-            <div class="description">
-			${grupos[i].tema}
-            </div>
-          </div>
-		  <div class="extra content">
-		  Lugar: ${grupos[i].lugar} <br>
-		  Fecha: ${grupos[i].fecha} <br>
-		  Hora: ${grupos[i].hora}:00 <br>
-        <div  class="ui basic orange button">Unirse</div>
-        </div>
-        </div>
-		` 
-		$("#divGruposB").append(text);
-		text="";
-	}else{
-		text +=`
-        <div class="ui link card grupo">
-          <div class="content grupo">
-            <div class="header grupo">
-			${grupos[i].nombreGrupo}
-            </div>
-            <div class="meta grupo">
-			${JSON.parse(grupos[i].materia).nombreMateria}
-            </div>
-            <div class="description">
-			${grupos[i].tema}
-            </div>
-          </div>
-		  <div class="extra content ">
+ function pintarGrupos(grupos){
+ 	var text="";
+ 	for(var i=0;i<grupos.length;i++){
+ 		if(!grupos[i].unido){
+ 			text +=`
+ 			<div class="ui link card grupo">
+ 			<div class="content grupo">
+ 			<div class="header grupo">
+ 			${grupos[i].nombreGrupo}
+ 			</div>
+ 			<div class="meta grupo">
+ 			${JSON.parse(grupos[i].materia).nombreMateria}
+ 			</div>
+ 			<div class="description">
+ 			${grupos[i].tema}
+ 			</div>
+ 			</div>
+ 			<div class="extra content">
+ 			Lugar: ${grupos[i].lugar} <br>
+ 			Fecha: ${grupos[i].fecha} <br>
+ 			Hora: ${grupos[i].hora}:00 <br>
+ 			<div  class="ui basic orange button">Unirse</div>
+ 			</div>
+ 			</div>
+ 			` 
+ 			$("#divGruposB").append(text);
+ 			text="";
+ 		}else{
+ 			text +=`
+ 			<div class="ui link card grupo">
+ 			<div class="content grupo">
+ 			<div class="header grupo">
+ 			${grupos[i].nombreGrupo}
+ 			</div>
+ 			<div class="meta grupo">
+ 			${JSON.parse(grupos[i].materia).nombreMateria}
+ 			</div>
+ 			<div class="description">
+ 			${grupos[i].tema}
+ 			</div>
+ 			</div>
+ 			<div class="extra content ">
 
-		  Lugar: ${grupos[i].lugar} <br>
-		  Fecha: ${grupos[i].fecha} <br>
-		  Hora: ${grupos[i].hora}:00 <br>
-            <div class="ui orange button">Unido</div>
-          </div>
-        </div>`
-		$("#divGruposB").append(text);
-		text="";
-	}
-}
-}
+ 			Lugar: ${grupos[i].lugar} <br>
+ 			Fecha: ${grupos[i].fecha} <br>
+ 			Hora: ${grupos[i].hora}:00 <br>
+ 			<div class="ui orange button">Unido</div>
+ 			</div>
+ 			</div>`
+ 			$("#divGruposB").append(text);
+ 			text="";
+ 		}
+ 	}
+ }
 
 
 /**
@@ -223,7 +229,7 @@ for(var i=0;i<grupos.length;i++){
  		</div>
  		</div>
  		<div class="extra content">
- 		${grupos[i].hora}
+ 		${grupos[i].hora}:00
  		<br>  
  		${grupos[i].fecha}
  		<br>
@@ -366,20 +372,20 @@ websocket.onerror=function(event){
 
 
  $("#selectMateria").click(function(){
-	 if(document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"){
-		idMateria=$(this).val();
-		var obj ={
-			tipo: "consultar profesor por materia",
-			idMateria: idMateria
-		}
-		enviarMensaje(obj);
-	 }
-	 else if(document.title==="Estudiamos unirse grupos"){
-		var obj={
-			tipo: "consultar escuelas",
-		}
-		enviarMensaje(obj);	 
-	}
+ 	if(document.title==="Estudiamos - Tutorias" || document.title==="Crear Tutoria"){
+ 		idMateria=$(this).val();
+ 		var obj ={
+ 			tipo: "consultar profesor por materia",
+ 			idMateria: idMateria
+ 		}
+ 		enviarMensaje(obj);
+ 	}
+ 	else if(document.title==="Estudiamos unirse grupos"){
+ 		var obj={
+ 			tipo: "consultar escuelas",
+ 		}
+ 		enviarMensaje(obj);	 
+ 	}
  	
  });
 
@@ -451,3 +457,135 @@ function ping(){
  	}
 
  }
+
+
+ function pintarTutorias(tutorias){
+ 	var text="";
+ 	for(var i=0;i<tutorias.length;i++){
+ 		if(!tutorias[i].unido){
+ 			text +=`
+ 			<div class="ui link card">
+ 			<div class="card">
+ 			<div class="content tutoria">
+ 			<div class="header yo ">
+ 			Inscritos ${tutorias[i].inscritos}
+ 			</div>
+ 			<div class="meta tutoria2">
+ 			<span>
+ 			Asignatura:
+ 			</span>
+ 			${JSON.parse(tutorias[i].materia).nombreMateria}
+ 			</div>
+ 			<div class="ui small feed">
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Hora: </span>${tutorias[i].hora}:00 pm
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Fecha: </span>${tutorias[i].fecha}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Docente:</span>${JSON.parse(tutorias[i].profesor).nombre}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Lugar:</span>${tutorias[i].lugar}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="extra content">
+ 			<div class="ui two buttons">
+ 			<div class="ui basic orange button" onclick="consultarEstadoTutoria(${tutorias[i].idTutoria})" id="${tutorias[i].idTutoria}">Inscribirse</div>
+ 			</div>
+ 			</div>	
+ 			</div>
+ 			</div>
+ 			</div>`
+ 			$("#listartutorias").append(text);
+ 			text="";
+ 		}else{
+ 			text +=`
+ 			<div class="ui link card">
+ 			<div class="card">
+ 			<div class="content tutoria">
+ 			<div class="header yo ">
+ 			Inscritos ${tutorias[i].inscritos}
+ 			</div>
+ 			<div class="meta tutoria2">
+ 			<span>
+ 			Asignatura:
+ 			</span>
+ 			${JSON.parse(tutorias[i].materia).nombreMateria}
+ 			</div>
+ 			<div class="ui small feed">
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Hora: </span>${tutorias[i].hora}:00 pm
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Fecha: </span>${tutorias[i].fecha}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Docente:</span>${JSON.parse(tutorias[i].profesor).nombre}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="event">
+ 			<div class="content">
+ 			<div class="summary">
+ 			<span>Lugar:</span>${tutorias[i].lugar}
+ 			</div>
+ 			</div>
+ 			</div>
+ 			</div>
+ 			<div class="extra content">
+ 			<div class="ui two buttons">
+ 			<div class="ui orange button">Inscrito</div>
+ 			</div>
+ 			</div>	
+ 			</div>
+ 			</div>
+ 			</div>`
+ 			$("#listartutorias").append(text);
+ 			text="";
+
+ 		}
+ 	}
+ }
+
+ function consultarEstadoTutoria(idTutoria){
+ 	var idTutoria=idTutoria;
+ 	console.log(idTutoria);
+ 	var obj={
+ 		tipo : "pedir tutoria",
+ 		idUsuario: usuario.usuario,
+ 		idTutoria: idTutoria
+ 	}
+ 	enviarMensaje(obj);
+ }
+
+
+
+

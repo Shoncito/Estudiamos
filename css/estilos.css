@@ -467,3 +467,24 @@ a:hover{
 #divGrupos .description{
 	margin-bottom: auto !important; 
 }
+
+
+#divBusquedaGrupos{
+	background-color: #ce9f74;
+	width: 920px;
+	height: 470px;
+	border-radius: 20px;
+	margin-top: 50px;
+	margin-left: 228px;
+	color: white;
+	text-align: center;
+}
+
+#listartutorias{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}
