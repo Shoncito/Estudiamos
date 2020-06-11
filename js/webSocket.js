@@ -139,7 +139,8 @@ websocket.onmessage=function(event){
 				console.log(obj.materias);
 			}else if(document.title==="Estudiamos - Foro"){
 				listarMaterias(obj.materias);	
-			}	
+			}
+				
 		}
 	}
 }
@@ -271,14 +272,25 @@ websocket.onerror=function(event){
  	var text="";
  	for(var i=0;i<materias.length;i++){
  		text +=`
- 		<tr class="carril">
- 		<td>${materias[i].nombreMateria}</td>
+		 <tr class="carril" id="${materias[i].idMateria}">
+ 		<td onclick="public(${materias[i].idMateria})">${materias[i].nombreMateria}</td>
  		</tr>`;
  		$("#"+materias[i].idEscuela).append(text);
  		text="";
  	}
  }
-
+/**
+ * envar id materia foro seleccionada y cambio a foropubli
+ */
+function public(idMateria){
+    var obj={
+        tipo: "consultar publicaciones",
+        idMateria: idMateria
+    }
+    websocket.close(4000,JSON.stringify(obj));
+    console.log(websocket);
+    window.location.assign("foropubli.html");
+}
 
  function filtarMaterias(materias){
  	var materiasFil=new Array();
@@ -340,7 +352,7 @@ websocket.onerror=function(event){
 }
 /**
  * Se envia la id cuando da click en el boton para mostrar las materias de cada escuela en foro.html
- * @param {array} escuelas 
+ * @param {id} escuelas 
  */
  function enviarId(escuelas){
 	 
@@ -354,6 +366,23 @@ websocket.onerror=function(event){
 		$("#"+escuelas).hide();
 	}
  }
+
+/**
+ * 
+ * @param {id} escuelas 
+ */
+ function enviarIdPubli(id){
+    if(!a){
+		a=true;
+	console.log("sirve")
+	$("#DOOPLER2").show();
+	}else{
+		a=false;
+		console.log("sirve")
+		$("#DOOPLER2").hide();
+	}
+ }
+
  $(".ui.right.labeled.icon.button").click(function() {
  	console.log("boton sirve");
  	$("#"+escuelas[$(this).id].idEscuela+"-"+$(this).id).toggle("slow");
