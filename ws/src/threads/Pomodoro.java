@@ -33,9 +33,9 @@ public class Pomodoro implements Runnable {
 			for(int j=0;j<4;j++) {
 				for(int i=0;i<this.grupoEstudio.getUsuarios().size();i++) {
 					String mensaje = "{" + 
-							"	tipo: notificacion," + 
-							"	subtipo: grupo," + 
-							"	mensaje: ¡A estudiar!. Estudia 20 minutos" + 
+							"\"tipo\": \"notificacion\"," + 
+							"\"subtipo\": \"grupo\"," + 
+							"\"mensaje\": \"¡A estudiar!. Estudia 20 minutos\"" + 
 							"}";
 					enviarATodosEnElGrupo(mensaje);
 				}
@@ -46,17 +46,17 @@ public class Pomodoro implements Runnable {
 				}
 				for(int i=0;i<this.grupoEstudio.getUsuarios().size();i++) {
 					String mensaje = "{" + 
-							"	tipo: notificacion," + 
-							"	subtipo: grupo," + 
-							"	mensaje: descansa "+descanso+" minutos " + 
+							"\"tipo\": \"notificacion\"," + 
+							"\"subtipo\": \"grupo\"," + 
+							"\"mensaje\": \"descansa "+descanso+" minutos \"" + 
 							"}";
 					enviarATodosEnElGrupo(mensaje);
 				}
 				Thread.sleep(descanso*60*1000);
 				String mensaje = "{" + 
-						"	tipo: notificacion," + 
-						"	subtipo: grupo," + 
-						"	mensaje: Grupo estudio finalizado" + 
+						"\"tipo\": \"notificacion\"," + 
+						"\"subtipo\": \"grupo\"," + 
+						"\"mensaje\": \"Grupo estudio finalizado\"" + 
 						"}";
 			}
 			this.grupos.remove(this.grupoEstudio);

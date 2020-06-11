@@ -23,7 +23,7 @@ public class Tutoria implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Recuerda que tienes una tutoria en la hora:" + hora + ",junto con el profesor:" + profesor + ",en el lugar:" + lugar + ", en el dia:" + fecha;
+		return "Recuerda que tienes una tutoria en la hora:" + hora + ",junto con el profesor:" + profesor.getNombre() + ",en el lugar:" + lugar + ", en el dia:" + fecha;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
