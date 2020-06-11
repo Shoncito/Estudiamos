@@ -12,6 +12,7 @@ import modelo.dao.PublicacionDao;
 import modelo.dao.SnackDao;
 import modelo.dao.TutoriasDao;
 import modelo.dao.UsuariosDao;
+import threads.Observador;
 
 public class Principal {
 	public static void main(String[] args) {

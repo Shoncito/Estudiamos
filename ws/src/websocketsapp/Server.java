@@ -41,7 +41,7 @@ public class Server extends WebSocketServer {
 		super(new InetSocketAddress(8080));
 		this.usuarios = new LinkedList<Usuario>();
 		Thread hiloObservador = new Thread(new Observador(this));
-		this.start();
+		hiloObservador.start();
 	}
 
 	@Override

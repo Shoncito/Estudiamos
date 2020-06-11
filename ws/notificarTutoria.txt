@@ -217,9 +217,27 @@ Retorna: dos arreglos: uno con sus horarios disponibles y otro con las materias 
 
 - Consultar todos los snacks:
 {
-	tipo: consultar snacks
+	tipo: consultar snacks,
 }
 Retorna: un arreglo con todos los datos de todos los snacks
+
+{
+	tipo: lista snacks,
+	snacks:[
+		{
+			idSnack: idSnack,
+			nombreSnack: nombreSnack,
+			imagen: imagen,
+			categoria: {
+				idCategoria: idCategoria,
+				nombreCategoria: nombreCategoria
+			}
+			precio: precio
+		},
+		{},
+		{}
+	]
+}
 
 - Consultar escuela:
 {
@@ -315,6 +333,45 @@ responde
 			}
 		}
 	]
+}
+
+consultar publicaciones
+{
+	tipo: consultar publicaciones,
+	idMateria: idMateria
+}
+
+retorna
+{
+	tipo: lista publicaciones,
+	publicaciones: [
+		{
+			idPublicacion: idPublicacion,
+			titulo: titulo,
+			contenido, contenido
+		},
+		{},
+		{}
+		]
+	materia: {
+		idMateria: idMateria,
+		nombreMateria: nombreMateria
+	}
+}
+
+
+{
+	tipo: crear publicaciones,
+	idMateria: idMateria
+}
+
+retorna
+{
+	tipo: materia de publicacion,
+	materia: {
+		idMateria: idMateria,
+		nombreMateria: nombreMateria
+	}
 }
 Put:
 - Editar grupo de estudio:
