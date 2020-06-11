@@ -66,6 +66,11 @@ websocket.onopen = function(event){
 			tipo: "consultar escuelas" 
 		}
 		enviarMensaje(obj);
+	}else if (document.title==="Estudiamos - Snacks"){
+		var obj = {
+			tipo: "consultar snacks"
+		}
+		enviarMensaje(obj);
 	}
 	
 }
@@ -130,7 +135,7 @@ websocket.onmessage=function(event){
 		}else if(obj.tipo==="materia de publicacion"){
 			  guardarMateria(obj.materia);
 		}else if(obj.tipo==="lista snacks"){
-
+			pintarSnacks(obj.snacks);
 		}else if(obj.tipo==="lista publicaciones"){
 			if(document.title==="Foro publicaciones"){
 				pintarPublicaciones(obj);
@@ -557,4 +562,33 @@ function ping(){
  		$("select").append(texto);
  	}
 
+ }
+
+/*
+*
+* 
+*/
+var valor=[];
+var total=[];
+var precio=[];
+ function pintarSnacks(snacks){
+	for(i in snacks){
+		valor[i]=0;
+		total[i]=0;
+	}
+ 	for(var i=0; i<snacks.length;i++){
+ 		var texto='<div name="PRODUCTO" class="card '+JSON.parse(snacks[i].categoria).nombreCategoria+'">'+
+ 			'<div class="content">'+
+ 			'<div name="NOMBREPRODUCTO" class="header">'+snacks[i].nombreSnack+'</div>'+
+ 			'</div>'+
+ 			'<img src="'+snacks[i].imagen+'">'+
+ 			'<div name="PRECIOPRODUCTO" class="meta">'+snacks[i].precio+'</div>'+
+ 			'<div class="extra content ui large buttons">'+
+ 			'<button class="ui brown button" id="disminuir" onclick="carrito(this)" value="disminuir'+i+'">-</button>'+
+ 			'<div id="p"><p id="contador'+i+'" value="">0</p></div>'+
+ 			'<button class="ui orange button" id="aumentar" onclick="carrito(this)" value="aumentar'+i+'">+</button></div>'+
+ 			'</div>';
+ 		$("#productosSnacks").append(texto);
+ 		precio[i]=snacks[i].precio;
+ 	}
  }
