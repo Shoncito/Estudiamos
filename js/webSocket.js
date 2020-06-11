@@ -22,9 +22,11 @@ var idEscuela=0;
 
 var num=0;
 
-var idMateria=0;
+var idMateria;
 
 var a=false;
+
+var b=false;
 
 /**
 * Cuando se abre la conexión
@@ -125,10 +127,15 @@ websocket.onmessage=function(event){
 				pintarGrupos(obj.grupos);
 			}
 			
+		}else if(obj.tipo==="materia de publicacion"){
+			  guardarMateria(obj.materia);
 		}else if(obj.tipo==="lista snacks"){
 
 		}else if(obj.tipo==="lista publicaciones"){
-
+			if(document.title==="Foro publicaciones"){
+				pintarPublicaciones(obj);
+				idMateria=obj.materia.idMateria;
+			}
 		}else if(obj.tipo==="mis grupos"){
 			misgrupos(obj.grupos);
 		}else if(obj.tipo==="lista escuelas"){
@@ -145,6 +152,59 @@ websocket.onmessage=function(event){
 	}
 }
 ;
+/**
+ * 
+ * @param {obj} materia 
+ */
+function guardarMateria(materia){
+idMateria=materia.idMateria;
+}
+
+
+/**
+ * pintar publicaciones
+ * @param {array} publicaciones 
+ */
+function pintarPublicaciones(obj){
+	var text="";
+	text +=`	
+    <thead>
+	<tr>
+	<th align="center">${obj.materia.nombreMateria}</th>  
+	</tr>
+	</thead>`
+	$("#tabla3").append(text);
+	text="";
+for(var i=0;i<obj.publicaciones.length;i++){
+	text +=` 
+	<tr class="carril">
+	<td>
+	${obj.publicaciones[i].titulo}
+	<button id="${i}"  class="ui right labeled icon button" onclick="enviarIdPubli(${obj.publicaciones[i].idPublicacion})">  
+	<i class="right arrow icon"></i>
+	<font style="vertical-align: inherit;">
+		<font style="vertical-align: inherit;">
+	Mas
+	</font>
+</font>
+</button>	
+	<div id="" class="materias" >
+	<table id="${obj.publicaciones[i].idPublicacion}">
+	<thead id="materia">
+	<tr>
+	<th>${obj.publicaciones[i].contenido}</th>
+	</tr>
+	</thead>
+	</table>	
+	</div>
+	</td>
+	</tr>`
+		$("#tabla3").append(text);
+		text="";
+		
+	}
+
+}
 
 /**
  * 
@@ -292,6 +352,8 @@ function public(idMateria){
     window.location.assign("foropubli.html");
 }
 
+
+
  function filtarMaterias(materias){
  	var materiasFil=new Array();
 
@@ -369,17 +431,17 @@ function public(idMateria){
 
 /**
  * 
- * @param {id} escuelas 
+ * @param {id} id
  */
  function enviarIdPubli(id){
-    if(!a){
-		a=true;
+    if(!b){
+		b=true;
 	console.log("sirve")
-	$("#DOOPLER2").show();
+	$("#"+id).show();
 	}else{
-		a=false;
+		b=false;
 		console.log("sirve")
-		$("#DOOPLER2").hide();
+		$("#"+id).hide();
 	}
  }
 
@@ -398,13 +460,6 @@ function public(idMateria){
  		<option value="${escuelas[i].idEscuela}">${escuelas[i].nombreEscuela}</option>` 
  	}
  	$("#escuelas").append(text);
- }
-/**
- * Se envia la id en cuando seleccionan una escuela para mostrar materias en tutorias.html
- * @param {id} idEscuela 
- */
- function enviarId2(id){
- 	console.log(id);
  }
 
  $("#escuelas").click(function(){

@@ -277,7 +277,7 @@ a:hover{
 }
 
 #productosSnacks{
-	background-color: #;
+	
 	height: 340px;
 	width: 640px;
 	margin-left: 140px;
@@ -415,7 +415,7 @@ a:hover{
 }
 
 #Pedido{
-	background-color: ;
+	
 	height: 365px;
 	width: 686px;
 	margin-left: 0px;
@@ -468,18 +468,10 @@ a:hover{
 	margin-bottom: auto !important; 
 }
 
-.titpub, .contpub, #pub, .cont{
-	width: 800px !important;
-}
 
-.contpub, .cont{
-	height: 230px;
-}
 
-.contenedor-form{
-	padding-right: 880px;
-	margin-top: 30px;
-}
+
+
 
 
 .cont{

@@ -14,6 +14,9 @@
     }
     enviarMensaje(obj);
 });
+
+
+
 /**
  * Al ingresar un usuario
  */
@@ -57,6 +60,16 @@ $("#BuscarGrupo").click(function(){
     window.location.assign("buscarGrupo.html");
 
 });
+
+$("#crearPublicacion").click(function(){
+    var obj={
+        tipo: "crear publicaciones",
+        idMateria: idMateria,
+    }
+    websocket.close(4000,JSON.stringify(obj));
+    window.location.assign("crearPublicacion.html");
+});
+
 
  $("#menuMisGrupos").click(function(){
     var obj={
