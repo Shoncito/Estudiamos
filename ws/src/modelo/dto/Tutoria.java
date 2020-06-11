@@ -124,7 +124,12 @@ public class Tutoria implements Serializable{
 		this.idMateria = idMateria;
 	}
 	public String toJSON() {
-		return "{\"idTutoria\":\"" + idTutoria + "\", \"hora\":\"" + hora + "\", \"profesor\":\"" + profesor.getId() + "\", \"lugar\":\"" + lugar+ "\", \"fecha\":\"" + fecha + "\", \"idMateria\":\"" + idMateria + "\"}";
+		return "{"
+				+ "\"idTutoria\":\"" + idTutoria + "\", "
+				+ "\"hora\":\"" + hora + "\", "
+				+ "\"lugar\":\"" + lugar+ "\","
+				+ " \"fecha\":\"" + fecha + "\""
+				+ "}";
 	}
 	
 	
