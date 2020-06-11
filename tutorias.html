@@ -2,45 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <link rel="stylesheet" href="css/semantic.min.css">
-    <link rel="stylesheet" href="css/estiloTutorias.css">
     <title>Estudiamos - Tutorias</title>
+    <link href="css/estilos2.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
-    <div id="contenido">
-        <div id="titulo">
-            <h1>Tutorías</h1>
-        </div>
-        <div id="formulario" class="ui form"> 
-            <div class="ui field">
-                <label for="escuela">Escuela</label>    
-                <select class="amen" id="escuelas">
-                    <option value="">Seleccione una escuela</option>
-                </select>
-            </div>   
-            <div class="ui field">
-                <label for="docente">Docente</label>    
-                <select name="docente" id="profesores">
-                    <option value="">Seleccione a un profesor</option>
-                </select>
+    <div id="divPrincipal">
+        <!-- Fondo -->
+        <img src="img/fondo.png" id="BackgroundPrincipal">
+        <!-- Header -->
+        <div id="divHeader" class="ui grid">
+          <div class="two wide column">
+            <div class="menu" id="menu" onclick="myFunction(this)">
+              <div class="linea-1"></div>
+              <div class="linea-2"></div>
+              <div class="linea-3"></div>
+          </div>
+          <div class="menu-container" id="menu">
+              <div class="ui left fixed vertical menu" id="divMenuVertical">
+                <a id="menuInicio" class="item" oncontextmenu="audioInicio.play()">Inicio</a>
+                <div class="item">
+                  <div class="header">Grupos de estudio</div>
+                  <div class="menu">
+                    <a id="menuCrear" class="item" oncontextmenu="audioCrearGrupo.play()">Crear</a>
+                    <a id="menuUnirse" class="item" oncontextmenu="audioUnirse.play()">Unirse</a>
+                    <a id="menuMisGrupos" class="item" oncontextmenu="audioMisGrupos.play()">Mis grupos</a>
+                </div>
             </div>
-            <div class="ui field">
-                <label for="materia">Materia</label>
-                <select name="materia" id="selectMateria">
-                    <option value="">Seleccione una materia</option>
-                </select>
+            <a id="menuForos" class="item" oncontextmenu="audioForo.play()">Foro</a>
+            <div class="item">
+              <div class="header">Snacks</div>
+              <div class="menu">
+                <a id="menuMenu" class="item" oncontextmenu="audioMenuSnacks.play()">Menú</a>
+                <a id="menuPedido" class="item" oncontextmenu="audioPedidoSnacks.play()">Mis pedidos</a>
             </div>
-            
-            <button class="ui orange icon button">
-                <i class="search icon"></i>
-                Buscar
-             </button>     
         </div>
-    </div> 
-    
+        <a id="menuAboutUs" class="item" oncontextmenu="audioSobreNosotros.play()">Sobre nosotros</a>
+    </div>
+</div>
+
+</div>
+<div class="twelve wide column">
+    <h1>
+      Estudiamos
+  </h1>
+</div>
+<div class="two wide column" id="saludoUsuario">
+    <p>Hola</p>
+    <p id="nombreUser"></p>
+</div>
+</div>
+<div id="contenido">
+    <div class="contenedor-form">
+        <div class="ui center aligned container">
+            <div class="formulario">
+                <h2>Tutorías</h2>
+                <div>
+                    <select class="amen" id="escuelas">
+                        <option disabled selected>Selecciona una escuela</option>
+                    </select>
+                    <select class="amen" id="selectMateria">
+                        <option disabled selected value="">Selecciona una materia</option>
+                    </select>
+                    <select class="amen" id="profesores">
+                        <option disabled selected value="">Seleccione a un profesor</option>
+                    </select>
+                    <button id="buscarTutoria" class="ui orange icon button">
+                        <i class="search icon"></i>
+                        Buscar
+                    </button>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
 </body>
 <script src="js/semantic.min.js"></script>
 <script type="text/javascript" src="js/funcionesPrincipales.js"></script>

@@ -491,3 +491,11 @@ a:hover{
     font-weight:normal;
     transition: all .5s ease;
 }
+#listartutorias{
+	background-color: #ba7a3e;
+	border-radius: 20px;
+	margin: 20px;
+	width: 880px;
+	height: 360px;
+	overflow: auto;
+}

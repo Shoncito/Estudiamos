@@ -48,7 +48,7 @@
 /**
  * Al unirse a un grupo
  */
-$("#BuscarGrupo").click(function(){
+ $("#BuscarGrupo").click(function(){
     var idEscuela=$("#escuelas").val();
     var idMateria=$("#selectMateria").val();
     var obj={
@@ -154,15 +154,33 @@ $("#btnUnirse").click(function(){
     window.location.assign("creartuto.html");
 });
 
- $("#btnTutorias").click(function(){
-    var obj={
-        tipo: "consultar tutorias",
-        idMateria: idMateria,
-        idProfesor: idProfesor
-    }
-    websocket.close(4000,JSON.stringify(obj));
-    window.location.assign("buscartutorias.html");
+
+ $("#buscarTutoria").click(function(){
+  var idMateria = $("#selectMateria").val();
+  var idProfesor = $("#profesores").val();
+  var obj={
+    tipo: "consultar tutorias",
+    idMateria: idMateria,
+    idProfesor: idProfesor
+}
+websocket.close(4000,JSON.stringify(obj));
+window.location.assign("buscartutorias.html");
 });
+
+ $("#btnUnirseTuto").click(function(){
+    websocket.close(1000,"cambio");
+    window.location.assign("tutorias.html");
+});
+
+$("#menuUnirseTuto").click(function(){
+    websocket.close(1000,"cambio");
+    console.log(websocket);
+    window.location.assign("tutorias.html");
+});
+
+
+
+
 
 
 
