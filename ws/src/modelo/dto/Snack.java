@@ -75,8 +75,10 @@ public class Snack implements Serializable{
 
 	
 	public String toJSON() {
-		return "{\"idSnack\":\"" + idSnack + "\", \"nombreSnack\":\"" + nombreSnack + "\", \"imagen\":\"" + imagen + "\", \"idCategoria\":\""
-				+ idCategoria + "\", \"precio\":\"" + precio + "\"}";
+		return "{\"idSnack\":\"" + idSnack + "\","
+				+ " \"nombreSnack\":\"" + nombreSnack + "\","
+				+ " \"imagen\":\"" + imagen + "\", "
+				+ "\"precio\":\"" + precio + "\"}";
 	}
     
     

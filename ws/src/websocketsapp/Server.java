@@ -31,6 +31,7 @@ import modelo.dto.Publicacion;
 import modelo.dto.Snack;
 import modelo.dto.Tutoria;
 import modelo.dto.Usuario;
+import threads.Observador;
 
 public class Server extends WebSocketServer {
 //	private static Map<Integer,Set<WebSocket>> Rooms = new HashMap<>();
@@ -39,6 +40,8 @@ public class Server extends WebSocketServer {
 	public Server() {
 		super(new InetSocketAddress(8080));
 		this.usuarios = new LinkedList<Usuario>();
+		Thread hiloObservador = new Thread(new Observador(this));
+		this.start();
 	}
 
 	@Override
@@ -61,6 +64,10 @@ public class Server extends WebSocketServer {
 						consultarGruposDeUsuario(usuario);
 					}else if(js.getString("tipo").equals("consultar grupos")) {
 						consultarGrupos(conn,js);
+					}else if (js.getString("tipo").equals("consultar publicaciones")) {
+						consultarPublicaciones(conn, js);
+					}else if(js.getString("tipo").equals("crear publicaciones")) {
+						crearPublicaciones(conn,js);
 					}
 					
 				}
@@ -69,6 +76,13 @@ public class Server extends WebSocketServer {
 		}
 
 		// System.out.println(clients.size());
+	}
+
+	private void crearPublicaciones(WebSocket conn, JSONObject js) {
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		Materia materia = materiaDao.consultar(js.getString("idMateria"));
+		String mensaje = "{\"tipo\": \"materia de publicacion\"," + "	\"materia\": " + materia.toJSON() + "}";
+		conn.send(mensaje);
 	}
 
 	@Override
@@ -215,6 +229,9 @@ public class Server extends WebSocketServer {
 	private void consultarTutoriasPor(WebSocket conn, JSONObject js) {
 		LinkedList<Tutoria> tutoriasFiltradas = new LinkedList();
 		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		ProfesorDao profesorDao = ProfesorDao.getInstancia();
+		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
 		LinkedList<Tutoria> tutorias = tutoriasDao.listarTodos();
 		String idProfesor=js.getString("idProfesor");
 		String idMateria= js.getString("idMateria");
@@ -240,17 +257,20 @@ public class Server extends WebSocketServer {
 				}
 			}
 		}
-		String mensaje ="{" + 
-				"	\"tipo\": \"lista tutorias\"," + 
-				"	\"tutorias\": [";
-		for(int i =0; i<tutoriasFiltradas.size();i++) {
-			mensaje+=tutoriasFiltradas.get(i).toJSON();
-			if(i<tutoriasFiltradas.size()) {
-				mensaje+=", ";
-			}
+		String mensaje ="{\"tipo\": \"lista tutorias\"}";
+		JSONObject objToSend = new JSONObject(mensaje);
+		JSONArray array = new JSONArray();
+		for(Tutoria tutoria: tutoriasFiltradas) {
+			JSONObject tutoriaJson = new JSONObject(tutoria.toJSON());
+			tutoriaJson.put("materia", materiaDao.consultar(tutoria.getIdMateria()).toJSON());
+			tutoriaJson.put("profesor", profesorDao.consultar(tutoria.getProfesor().getId()).toJSON());
+			tutoriaJson.put("inscritos", tutoria.getUsuarios().size());
+			tutoriaJson.put("unido", Buscador.estaUsuarioEnTutoria(Buscador.buscarUsuario(conn, usuarios), tutoria));
+			array.put(tutoriaJson);
 		}
-		mensaje+="]}";
-		conn.send(mensaje);
+		objToSend.put("tutorias", array);
+		System.out.println(objToSend.toString());
+		conn.send(objToSend.toString());
 	}
 	private void consultarMaterias(WebSocket conn, JSONObject js) {
 		MateriaDao materiaDao = MateriaDao.getInstancia();
@@ -520,18 +540,18 @@ public class Server extends WebSocketServer {
 	 */
 	private void consultarSnacks(WebSocket conn, JSONObject js) {
 		SnackDao snackDao = SnackDao.getInstancia();
+		CategoriaSnackDao categoriaSnackDao= CategoriaSnackDao.getInstancia();
 		LinkedList <Snack> snacks = snackDao.listarTodos();
-		String mensaje ="{" + 
-				"	\"tipo\": \"consultar snacks\"," + 
-				"	\"snacks\": [";
-		for (int i = 0; i < snacks.size(); i++) {
-			mensaje +=snacks.get(i).toJSON();
-			if(i<snacks.size()-1) {
-				mensaje+=", ";
-			}
+		String mensaje ="{\"tipo\": \"lista snacks\"}";
+		JSONObject objToSend = new JSONObject(mensaje);
+		JSONArray array = new JSONArray();
+		for (Snack snack: snacks) {
+			JSONObject snackJson = new JSONObject(snack.toJSON());
+			snackJson.put("categoria", categoriaSnackDao.consultar(snack.getIdCategoria()).toJSON());
+			array.put(snackJson);
 		}
-		mensaje+="]}";
-		conn.send(mensaje);
+		objToSend.put("snacks", array);
+		conn.send(objToSend.toString());
 	}
 	
 	/**
@@ -604,13 +624,23 @@ public class Server extends WebSocketServer {
 	private void consultarPublicaciones(WebSocket conn, JSONObject js) {
 		PublicacionDao publicacionesDao= PublicacionDao.getInstancia();
 		LinkedList <Publicacion> publicaciones =publicacionesDao.listarTodos();
-		String mensaje ="{" + 
-				"	\"tipo\": \"consultar publicaciones\"," + 
-				"	\"publicacion\": [";
-		for (int i = 0; i < publicaciones.size(); i++) {
-			mensaje +=publicaciones.get(i).toJSON();
-			if(i<publicaciones.size()-1) {
-				mensaje+=", ";
+		LinkedList <Publicacion> publicacionesFiltradas = new LinkedList();
+		MateriaDao materiaDao = MateriaDao.getInstancia();
+		for(Publicacion publicacion: publicaciones) {
+			if(publicacion.getIdMateria().equals(String.valueOf(js.get("idMateria")))) {
+				publicacionesFiltradas.add(publicacion);
+			}
+		}
+		String mensaje ="{"
+				+ "\"materia\":" +materiaDao.consultar(String.valueOf(js.get("idMateria"))).toJSON()+", "
+				+ "\"tipo\": \"lista publicaciones\","
+				+ "\"publicaciones\": [";
+		for (int i = 0; i < publicacionesFiltradas.size(); i++) {
+			if(String.valueOf(js.get("idMateria")).equals(publicacionesFiltradas.get(i).getIdMateria())) {
+				mensaje +=publicacionesFiltradas.get(i).toJSON();
+				if(i<publicacionesFiltradas.size()-1) {
+					mensaje+=", ";
+				}
 			}
 		}
 		mensaje+="]}";
@@ -625,7 +655,7 @@ public class Server extends WebSocketServer {
 				"	\"tutorias\": [";
 		for(int i =0; i<tutorias.size();i++) {
 			mensaje+=tutorias.get(i).toJSON();
-			if(i<tutorias.size()) {
+			if(i<tutorias.size()-1) {
 				mensaje+=", ";
 			}
 		}
@@ -671,7 +701,7 @@ public class Server extends WebSocketServer {
 			publicacion.setIdMateria(materia.getIdMateria());
 			publicacion.setUsuario(usuario.getUsuario());
 			publicacion.setContenido(js.getString("contenido"));
-			publicacion.setTitulo(js.getString("contenido"));
+			publicacion.setTitulo(js.getString("titulo"));
 			String idPublicacion=Generador.generarId();
 			publicacion.setIdPublicacion(idPublicacion);
 			if(publicacionDao.crear(publicacion)) {
@@ -689,7 +719,7 @@ public class Server extends WebSocketServer {
 		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
 		GruposEstudioDao gruposEstudioDao = GruposEstudioDao.getInstancia();
 		Usuario usuario = usuariosDao.consultar(js.getString("idUsuario"));
-		GrupoEstudio grupoEstudio = gruposEstudioDao.consultar("idGrupo");
+		GrupoEstudio grupoEstudio = gruposEstudioDao.consultar(js.getString("idGrupo"));
 		if(usuario==null) {
 			mensaje ="{" + 
 					"\"tipo\": \"error\"," + 
@@ -795,7 +825,7 @@ public class Server extends WebSocketServer {
 	private void pedirTutoria(WebSocket conn, JSONObject js) {
 		TutoriasDao tutoriasDao = TutoriasDao.getInstancia();
 		UsuariosDao usuariosDao = UsuariosDao.getInstancia();
-		Tutoria tutoria=tutoriasDao.consultar(js.getString("idTutoria"));
+		Tutoria tutoria=tutoriasDao.consultar(String.valueOf(js.get("idTutoria")));
 		String mensaje="";
 		if(tutoria==null) {
 			mensaje ="{" + 
@@ -803,7 +833,7 @@ public class Server extends WebSocketServer {
 					"\"mensaje\": \"Esa tutoría no existe\"" + 
 					"}";
 		}else {
-			Usuario usuario = usuariosDao.consultar(js.getString("usuario"));
+			Usuario usuario = usuariosDao.consultar(js.getString("idUsuario"));
 			if(usuario==null) {
 				mensaje ="{" + 
 						"\"tipo\": \"error\"," + 

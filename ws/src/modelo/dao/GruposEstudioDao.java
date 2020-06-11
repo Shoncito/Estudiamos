@@ -32,7 +32,7 @@ public class GruposEstudioDao extends Dao implements IGruposEstudioDao {
 	public GrupoEstudio consultar(String id) {
 		GrupoEstudio grupo = null;
         for (int i = 0; i < this.data.size(); i++) {
-            if(((GrupoEstudio)this.data.get(i)).getIdGrupo()==id){
+            if(((GrupoEstudio)this.data.get(i)).getIdGrupo().equals(id)){
                 grupo = (GrupoEstudio)this.data.get(i);
                 break;
             }

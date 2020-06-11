@@ -74,8 +74,8 @@ public class Publicacion implements Serializable{
 	}
     
 	public String toJSON() {
-		return "{\"idPublicacion\":\"" + idPublicacion + "\", \" idMateria\" :\"" + idMateria + "\" , \" usuario\":\"" + usuario
-				+ "\", \" titulo\":\"" + titulo + "\", \" contenido\":\"" + contenido + "\"}";
+		return "{\"idPublicacion\":\"" + idPublicacion + "\", \"idMateria\" :\"" + idMateria + "\" , \"usuario\":\"" + usuario
+				+ "\", \"titulo\":\"" + titulo + "\", \"contenido\":\"" + contenido + "\"}";
 	}
 	
     

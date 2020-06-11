@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import org.java_websocket.WebSocket;
 
 import modelo.dto.GrupoEstudio;
+import modelo.dto.Tutoria;
 import modelo.dto.Usuario;
 
 public class Buscador {
@@ -19,6 +20,16 @@ public class Buscador {
 
 	public static boolean estaUsuarioEnGrupo(Usuario usuario, GrupoEstudio grupoEstudio) {
 		LinkedList<String> nombreUsuarios = grupoEstudio.getUsuarios();
+		for(String nombreUsuario: nombreUsuarios) {
+			if(nombreUsuario.equals(usuario.getUsuario())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean estaUsuarioEnTutoria(Usuario usuario, Tutoria tutoria) {
+		LinkedList<String> nombreUsuarios = tutoria.getUsuarios();
 		for(String nombreUsuario: nombreUsuarios) {
 			if(nombreUsuario.equals(usuario.getUsuario())) {
 				return true;
