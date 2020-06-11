@@ -141,3 +141,23 @@ option:disabled {
     margin: 0px !important;
 }
 
+.cont,
+#amen:focus {
+    border-bottom: 4px solid white;
+}
+
+.contenedor-form input[type="submit"] {
+    color: #FFF;
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Balsamiq Sans', cursive;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin: 0px !important;
+}
+
+
+

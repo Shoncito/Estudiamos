@@ -467,3 +467,21 @@ a:hover{
 #divGrupos .description{
 	margin-bottom: auto !important; 
 }
+
+.cont{
+	outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+    background: rgba(0,0,0,.5);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    border-bottom: 4px solid #ff851b;
+    box-sizing: border-box;
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 14px;
+    font-weight:normal;
+    transition: all .5s ease;
+}
